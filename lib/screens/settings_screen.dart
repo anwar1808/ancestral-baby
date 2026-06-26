@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 const Text(
-                  'Baby Solids works fully offline with no account. To back up '
+                  'Ancestral Baby works fully offline with no account. To back up '
                   'or share the same baby with a partner, sign in — '
                   'passwordless, no password to remember.',
                   style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
@@ -140,12 +140,12 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
-                Text('Baby Solids',
+                Text('Ancestral Baby',
                     style: TextStyle(
                         fontWeight: FontWeight.w800, color: AppColors.navy)),
                 SizedBox(height: 4),
                 Text(
-                  'Free and ad-free. Baby Solids is not a medical app and does '
+                  'Free and ad-free. Ancestral Baby is not a medical app and does '
                   'not replace your child\'s healthcare team. Food and allergen '
                   'guidance is general information grounded in public-health '
                   'sources (WHO, NHS Start4Life, SACN, NIAID, AAP, HPB). Always '

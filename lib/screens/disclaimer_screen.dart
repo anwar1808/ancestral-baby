@@ -26,11 +26,7 @@ class DisclaimerScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(AppRadius.card),
                 ),
                 child: const Center(
-                  child: Text('ن',
-                      style: TextStyle(
-                          fontSize: 38,
-                          color: AppColors.navy,
-                          fontWeight: FontWeight.w800)),
+                  child: Icon(Icons.spa, size: 38, color: AppColors.navy),
                 ),
               ),
               const SizedBox(height: AppSpacing.xl),
@@ -39,7 +35,7 @@ class DisclaimerScreen extends StatelessWidget {
                   textAlign: TextAlign.center),
               const SizedBox(height: AppSpacing.lg),
               const Text(
-                'Baby Solids is not a medical app and does not replace your '
+                'Ancestral Baby is not a medical app and does not replace your '
                 'child\'s healthcare team.\n\n'
                 'Everything here — food guidance, allergen timing, and the '
                 'maintenance reminders — is general information grounded in '

@@ -47,9 +47,9 @@ class ExportService {
       }),
     ];
     final csv = const ListToCsvConverter().convert(rows);
-    final file = await _writeTemp('baby_solids_export.csv', csv);
+    final file = await _writeTemp('ancestral_baby_export.csv', csv);
     await Share.shareXFiles([XFile(file.path)],
-        text: 'Baby Solids export — ${baby?.name ?? ''}');
+        text: 'Ancestral Baby export — ${baby?.name ?? ''}');
   }
 
   Future<void> exportPdf(AppState state) async {
@@ -64,7 +64,7 @@ class ExportService {
         build: (ctx) => [
           pw.Header(
             level: 0,
-            child: pw.Text('Baby Solids — Summary',
+            child: pw.Text('Ancestral Baby — Summary',
                 style: pw.TextStyle(
                     fontSize: 22, fontWeight: pw.FontWeight.bold)),
           ),
@@ -139,7 +139,7 @@ class ExportService {
           pw.SizedBox(height: 24),
           pw.Divider(),
           pw.Text(
-            'Baby Solids is not a medical app and does not replace your '
+            'Ancestral Baby is not a medical app and does not replace your '
             'child\'s healthcare team. This summary is for discussion with '
             'your paediatrician.',
             style: pw.TextStyle(
@@ -150,9 +150,9 @@ class ExportService {
     );
 
     final bytes = await doc.save();
-    final file = await _writeTempBytes('baby_solids_summary.pdf', bytes);
+    final file = await _writeTempBytes('ancestral_baby_summary.pdf', bytes);
     await Share.shareXFiles([XFile(file.path)],
-        text: 'Baby Solids summary — ${baby?.name ?? ''}');
+        text: 'Ancestral Baby summary — ${baby?.name ?? ''}');
   }
 
   Future<File> _writeTemp(String name, String content) async {

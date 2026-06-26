@@ -62,6 +62,6 @@ class SyncUnavailable implements Exception {
   const SyncUnavailable();
   @override
   String toString() =>
-      'Cloud sharing isn\'t set up in this build yet. Baby Solids works fully '
+      'Cloud sharing isn\'t set up in this build yet. Ancestral Baby works fully '
       'offline; partner sharing arrives with passwordless sign-in.';
 }

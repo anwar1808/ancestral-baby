@@ -25,7 +25,7 @@ class BabySolidsApp extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: state,
       child: MaterialApp(
-        title: 'Baby Solids',
+        title: 'Ancestral Baby',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.light,
         home: const _Root(),

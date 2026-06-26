@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../data/seed_guides.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
+import 'guidelines_screen.dart';
 
 /// Guides (§5): browsable how-tos grouped by section, each a card with a
 /// thumbnail + read-time. Original content.
@@ -20,7 +21,35 @@ class GuidesScreen extends StatelessWidget {
           title: const Text('Guides'), automaticallyImplyLeading: false),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.lg),
-        children: sections.entries.expand((e) {
+        children: [
+          InfoCard(
+            color: AppColors.navy,
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => const GuidelinesScreen())),
+            child: Row(
+              children: const [
+                Icon(Icons.public, color: AppColors.butter),
+                SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Compare guidelines by country',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800, color: Colors.white)),
+                      SizedBox(height: 2),
+                      Text('UK · US · Singapore · Europe · WHO',
+                          style: TextStyle(
+                              fontSize: 13, color: Color(0xFFB9C2D6))),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right, color: Colors.white),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          ...sections.entries.expand((e) {
           return [
             Padding(
               padding: const EdgeInsets.only(
@@ -78,6 +107,7 @@ class GuidesScreen extends StatelessWidget {
                 )),
           ];
         }).toList(),
+        ],
       ),
     );
   }
