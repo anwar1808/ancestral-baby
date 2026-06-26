@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ancestral Baby adaptive-icon FOREGROUND — tomahawk steak only, no tile.
+     Transparent background; steak scaled to ~62% and centred so the bone tip
+     stays inside the Android adaptive safe zone. Background colour supplied via
+     flutter_launcher_icons adaptive_icon_background (#FCEFC7). -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="meat" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E89A78"/>
+      <stop offset="1" stop-color="#D2785A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Steak at natural size; flutter_launcher_icons applies a 16% inset which
+       supplies the adaptive safe-zone padding (keeps the bone tip clear). -->
+  <g transform="translate(512 512) scale(0.96) translate(-512 -512)">
+    <!-- steak, tilted for a bit of energy -->
+    <g transform="rotate(-13 512 512)" stroke="#30384D" stroke-width="26"
+       stroke-linejoin="round" stroke-linecap="round">
+
+      <!-- bone: frenched rib shaft + double knuckle (drawn first, behind meat) -->
+      <path d="M 545 545 L 815 405" fill="none" stroke="#30384D" stroke-width="96"/>
+      <path d="M 545 545 L 815 405" fill="none" stroke="#F6EEDB" stroke-width="52"/>
+      <g>
+        <circle cx="835" cy="392" r="62" fill="#F6EEDB"/>
+        <circle cx="806" cy="450" r="54" fill="#F6EEDB"/>
+      </g>
+
+      <!-- ribeye: round, marbled -->
+      <ellipse cx="408" cy="588" rx="252" ry="220" fill="url(#meat)"/>
+
+      <!-- fat cap crescent along the lower-left edge -->
+      <path d="M 214 640
+               a 252 220 0 0 0 360 150"
+            fill="none" stroke="#F6EEDB" stroke-width="40" opacity="0.9"/>
+
+      <!-- marbling (thin cream strokes), no individual outline -->
+      <g stroke="#F6EEDB" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.85">
+        <path d="M 330 520 q 60 50 30 130"/>
+        <path d="M 430 540 q 40 60 -10 150"/>
+        <path d="M 360 660 q 70 10 120 -20"/>
+      </g>
+    </g>
+  </g>
+</svg>

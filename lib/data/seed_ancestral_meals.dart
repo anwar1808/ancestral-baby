@@ -4,14 +4,24 @@
 /// meat stock / bone broth, organ meats (liver), egg yolk, slow-cooked meats,
 /// healthy fats, and fermented foods, while avoiding processed baby food.
 ///
+/// PRODUCE RULE for this tab:
+///  • FRUITS are kept to a low-sugar, keto-friendly set — avocado, olives,
+///    tomato, berries (rasp/black/straw/blue in small portions), coconut,
+///    star fruit, and lemon/lime.
+///  • VEGETABLES are welcome (e.g. broccoli, courgette, leafy greens) EXCEPT
+///    starch-based staples (potato, sweet potato, yam) and grains/legumes,
+///    which are swapped out.
+///
 /// IMPORTANT: this is an ALTERNATIVE philosophy. It diverges from the mainstream
-/// guidance (NHS / AAP / WHO) the rest of the app follows — for example by
-/// starting with meats rather than fibrous veg, and using organ meats and
-/// fermented dairy early. It is presented for information and is NOT medical
-/// advice. The content here is original, not copied from any paid course.
-/// Standard infant-safety rules still apply: cook meats, egg, and especially
-/// liver thoroughly; no honey before 12 months; introduce one new food at a
-/// time and watch for reactions; discuss any approach with your paediatrician.
+/// guidance (NHS / AAP / WHO) the rest of the app follows — those bodies
+/// recommend a diverse diet including fruit, veg, and starchy carbohydrates,
+/// which babies need for energy and growth. This is presented for information
+/// and is NOT medical advice. The content here is original, not copied from any
+/// paid course. Standard infant-safety rules still apply: cook meats, egg, and
+/// especially liver thoroughly (liver is very high in vitamin A — about once a
+/// week at most); use pasteurised dairy; keep olives/salt minimal; no honey
+/// before 12 months; introduce one new food at a time; discuss any approach
+/// with your paediatrician.
 library;
 
 class AncestralMeal {
@@ -26,7 +36,7 @@ class AncestralMeal {
   /// Food ids that exist in the First Foods database (tappable links).
   final List<String> foodIds;
 
-  /// Ancestral ingredients that aren't in the food DB — shown as plain chips.
+  /// Ancestral ingredients not in the food DB — shown as plain chips.
   final List<String> ancestralExtras;
 
   /// Why an ancestral cook might choose this combo.
@@ -70,39 +80,41 @@ const List<AncestralMeal> kAncestralMeals = [
     foodIds: ['egg'],
     ancestralExtras: ['Chicken liver (well-cooked)', 'Pastured egg yolk'],
     why:
-        'Liver is exceptionally rich in vitamin A, B12, and iron. Cook liver '
-        'fully and offer a tiny amount at first — it is potent, so a little '
-        'goes a long way.',
+        'Liver is exceptionally rich in vitamin A, B12, and iron. Cook it '
+        'fully and offer only a tiny amount — because of its very high vitamin '
+        'A, most guidance suggests liver no more than about once a week.',
   ),
   AncestralMeal(
-    id: 'a_beef_broth_sweetpotato',
+    id: 'a_beef_broth_carrot',
     stage: '6 mo+',
-    title: 'Slow-cooked beef in stock with sweet potato',
+    title: 'Slow-cooked beef in stock with soft carrot',
     description:
-        'Shredded slow-cooked beef softened in meat stock, with mashed sweet '
-        'potato — a meat-first take on the lentil mash.',
+        'Shredded slow-cooked beef softened in meat stock, with soft-cooked '
+        'carrot — a meat-first take that drops the starchy sweet potato and '
+        'the lentils.',
     insteadOf: 'Sweet potato & lentil mash',
-    foodIds: ['beef', 'sweet_potato'],
+    foodIds: ['beef', 'carrot'],
     ancestralExtras: ['Meat stock'],
     why:
-        'Heme iron from beef is highly absorbable, and meat stock adds collagen '
-        '— an ancestral pairing that starts with animal foods rather than '
-        'fibrous legumes.',
+        'Heme iron from beef is highly absorbable, and meat stock adds '
+        'collagen. Carrot keeps a soft vegetable in the bowl while leaving out '
+        'the starchy sweet potato and legumes.',
   ),
   AncestralMeal(
     id: 'a_kefir_blueberry',
     stage: '9 mo+',
-    title: 'Fermented full-fat kefir with smashed blueberries',
+    title: 'Fermented kefir with a few smashed blueberries',
     description:
         'Cultured full-fat dairy (kefir or well-fermented plain yoghurt) with '
-        'smashed blueberries — chosen for live cultures over plain yoghurt.',
+        'a small amount of smashed blueberries — chosen for live cultures over '
+        'plain yoghurt.',
     insteadOf: 'Yoghurt with smashed blueberries',
     foodIds: ['yoghurt', 'blueberry'],
     ancestralExtras: ['Kefir / fermented dairy'],
     why:
-        'Fermented dairy adds live cultures that support the developing gut '
-        'microbiome — a central idea in the ancestral approach. Use pasteurised '
-        'dairy for infants.',
+        'Fermented dairy adds live cultures for the developing gut. Blueberries '
+        'are the higher-carb fruit on the keto list (~12g/100g), so keep the '
+        'portion small. Use pasteurised dairy for infants.',
   ),
   AncestralMeal(
     id: 'a_chicken_bonebroth',
@@ -117,7 +129,8 @@ const List<AncestralMeal> kAncestralMeals = [
     ancestralExtras: ['Bone broth', 'Grass-fed butter'],
     why:
         'Bone broth contributes collagen and minerals, while butter helps a '
-        'baby absorb the fat-soluble vitamins in the broccoli.',
+        'baby absorb the fat-soluble vitamins in the broccoli — a non-starchy '
+        'vegetable that stays.',
   ),
   AncestralMeal(
     id: 'a_salmon_avocado_roe',
@@ -136,16 +149,17 @@ const List<AncestralMeal> kAncestralMeals = [
   AncestralMeal(
     id: 'a_beef_softveg',
     stage: '12 mo+',
-    title: 'Grass-fed beef with soft cooked vegetables',
+    title: 'Grass-fed beef with soft non-starchy vegetables',
     description:
-        'Slow-cooked grass-fed beef with soft seasonal vegetables in stock — a '
-        'grain- and soy-free alternative to the tofu rice bowl.',
+        'Slow-cooked grass-fed beef with soft non-starchy vegetables (such as '
+        'courgette, broccoli, or greens) in stock — a grain- and soy-free '
+        'alternative to the tofu rice bowl.',
     insteadOf: 'Tofu & veg rice bowl',
     foodIds: ['beef'],
-    ancestralExtras: ['Meat stock', 'Seasonal vegetables'],
+    ancestralExtras: ['Meat stock', 'Soft non-starchy vegetables'],
     why:
-        'Swaps soy and grain for pastured red meat and stock, prioritising '
-        'animal protein and minerals over plant-based fillers.',
+        'Swaps soy and rice for pastured red meat and stock, keeping soft '
+        'vegetables but leaving out the grain.',
   ),
   AncestralMeal(
     id: 'a_liver_avocado_plate',
@@ -153,12 +167,17 @@ const List<AncestralMeal> kAncestralMeals = [
     title: "Liver pâté & avocado 'dip' plate",
     description:
         'Smooth, well-cooked liver pâté and mashed avocado as dips, with soft '
-        'vegetable batons — an organ-meat plate in place of chickpea hummus.',
+        'non-starchy vegetable batons — an organ-meat plate in place of '
+        'chickpea hummus.',
     insteadOf: 'Chickpea hummus plate',
     foodIds: ['avocado'],
-    ancestralExtras: ['Chicken / beef liver (well-cooked)', 'Soft veg batons'],
+    ancestralExtras: [
+      'Chicken / beef liver (well-cooked)',
+      'Soft non-starchy veg batons',
+    ],
     why:
         'Replaces legume-based hummus with organ meat for far greater nutrient '
-        'density — vitamin A, B12, iron, and choline in one small plate.',
+        'density — vitamin A, B12, iron, and choline. Keep liver to small, '
+        'roughly weekly servings given its high vitamin A.',
   ),
 ];

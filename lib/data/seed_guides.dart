@@ -111,4 +111,36 @@ const List<Guide> kSeedGuides = [
         'a baby accepts a new food. Keep offering without forcing, and let them '
         'explore with their hands.',
   ),
+  Guide(
+    id: 'ancestral_first_foods_order',
+    section: 'Ancestral',
+    title: 'The ancestral first-foods order',
+    readMinutes: 4,
+    body:
+        'This is the gut-health-first sequence popularised by Kate Pope '
+        '(@wildnutritionist). It is an alternative to mainstream guidance, not '
+        'medical advice — the NHS, AAP, and WHO instead recommend a diverse '
+        'diet that includes fruit, vegetables, and grains. Read it as one '
+        'philosophy among several, and discuss any approach with your '
+        'paediatrician.\n\n'
+        'The order, roughly:\n\n'
+        '1. Meat stock first. Short-cooked meaty bones (gentler and more '
+        'gelatinous than long-cooked bone broth), offered by the spoonful as '
+        'the first food beyond milk.\n\n'
+        '2. Fermented brine. A few drops of the liquid from naturally '
+        'fermented vegetables, stirred into the meat stock.\n\n'
+        '3. Soft cooked vegetables, in tiny amounts.\n\n'
+        '4. Organ meats — liver, heart, and bone marrow — for nutrient '
+        'density. Liver is very rich in vitamin A, so keep it to small, '
+        'roughly weekly servings.\n\n'
+        '5. Egg yolk before the white. Well-cooked yolk for several weeks '
+        'before introducing whites.\n\n'
+        '6. Fats and fermented dairy. Ghee and butter first, then well-'
+        'fermented, pasteurised dairy once tolerated.\n\n'
+        'Throughout: slow-cooked gelatinous cuts of meat, and no processed '
+        'baby food. Standard safety still applies — cook meats and egg '
+        'thoroughly, use pasteurised dairy, no honey before 12 months, and '
+        'introduce one new food at a time while watching for reactions. You '
+        'can explore these ideas as meal swaps under Meals → Ancestral.',
+  ),
 ];

@@ -7,6 +7,7 @@ import '../widgets/baby_header.dart';
 import '../widgets/common.dart';
 import 'allergen_screen.dart';
 import 'foods_screen.dart';
+import 'guides_screen.dart';
 import 'progress_screen.dart';
 import 'readiness_quiz_screen.dart';
 import 'tracker_screen.dart';
@@ -269,7 +270,9 @@ class _ForYouRow extends StatelessWidget {
             subtitle: 'Gagging vs choking, and how to reduce risk',
             colors: const [AppColors.butter, AppColors.coral],
             icon: Icons.health_and_safety_outlined,
-            onTap: () {},
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(builder: (_) => const GuidesScreen()),
+            ),
           ),
         ],
       ),
