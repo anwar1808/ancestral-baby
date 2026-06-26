@@ -13,12 +13,12 @@ void main() async {
   await NotificationService.instance.init();
   final state = AppState();
   await state.load();
-  runApp(BabySolidsApp(state: state));
+  runApp(AncestralBabyApp(state: state));
 }
 
-class BabySolidsApp extends StatelessWidget {
+class AncestralBabyApp extends StatelessWidget {
   final AppState state;
-  const BabySolidsApp({super.key, required this.state});
+  const AncestralBabyApp({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {

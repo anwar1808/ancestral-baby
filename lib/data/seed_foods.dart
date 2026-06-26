@@ -6,8 +6,8 @@
 // summarised here in general terms (e.g. WHO, NHS Start4Life / SACN 2018,
 // US NIAID 2017, AAP, Singapore HPB, US Dietary Guidelines 2020–2025).
 
-import 'package:baby_solids/models/food.dart';
-import 'package:baby_solids/models/media.dart';
+import 'package:ancestral_baby/models/food.dart';
+import 'package:ancestral_baby/models/media.dart';
 
 const List<Food> kSeedFoods = [
   // ---------------------------------------------------------------------------

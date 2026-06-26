@@ -45,4 +45,4 @@ app.*.map.json
 /android/app/release
 
 # local scratch helpers
-scratch_fetch_foods.py
+scratch_*.py

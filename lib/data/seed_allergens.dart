@@ -8,7 +8,7 @@
 // Dietary Guidelines 2020–2025. Region sets follow the US "big 9" major
 // allergens and the UK / EU list of 14 declarable allergens.
 
-import 'package:baby_solids/models/allergen.dart';
+import 'package:ancestral_baby/models/allergen.dart';
 
 const List<Allergen> kSeedAllergens = [
   Allergen(

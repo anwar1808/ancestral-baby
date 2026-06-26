@@ -1,7 +1,7 @@
-// Smoke tests for Baby Solids.
+// Smoke tests for Ancestral Baby.
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:baby_solids/models/media.dart';
+import 'package:ancestral_baby/models/media.dart';
 
 void main() {
   test('AppMedia auto-detects media kind from uri', () {

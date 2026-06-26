@@ -18,7 +18,7 @@ class AppDatabase {
 
   Future<Database> _open() async {
     final dir = await getDatabasesPath();
-    final path = p.join(dir, 'baby_solids.db');
+    final path = p.join(dir, 'ancestral_baby.db');
     return openDatabase(
       path,
       version: 1,
