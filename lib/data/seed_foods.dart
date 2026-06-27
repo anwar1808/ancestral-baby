@@ -814,7 +814,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'egg',
     name: 'Egg',
-    category: 'Protein',
+    category: 'Egg',
     heroMedia: AppMedia(uri: 'assets/foods/egg_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'egg',
@@ -872,7 +872,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'chicken',
     name: 'Chicken',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/chicken_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron-rich'],
     minAgeMonths: 6,
@@ -917,7 +917,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'beef',
     name: 'Beef',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/beef_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Protein'],
     minAgeMonths: 6,
@@ -962,7 +962,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'salmon',
     name: 'Salmon (fish)',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/salmon_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -1009,7 +1009,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'shrimp',
     name: 'Shrimp / prawn (shellfish)',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/shrimp_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'shellfish',
@@ -1056,7 +1056,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'peanut_butter',
     name: 'Peanut butter',
-    category: 'Protein',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/peanut_butter_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'peanut',
@@ -1115,7 +1115,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'almond_butter',
     name: 'Almond butter (tree nut)',
-    category: 'Protein',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/almond_butter_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'tree_nuts',
@@ -1164,7 +1164,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tofu',
     name: 'Tofu (soy)',
-    category: 'Protein',
+    category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/tofu_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'soy',
@@ -1212,7 +1212,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tahini',
     name: 'Tahini (sesame)',
-    category: 'Protein',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/tahini_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'sesame',
@@ -2644,7 +2644,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'turkey',
     name: 'Turkey',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/turkey_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron', 'Zinc'],
     minAgeMonths: 6,
@@ -2678,7 +2678,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'pork',
     name: 'Pork',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/pork_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron', 'B vitamins'],
     minAgeMonths: 6,
@@ -2712,7 +2712,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'lamb',
     name: 'Lamb',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/lamb_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron', 'Zinc'],
     minAgeMonths: 6,
@@ -2746,7 +2746,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'cod',
     name: 'Cod',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/cod_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -2782,7 +2782,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'haddock',
     name: 'Haddock',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/haddock_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -2818,7 +2818,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tuna',
     name: 'Tuna',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/tuna_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -2853,7 +2853,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'sardine',
     name: 'Sardine',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/sardine_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -2889,7 +2889,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'mackerel',
     name: 'Mackerel',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/mackerel_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -2925,7 +2925,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'duck',
     name: 'Duck',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/duck_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron'],
     minAgeMonths: 6,
@@ -2959,7 +2959,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'liver',
     name: 'Liver',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/liver_hero.jpg'),
     nutritionFlags: ['Iron', 'Vitamin A', 'B12'],
     minAgeMonths: 6,
@@ -3595,7 +3595,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'cashew_butter',
     name: 'Cashew butter',
-    category: 'Nut/Seed',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/cashew_butter_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'tree_nuts',
@@ -3631,7 +3631,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'sunflower_seed_butter',
     name: 'Sunflower seed butter',
-    category: 'Nut/Seed',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/sunflower_seed_butter_hero.jpg'),
     nutritionFlags: ['Healthy fats', 'Vitamin E'],
     minAgeMonths: 6,
@@ -3665,7 +3665,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'pumpkin_seed',
     name: 'Pumpkin seed butter',
-    category: 'Nut/Seed',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/pumpkin_seed_hero.jpg'),
     nutritionFlags: ['Iron', 'Healthy fats', 'Magnesium'],
     minAgeMonths: 6,

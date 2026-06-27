@@ -23,7 +23,7 @@ class ProgressScreen extends StatelessWidget {
     // Food types
     'first_food_type': 'First food group 🍽️',
     'five_food_types': '5 food groups 🌈',
-    'all_food_types': 'All food groups explored 🍱',
+    'ten_food_types': 'All 10 food groups 🍱',
     // Allergens
     'first_allergen': 'First allergen introduced 🛡️',
     'five_allergens': '5 allergens introduced 🧪',
