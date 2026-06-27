@@ -7,6 +7,7 @@ import '../data/sync_repository.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
+import 'edit_baby_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -63,14 +64,31 @@ class SettingsScreen extends StatelessWidget {
                   leading: const Icon(Icons.cake_outlined, color: AppColors.navy),
                   title: Text(state.baby?.name ?? 'Baby'),
                   subtitle: Text(state.baby?.ageLabel ?? ''),
-                  trailing: state.babies.length > 1 && state.baby != null
-                      ? IconButton(
+                  onTap: state.baby == null
+                      ? null
+                      : () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const EditBabyScreen())),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (state.baby != null)
+                        IconButton(
+                          tooltip: 'Edit baby',
+                          icon: const Icon(Icons.edit_outlined,
+                              color: AppColors.navy),
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const EditBabyScreen())),
+                        ),
+                      if (state.babies.length > 1 && state.baby != null)
+                        IconButton(
                           tooltip: 'Remove baby',
                           icon: const Icon(Icons.delete_outline,
                               color: AppColors.danger),
                           onPressed: () => _confirmRemoveBaby(context, state),
-                        )
-                      : null,
+                        ),
+                    ],
+                  ),
                 ),
                 if (state.babies.length > 1)
                   const Padding(

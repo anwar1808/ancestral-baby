@@ -256,6 +256,20 @@ class AppState extends ChangeNotifier {
     await refreshReminders();
   }
 
+  /// Update an existing baby's details (name, birth date, flags, region).
+  Future<void> updateBaby(Baby b) async {
+    await repo.saveBaby(b);
+    babies = await repo.getBabies();
+    if (b.id == baby?.id) {
+      baby = b;
+      // Region can affect guideline display + default cadence; persist it.
+      if (b.id == baby?.id) {
+        settings = settings.copyWith(region: b.region);
+        await repo.saveSettings(settings);
+      }
+    }
+    notifyListeners();
+  }
 
   Future<void> acceptDisclaimer() async {
     settings = settings.copyWith(disclaimerAccepted: true);
