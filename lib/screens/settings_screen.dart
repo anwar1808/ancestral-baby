@@ -99,6 +99,7 @@ class SettingsScreen extends StatelessWidget {
                       'Get nudged to keep introduced allergens in rotation'),
                   onChanged: (v) async {
                     if (v) await NotificationService.instance.requestPermissions();
+                    if (!context.mounted) return;
                     await context
                         .read<AppState>()
                         .updateSettings(s.copyWith(notificationsEnabled: v));

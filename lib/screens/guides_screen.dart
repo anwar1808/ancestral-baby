@@ -144,7 +144,7 @@ class _GuidesScreenState extends State<GuidesScreen> {
                   ),
                 )),
           ];
-        }).toList(),
+        }),
         ],
       ),
     );

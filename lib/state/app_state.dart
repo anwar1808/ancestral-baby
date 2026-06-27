@@ -256,12 +256,6 @@ class AppState extends ChangeNotifier {
     await refreshReminders();
   }
 
-  Future<void> updateBaby(Baby b) async {
-    await repo.saveBaby(b);
-    babies = await repo.getBabies();
-    if (b.id == baby?.id) baby = b;
-    notifyListeners();
-  }
 
   Future<void> acceptDisclaimer() async {
     settings = settings.copyWith(disclaimerAccepted: true);
@@ -547,12 +541,16 @@ class AppState extends ChangeNotifier {
     50: 'fifty_foods',
     100: 'hundred_foods',
   };
-  // Food types: 1 / 5 / 10.
+  // Food types: 1 / 5 / all groups (top rung is catalog-relative so it stays
+  // reachable — the catalog has fewer than 10 categories).
   static const _foodTypeTiers = <int, String>{
     1: 'first_food_type',
     5: 'five_food_types',
-    10: 'ten_food_types',
   };
+
+  /// Distinct food categories in the catalog (for the "all food groups" badge).
+  int get _catalogCategoryCount =>
+      {for (final f in foods) f.category}.length;
   // Allergens: 1 / 5 / 11.
   static const _allergenTiers = <int, String>{
     1: 'first_allergen',
@@ -571,6 +569,10 @@ class AppState extends ChangeNotifier {
   Future<void> _checkFoodMilestones() async {
     await _awardTiers(_foodTiers, triedCount);
     await _awardTiers(_foodTypeTiers, triedCategoryCount);
+    if (triedCategoryCount >= _catalogCategoryCount &&
+        !_hasMilestone('all_food_types')) {
+      await _award('all_food_types');
+    }
   }
 
   Future<void> _checkAllergenMilestones() async {
