@@ -21,23 +21,24 @@ class RegionInfo {
 /// Order here is the default display order (user's region gets pinned first).
 /// Regions are grouped (Global / Europe / Americas / Asia-Pacific) in the UI.
 const List<RegionInfo> kRegions = [
+  RegionInfo('UK', 'United Kingdom', '🇬🇧', 'NHS Start4Life · SACN',
+      group: 'Anglo-West'),
+  RegionInfo('US', 'United States', '🇺🇸', 'AAP · NIAID · USDA',
+      group: 'Anglo-West'),
+  RegionInfo('AU', 'Australia', '🇦🇺', 'NHMRC · ASCIA', group: 'Anglo-West'),
+  RegionInfo('EU', 'Europe', '🇪🇺', 'EFSA · ESPGHAN', group: 'Anglo-West'),
+  RegionInfo('SE', 'Sweden', '🇸🇪', 'Livsmedelsverket', group: 'Scandinavia'),
+  RegionInfo('IS', 'Iceland', '🇮🇸', 'Directorate of Health',
+      group: 'Scandinavia'),
+  RegionInfo('SG', 'Singapore', '🇸🇬', 'HPB · MOH', group: 'Asia'),
+  RegionInfo('JP', 'Japan', '🇯🇵', 'MHLW', group: 'Asia'),
+  RegionInfo('MN', 'Mongolia', '🇲🇳', 'Ministry of Health', group: 'Asia'),
   RegionInfo('WHO', 'World Health Organization', '🌍', 'WHO · Codex',
       group: 'Global'),
-  RegionInfo('UK', 'United Kingdom', '🇬🇧', 'NHS Start4Life · SACN',
-      group: 'Europe'),
-  RegionInfo('EU', 'Europe', '🇪🇺', 'EFSA · ESPGHAN', group: 'Europe'),
-  RegionInfo('SE', 'Sweden', '🇸🇪', 'Livsmedelsverket', group: 'Europe'),
-  RegionInfo('IS', 'Iceland', '🇮🇸', 'Directorate of Health', group: 'Europe'),
-  RegionInfo('US', 'United States', '🇺🇸', 'AAP · NIAID · USDA',
-      group: 'Americas'),
-  RegionInfo('SG', 'Singapore', '🇸🇬', 'HPB · MOH', group: 'Asia-Pacific'),
-  RegionInfo('JP', 'Japan', '🇯🇵', 'MHLW', group: 'Asia-Pacific'),
-  RegionInfo('MN', 'Mongolia', '🇲🇳', 'Ministry of Health', group: 'Asia-Pacific'),
-  RegionInfo('AU', 'Australia', '🇦🇺', 'NHMRC · ASCIA', group: 'Asia-Pacific'),
 ];
 
 /// Group display order.
-const List<String> kRegionGroups = ['Global', 'Europe', 'Americas', 'Asia-Pacific'];
+const List<String> kRegionGroups = ['Anglo-West', 'Scandinavia', 'Asia', 'Global'];
 
 RegionInfo regionByCode(String code) =>
     kRegions.firstWhere((r) => r.code == code, orElse: () => kRegions.first);
