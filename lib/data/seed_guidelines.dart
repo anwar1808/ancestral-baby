@@ -13,17 +13,31 @@ class RegionInfo {
   final String name;
   final String flag;
   final String bodies;
-  const RegionInfo(this.code, this.name, this.flag, this.bodies);
+  final String group; // Global / Europe / Americas / Asia-Pacific
+  const RegionInfo(this.code, this.name, this.flag, this.bodies,
+      {this.group = 'Other'});
 }
 
 /// Order here is the default display order (user's region gets pinned first).
+/// Regions are grouped (Global / Europe / Americas / Asia-Pacific) in the UI.
 const List<RegionInfo> kRegions = [
-  RegionInfo('UK', 'United Kingdom', '🇬🇧', 'NHS Start4Life · SACN'),
-  RegionInfo('US', 'United States', '🇺🇸', 'AAP · NIAID · USDA'),
-  RegionInfo('SG', 'Singapore', '🇸🇬', 'HPB · MOH'),
-  RegionInfo('EU', 'Europe', '🇪🇺', 'EFSA · ESPGHAN'),
-  RegionInfo('WHO', 'World Health Organization', '🌍', 'WHO · Codex'),
+  RegionInfo('WHO', 'World Health Organization', '🌍', 'WHO · Codex',
+      group: 'Global'),
+  RegionInfo('UK', 'United Kingdom', '🇬🇧', 'NHS Start4Life · SACN',
+      group: 'Europe'),
+  RegionInfo('EU', 'Europe', '🇪🇺', 'EFSA · ESPGHAN', group: 'Europe'),
+  RegionInfo('SE', 'Sweden', '🇸🇪', 'Livsmedelsverket', group: 'Europe'),
+  RegionInfo('IS', 'Iceland', '🇮🇸', 'Directorate of Health', group: 'Europe'),
+  RegionInfo('US', 'United States', '🇺🇸', 'AAP · NIAID · USDA',
+      group: 'Americas'),
+  RegionInfo('SG', 'Singapore', '🇸🇬', 'HPB · MOH', group: 'Asia-Pacific'),
+  RegionInfo('JP', 'Japan', '🇯🇵', 'MHLW', group: 'Asia-Pacific'),
+  RegionInfo('MN', 'Mongolia', '🇲🇳', 'Ministry of Health', group: 'Asia-Pacific'),
+  RegionInfo('AU', 'Australia', '🇦🇺', 'NHMRC · ASCIA', group: 'Asia-Pacific'),
 ];
+
+/// Group display order.
+const List<String> kRegionGroups = ['Global', 'Europe', 'Americas', 'Asia-Pacific'];
 
 RegionInfo regionByCode(String code) =>
     kRegions.firstWhere((r) => r.code == code, orElse: () => kRegions.first);
@@ -71,6 +85,24 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'SG':
           'HPB recommends starting at around 6 months, and not before 4 '
           'months.',
+      'SE':
+          'Livsmedelsverket allows small tastes from 4 months, with proper '
+          'complementary feeding from around 6 months, alongside continued '
+          'breastfeeding.',
+      'IS':
+          'Iceland advises around 6 months (with breastfeeding to about 6 '
+          'months), in line with Nordic guidance; small tastes from 4 months '
+          'are sometimes allowed.',
+      'JP':
+          'Weaning (rinyushoku) usually begins around 5–6 months, progressing '
+          'through staged textures as the baby develops.',
+      'MN':
+          'Broadly follows WHO: exclusive breastfeeding for about 6 months, '
+          'then complementary foods from 6 months. Confirm current national '
+          'guidance.',
+      'AU':
+          'NHMRC advises around 6 months, and not before 4 months, while '
+          'continuing breastfeeding.',
     },
     sources: ['WHO complementary feeding', 'NHS Start4Life', 'AAP', 'ESPGHAN', 'HPB 2023'],
   ),
@@ -98,8 +130,25 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'SG':
           'Labelling commonly covers a similar priority set; check the current '
           'SFA/HPB list for specifics.',
+      'SE':
+          'As an EU member, Sweden follows EU food law — 14 declarable '
+          'allergens.',
+      'IS':
+          'As an EEA country, Iceland aligns with the EU\'s 14 declarable '
+          'allergens.',
+      'JP':
+          'Japan mandates labelling of a core set (including egg, milk, wheat, '
+          'peanut, shrimp, and crab) plus buckwheat — a notable local addition '
+          '— with a further recommended list.',
+      'MN':
+          'Labelling requirements vary; guidance references the common priority '
+          'allergens. Check current national rules.',
+      'AU':
+          'Australia and New Zealand require declaration of a set of allergens '
+          '(including peanut, tree nuts, milk, egg, sesame, fish, shellfish, '
+          'soy, wheat, and lupin); ASCIA leads clinical advice.',
     },
-    sources: ['FASTER Act 2021', 'EU FIC 1169/2011', 'UK FIC', 'Codex'],
+    sources: ['FASTER Act 2021', 'EU FIC 1169/2011', 'UK FIC', 'Codex', 'FSANZ'],
   ),
   GuidelineTopic(
     id: 'peanut',
@@ -130,8 +179,25 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'SG':
           'Encourages introducing peanut once solids have begun rather than '
           'delaying; higher-risk babies should be discussed with a doctor.',
+      'SE':
+          'Encourages introducing peanut (smooth or ground, never whole) from '
+          'around 4–6 months alongside other foods, in line with Nordic and EU '
+          'advice.',
+      'IS':
+          'Supports early, non-delayed introduction of peanut, aligned with '
+          'Nordic/EU guidance; discuss higher-risk infants with a clinician.',
+      'JP':
+          'Introduce peanut (smooth, never whole) once weaning is under way, '
+          'with careful, graded amounts.',
+      'MN':
+          'Follows the general early-introduction principle; defers specifics '
+          'to clinicians.',
+      'AU':
+          'ASCIA strongly recommends introducing peanut in the first year (by '
+          '12 months), including for higher-risk babies, and keeping it in the '
+          'diet regularly.',
     },
-    sources: ['NIAID 2017', 'LEAP trial (NEJM)', 'SACN 2018', 'HPB 2023'],
+    sources: ['NIAID 2017', 'LEAP trial (NEJM)', 'SACN 2018', 'HPB 2023', 'ASCIA'],
   ),
   GuidelineTopic(
     id: 'egg',
@@ -157,8 +223,23 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'SG':
           'Well-cooked egg can be introduced from around 6 months as part of '
           'early allergen exposure.',
+      'SE':
+          'Well-cooked egg from around 4–6 months; early introduction is '
+          'encouraged.',
+      'IS':
+          'Cooked egg from around 6 months, with early rather than delayed '
+          'introduction.',
+      'JP':
+          'Egg is introduced carefully in stages — typically well-cooked yolk '
+          'first, then white — from around 5–6 months.',
+      'MN':
+          'Well-cooked egg as an early protein and iron source, timed per '
+          'WHO-aligned national guidance.',
+      'AU':
+          'ASCIA recommends introducing well-cooked egg in the first year '
+          '(around 6 months) and keeping it in the diet.',
     },
-    sources: ['SACN 2018', 'AAP', 'EAT trial (NEJM)'],
+    sources: ['SACN 2018', 'AAP', 'EAT trial (NEJM)', 'ASCIA'],
   ),
   GuidelineTopic(
     id: 'honey',
@@ -173,6 +254,11 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'US': 'AAP/CDC: avoid honey before 12 months (infant botulism risk).',
       'EU': 'Not recommended before 12 months.',
       'SG': 'HPB: avoid honey before 12 months.',
+      'SE': 'No honey before 12 months.',
+      'IS': 'No honey before 12 months.',
+      'JP': 'No honey before 12 months — infant botulism is a well-recognised risk.',
+      'MN': 'No honey before 12 months.',
+      'AU': 'No honey before 12 months (infant botulism risk).',
     },
     sources: ['NHS', 'AAP', 'CDC'],
   ),
@@ -197,6 +283,19 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'SG':
           'HPB: full cream cow\'s milk as a main drink from 12 months; dairy '
           'foods earlier.',
+      'SE':
+          'Cow\'s milk not as a main drink before 12 months; small amounts in '
+          'food and dairy foods are fine earlier.',
+      'IS': 'Cow\'s milk as a main drink from 12 months; dairy foods earlier.',
+      'JP':
+          'Cow\'s milk as a main drink from around 12 months; breast milk or '
+          'formula in the first year.',
+      'MN':
+          'Breast milk or formula as the main milk in the first year; cow\'s '
+          'milk as a drink from 12 months.',
+      'AU':
+          'Cow\'s milk can be used in foods from around 6 months but not as a '
+          'main drink before 12 months; full-fat for under-2s.',
     },
     sources: ['NHS', 'AAP'],
   ),
@@ -224,6 +323,22 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'SG':
           'HPB provides vitamin D guidance; confirm current recommendation for '
           'your baby with a doctor.',
+      'SE':
+          'Sweden recommends daily vitamin D drops for infants and young '
+          'children, often continued into early childhood given limited winter '
+          'sun.',
+      'IS':
+          'Iceland recommends vitamin D supplementation for infants (D-drops), '
+          'reflecting low sunlight at high latitude.',
+      'JP':
+          'Vitamin D adequacy is a recognised concern; supplementation may be '
+          'advised in some cases — check current guidance.',
+      'MN':
+          'Vitamin D deficiency is common given long winters and limited sun, '
+          'so supplementation for infants and children is widely recommended.',
+      'AU':
+          'Most infants get enough from sunlight, but supplements are advised '
+          'for at-risk babies (limited sun, darker skin, or covered).',
     },
     sources: ['NHS', 'AAP 2008/updates'],
   ),
@@ -245,6 +360,11 @@ const List<GuidelineTopic> kGuidelineTopics = [
           '2, and limit sodium.',
       'EU': 'Avoid added salt and sugar in the first year.',
       'SG': 'HPB: avoid adding salt and sugar to baby\'s food.',
+      'SE': 'Avoid added salt and sugar in infancy.',
+      'IS': 'Avoid added salt and sugar in the first year.',
+      'JP': 'Keep seasoning very light for babies; avoid added salt and sugar.',
+      'MN': 'Avoid adding salt and sugar to infant foods.',
+      'AU': 'Avoid added salt and sugar for infants and toddlers.',
     },
     sources: ['US Dietary Guidelines 2020–2025', 'NHS', 'WHO'],
   ),
@@ -262,6 +382,18 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'EU': 'ESPGHAN stresses iron-rich complementary foods.',
       'SG': 'HPB recommends iron-rich first foods such as meat and fortified '
           'cereal.',
+      'SE': 'Emphasises iron-rich complementary foods from the start of weaning.',
+      'IS': 'Encourages iron-rich first foods, in line with Nordic guidance.',
+      'JP':
+          'Iron-rich foods (such as red meat, fish, egg yolk, and fortified '
+          'foods) are encouraged as weaning progresses.',
+      'MN':
+          'Iron-rich complementary foods are encouraged, important given the '
+          'prevalence of infant anaemia.',
+      'AU':
+          'Iron-rich first foods (iron-fortified cereal, meat, and '
+          'alternatives) are recommended from around 6 months, as iron needs '
+          'are high.',
     },
     sources: ['SACN 2018', 'AAP', 'ESPGHAN'],
   ),
