@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../data/seed_guidelines.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
@@ -342,26 +343,21 @@ class _RegionStep extends StatelessWidget {
   final ValueChanged<String> onRegion;
   const _RegionStep({required this.region, required this.onRegion});
 
-  static const _regions = {
-    'UK': 'United Kingdom (NHS Start4Life, SACN)',
-    'US': 'United States (AAP, NIAID, USDA)',
-    'EU': 'Europe',
-    'SG': 'Singapore (HPB)',
-  };
-
   @override
   Widget build(BuildContext context) {
+    // All comparable regions except the global WHO entry.
+    final regions = kRegions.where((r) => r.group != 'Global').toList();
     return _StepScaffold(
       title: 'Where are you?',
       subtitle: 'Allergen lists and guidance vary by region.',
       child: Column(
-        children: _regions.entries.map((e) {
-          final selected = region == e.key;
+        children: regions.map((r) {
+          final selected = region == r.code;
           return Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.sm),
             child: InfoCard(
               color: selected ? AppColors.softBlue : Colors.white,
-              onTap: () => onRegion(e.key),
+              onTap: () => onRegion(r.code),
               child: Row(
                 children: [
                   Icon(
@@ -371,9 +367,20 @@ class _RegionStep extends StatelessWidget {
                     color: AppColors.navy,
                   ),
                   const SizedBox(width: AppSpacing.md),
+                  Text(r.flag, style: const TextStyle(fontSize: 20)),
+                  const SizedBox(width: AppSpacing.sm),
                   Expanded(
-                    child: Text(e.value,
-                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(r.name,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
+                        Text(r.bodies,
+                            style: const TextStyle(
+                                fontSize: 12, color: AppColors.textMuted)),
+                      ],
+                    ),
                   ),
                 ],
               ),
