@@ -5,6 +5,7 @@ import '../data/notification_service.dart';
 import '../data/repository.dart';
 import '../data/seed_allergens.dart';
 import '../data/seed_foods.dart';
+import '../data/seed_skills.dart';
 import '../data/sync_repository.dart';
 import '../models/allergen.dart';
 import '../models/baby.dart';
@@ -29,6 +30,7 @@ class AppState extends ChangeNotifier {
   // Catalogs (seeded original content).
   final List<Food> foods = List.unmodifiable(kSeedFoods);
   final List<Allergen> allergens = List.unmodifiable(kSeedAllergens);
+  final List<Skill> skills = List.unmodifiable(kSeedSkills);
 
   // Mutable state.
   Baby? baby;
@@ -73,6 +75,35 @@ class AppState extends ChangeNotifier {
       .where((e) => e.type == TrackerType.reaction && e.reactionSeverity != null
           && e.reactionSeverity != ReactionSeverity.none)
       .toList();
+
+  // ---- Skills (100 Foods Plan) -----------------------------------------
+  Skill? skillById(String id) {
+    for (final s in skills) {
+      if (s.id == id) return s;
+    }
+    return null;
+  }
+
+  int skillTriedCount(Skill s) => s.foodIds.where(isTried).length;
+
+  double skillProgress(Skill s) =>
+      s.foodIds.isEmpty ? 0 : skillTriedCount(s) / s.foodIds.length;
+
+  bool skillComplete(Skill s) =>
+      s.foodIds.isNotEmpty && skillTriedCount(s) == s.foodIds.length;
+
+  /// Overall plan progress: share of all skill foods tried.
+  double get planProgress {
+    final all = <String>{for (final s in skills) ...s.foodIds};
+    if (all.isEmpty) return 0;
+    return all.where(isTried).length / all.length;
+  }
+
+  Future<void> _checkSkillBadges() async {
+    for (final s in skills) {
+      if (skillComplete(s)) await awardSkillBadge(s.id);
+    }
+  }
 
   /// Resolve a food's hero media, honouring a user override (§6).
   AppMedia heroMediaFor(Food food) {
@@ -270,6 +301,7 @@ class AppState extends ChangeNotifier {
         details: 'Tried ${food?.name ?? foodId}',
       ));
       await _checkFoodMilestones();
+      await _checkSkillBadges();
     }
     notifyListeners();
   }

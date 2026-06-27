@@ -6,6 +6,7 @@ import '../models/allergen.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
+import 'plan_screen.dart';
 
 /// Progress / Milestones (§5): foods tried, meals, allergens introduced,
 /// milestones, with a small celebration on key milestones.
@@ -64,6 +65,34 @@ class ProgressScreen extends StatelessWidget {
                       label: 'Maintaining',
                       color: AppColors.navy)),
             ],
+          ),
+          const SizedBox(height: AppSpacing.xl),
+          InfoCard(
+            color: AppColors.softBlue,
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const PlanScreen())),
+            child: Row(
+              children: [
+                const Icon(Icons.flag_outlined, color: AppColors.navy),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('100 Foods Plan',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.navy)),
+                      const SizedBox(height: 2),
+                      Text('${(state.planProgress * 100).round()}% explored',
+                          style: const TextStyle(
+                              fontSize: 13, color: AppColors.textSecondary)),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right, color: AppColors.navy),
+              ],
+            ),
           ),
           const SizedBox(height: AppSpacing.xl),
           Text('Foods explored', style: Theme.of(context).textTheme.titleMedium),
@@ -125,7 +154,7 @@ class ProgressScreen extends StatelessWidget {
                         const SizedBox(width: AppSpacing.md),
                         Expanded(
                           child: Text(
-                            _milestoneLabels[m.kind] ?? m.kind,
+                            _milestoneLabel(state, m.kind),
                             style: const TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.navy),
@@ -138,6 +167,14 @@ class ProgressScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _milestoneLabel(AppState state, String kind) {
+    if (kind.startsWith('skill_')) {
+      final s = state.skillById(kind.substring(6));
+      return s == null ? 'Skill complete 🏅' : '${s.title} skill mastered 🏅';
+    }
+    return _milestoneLabels[kind] ?? kind;
   }
 }
 
