@@ -63,6 +63,16 @@ class AppState extends ChangeNotifier {
 
   bool isFavourite(String foodId) => foodState(foodId).favourite;
   bool isTried(String foodId) => foodState(foodId).tried;
+  bool isTryLater(String foodId) => foodState(foodId).tryLater;
+
+  /// Catalog foods flagged as favourite / try-later (for the Tracker tabs).
+  List<Food> get favouriteFoods =>
+      foods.where((f) => isFavourite(f.id)).toList();
+  List<Food> get tryLaterFoods => foods.where((f) => isTryLater(f.id)).toList();
+  List<TrackerEntry> get reactionEntries => trackerEntries
+      .where((e) => e.type == TrackerType.reaction && e.reactionSeverity != null
+          && e.reactionSeverity != ReactionSeverity.none)
+      .toList();
 
   /// Resolve a food's hero media, honouring a user override (§6).
   AppMedia heroMediaFor(Food food) {
@@ -267,6 +277,14 @@ class AppState extends ChangeNotifier {
   Future<void> setHeroMediaOverride(String foodId, String? uri) async {
     if (baby == null) return;
     await repo.setHeroMediaOverride(baby!.id, foodId, uri);
+    _foodStates = await repo.getFoodStates(baby!.id);
+    notifyListeners();
+  }
+
+  Future<void> toggleTryLater(String foodId) async {
+    if (baby == null) return;
+    final next = !isTryLater(foodId);
+    await repo.setTryLater(baby!.id, foodId, next);
     _foodStates = await repo.getFoodStates(baby!.id);
     notifyListeners();
   }

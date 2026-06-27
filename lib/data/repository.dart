@@ -14,6 +14,7 @@ class FoodState {
   final bool tried;
   final DateTime? triedDate;
   final String? heroMediaOverride;
+  final bool tryLater;
 
   const FoodState({
     required this.foodId,
@@ -21,6 +22,7 @@ class FoodState {
     this.tried = false,
     this.triedDate,
     this.heroMediaOverride,
+    this.tryLater = false,
   });
 }
 
@@ -83,6 +85,7 @@ class Repository {
               ? null
               : DateTime.tryParse(r['triedDate'] as String),
           heroMediaOverride: r['heroMediaOverride'] as String?,
+          tryLater: (r['tryLater'] as int? ?? 0) == 1,
         )
     };
   }
@@ -118,6 +121,9 @@ class Repository {
   Future<void> setHeroMediaOverride(
           String babyId, String foodId, String? uri) =>
       _upsertFoodState(babyId, foodId, {'heroMediaOverride': uri});
+
+  Future<void> setTryLater(String babyId, String foodId, bool v) =>
+      _upsertFoodState(babyId, foodId, {'tryLater': v ? 1 : 0});
 
   // ---- Allergen status --------------------------------------------------
   Future<Map<String, AllergenStatus>> getAllergenStatuses(

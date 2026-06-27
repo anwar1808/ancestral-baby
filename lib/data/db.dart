@@ -21,19 +21,25 @@ class AppDatabase {
     final path = p.join(dir, 'ancestral_baby.db');
     return openDatabase(
       path,
-      version: 2,
+      version: 3,
       onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onCreate: _create,
       onUpgrade: _upgrade,
     );
   }
 
-  /// Schema migrations. v2: escalating allergen intro step + custom foods.
+  /// Schema migrations.
+  /// v2: escalating allergen intro step + custom foods.
+  /// v3: "try later" flag on food_state.
   Future<void> _upgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await db.execute(
           'ALTER TABLE allergen_status ADD COLUMN introStep INTEGER DEFAULT 0');
       await db.execute(_customFoodTable);
+    }
+    if (oldVersion < 3) {
+      await db.execute(
+          'ALTER TABLE food_state ADD COLUMN tryLater INTEGER DEFAULT 0');
     }
   }
 
@@ -72,6 +78,7 @@ class AppDatabase {
         tried INTEGER DEFAULT 0,
         triedDate TEXT,
         heroMediaOverride TEXT,
+        tryLater INTEGER DEFAULT 0,
         PRIMARY KEY (babyId, foodId)
       )''');
 
