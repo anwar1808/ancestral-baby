@@ -280,7 +280,13 @@ class _CalendarViewState extends State<_CalendarView> {
       case TrackerType.meal:
         return AppColors.success;
       case TrackerType.reaction:
-        return AppColors.danger;
+        // A reaction-type entry with no/none severity is a tolerated allergen
+        // serving — show it positive, not red.
+        if (e.reactionSeverity == ReactionSeverity.significant) {
+          return AppColors.danger;
+        }
+        if (e.reactionSeverity == ReactionSeverity.mild) return AppColors.amber;
+        return AppColors.success;
       case TrackerType.note:
         return AppColors.amber;
     }

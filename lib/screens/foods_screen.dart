@@ -31,10 +31,15 @@ class _FoodsScreenState extends State<FoodsScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _maybeShowNotice());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      final state = context.read<AppState>();
+      if (!state.settings.foodNoticeSeen) _maybeShowNotice(state);
+    });
   }
 
-  void _maybeShowNotice() {
+  void _maybeShowNotice(AppState state) {
+    state.updateSettings(state.settings.copyWith(foodNoticeSeen: true));
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(

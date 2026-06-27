@@ -142,9 +142,10 @@ class CustomFoodScreen extends StatelessWidget {
               child: const Text('Cancel')),
           TextButton(
             onPressed: () {
+              final state = context.read<AppState>();
               Navigator.pop(dialogCtx);
-              context.read<AppState>().deleteCustomFood(food.id);
               Navigator.of(context).pop();
+              state.deleteCustomFood(food.id);
             },
             child: const Text('Remove',
                 style: TextStyle(color: AppColors.danger)),

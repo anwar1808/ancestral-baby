@@ -35,6 +35,9 @@ class ProgressScreen extends StatelessWidget {
     final state = context.watch<AppState>();
     final tried = state.triedCount;
     final total = state.foods.length;
+    // Catalog-only tried count for the "of N in the database" pie (triedCount
+    // also includes off-catalog custom foods, which aren't in the database total).
+    final catalogTried = state.foods.where((f) => state.isTried(f.id)).length;
     final maintaining = state.allergens
         .where((a) => state.allergenStatus(a.id).state ==
             AllergenState.maintaining)
@@ -108,16 +111,16 @@ class ProgressScreen extends StatelessWidget {
                       centerSpaceRadius: 38,
                       sections: [
                         PieChartSectionData(
-                          value: tried.toDouble(),
+                          value: catalogTried.toDouble(),
                           color: AppColors.success,
-                          title: '$tried',
+                          title: '$catalogTried',
                           radius: 28,
                           titleStyle: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800),
                         ),
                         PieChartSectionData(
-                          value: (total - tried).toDouble(),
+                          value: (total - catalogTried).toDouble(),
                           color: AppColors.softBlue,
                           title: '',
                           radius: 24,
@@ -127,7 +130,7 @@ class ProgressScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                Text('$tried of $total foods in the database',
+                Text('$catalogTried of $total foods in the database',
                     style: const TextStyle(color: AppColors.textSecondary)),
               ],
             ),

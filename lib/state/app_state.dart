@@ -167,7 +167,7 @@ class AppState extends ChangeNotifier {
     if (target == null || target.id == baby?.id) return;
     baby = target;
     await _loadBabyData(target.id);
-    settings = settings.copyWith(activeBabyId: target.id);
+    settings = settings.copyWith(activeBabyId: target.id, region: target.region);
     await repo.saveSettings(settings);
     notifyListeners();
     await refreshReminders();
@@ -213,7 +213,7 @@ class AppState extends ChangeNotifier {
       allergies: allergies,
       region: region,
     );
-    settings = settings.copyWith(activeBabyId: b.id);
+    settings = settings.copyWith(activeBabyId: b.id, region: b.region);
     await repo.saveSettings(settings);
     notifyListeners();
     await refreshReminders();
@@ -249,7 +249,8 @@ class AppState extends ChangeNotifier {
     if (baby?.id == babyId) {
       baby = babies.isNotEmpty ? babies.first : null;
       if (baby != null) await _loadBabyData(baby!.id);
-      settings = settings.copyWith(activeBabyId: baby?.id);
+      settings = settings.copyWith(
+          activeBabyId: baby?.id, region: baby?.region);
       await repo.saveSettings(settings);
     }
     notifyListeners();
@@ -310,6 +311,14 @@ class AppState extends ChangeNotifier {
       ));
       await _checkFoodMilestones();
       await _checkSkillBadges();
+    } else if (!tried && wasTried) {
+      // Remove the auto-logged "Tried X" entries so re-marking doesn't duplicate.
+      for (final e in trackerEntries
+          .where((e) => e.type == TrackerType.food && e.foodId == foodId)
+          .toList()) {
+        await repo.deleteTrackerEntry(e.id);
+      }
+      trackerEntries = await repo.getTrackerEntries(baby!.id);
     }
     notifyListeners();
   }
@@ -354,6 +363,9 @@ class AppState extends ChangeNotifier {
       details: 'Tried ${f.name}',
     ));
     await _checkFoodMilestones();
+    // No celebration UI on this path — clear the flag so it can't surface a
+    // stale "milestone unlocked" later on the food-detail screen.
+    consumeJustEarnedMilestone();
     notifyListeners();
     return f.id;
   }
@@ -429,6 +441,8 @@ class AppState extends ChangeNotifier {
       reactionSeverity: ReactionSeverity.none,
     ));
     await _checkAllergenMilestones();
+    // No celebration UI on the allergen path — clear so it can't leak later.
+    consumeJustEarnedMilestone();
     await refreshReminders();
     notifyListeners();
   }
@@ -465,23 +479,28 @@ class AppState extends ChangeNotifier {
   }
 
   /// Log a maintenance serve ("served today") for an already-tolerated allergen.
+  /// Only offered for allergens in the maintaining state.
   Future<void> logMaintenanceServe(String allergenId,
       {DateTime? when}) async {
     if (baby == null) return;
     final date = when ?? DateTime.now();
     final status = allergenStatus(allergenId);
     status.lastServedDate = date;
-    if (status.state == AllergenState.reactionNoted) {
-      // Re-serving after a noted reaction resumes the introduction series.
-      status.state = AllergenState.introducing;
-    } else {
-      status.state = AllergenState.maintaining;
-      status.introStep = AllergenStatus.introServingsTarget;
-    }
+    status.state = AllergenState.maintaining;
+    status.introStep = AllergenStatus.introServingsTarget;
     status.serveStreak += 1;
     status.firstIntroducedDate ??= date;
     await repo.saveAllergenStatus(status);
     _allergenStatuses = await repo.getAllergenStatuses(baby!.id);
+    final allergen = allergenById(allergenId);
+    await addTrackerEntry(TrackerEntry(
+      id: _uuid.v4(),
+      babyId: baby!.id,
+      type: TrackerType.food,
+      allergenId: allergenId,
+      date: date,
+      details: '${allergen?.name ?? allergenId}: maintenance serve',
+    ));
     await refreshReminders();
     notifyListeners();
   }

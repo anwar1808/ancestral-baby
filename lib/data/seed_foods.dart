@@ -1501,7 +1501,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'honey',
     name: 'Honey',
-    category: 'Other',
+    category: 'Sweetener',
     heroMedia: AppMedia(uri: 'assets/foods/honey_hero.jpg'),
     nutritionFlags: ['Energy'],
     minAgeMonths: 12,

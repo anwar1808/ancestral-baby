@@ -14,6 +14,9 @@ class AppSettings {
   /// first baby is created or when the active baby is removed.
   final String? activeBabyId;
 
+  /// Whether the one-time Foods age-safety notice has been shown.
+  final bool foodNoticeSeen;
+
   const AppSettings({
     this.reminderTime = const TimeOfDay(hour: 9, minute: 0),
     this.defaultMaintenanceInterval = 3,
@@ -23,6 +26,7 @@ class AppSettings {
     this.onboardingComplete = false,
     this.disclaimerAccepted = false,
     this.activeBabyId,
+    this.foodNoticeSeen = false,
   });
 
   AppSettings copyWith({
@@ -34,6 +38,7 @@ class AppSettings {
     bool? onboardingComplete,
     bool? disclaimerAccepted,
     String? activeBabyId,
+    bool? foodNoticeSeen,
   }) =>
       AppSettings(
         reminderTime: reminderTime ?? this.reminderTime,
@@ -46,6 +51,7 @@ class AppSettings {
         onboardingComplete: onboardingComplete ?? this.onboardingComplete,
         disclaimerAccepted: disclaimerAccepted ?? this.disclaimerAccepted,
         activeBabyId: activeBabyId ?? this.activeBabyId,
+        foodNoticeSeen: foodNoticeSeen ?? this.foodNoticeSeen,
       );
 
   Map<String, String> toMap() => {
@@ -57,6 +63,7 @@ class AppSettings {
         'notificationsEnabled': notificationsEnabled ? '1' : '0',
         'onboardingComplete': onboardingComplete ? '1' : '0',
         'disclaimerAccepted': disclaimerAccepted ? '1' : '0',
+        'foodNoticeSeen': foodNoticeSeen ? '1' : '0',
         if (activeBabyId != null) 'activeBabyId': activeBabyId!,
       };
 
@@ -73,5 +80,6 @@ class AppSettings {
         onboardingComplete: (m['onboardingComplete'] ?? '0') == '1',
         disclaimerAccepted: (m['disclaimerAccepted'] ?? '0') == '1',
         activeBabyId: m['activeBabyId'],
+        foodNoticeSeen: (m['foodNoticeSeen'] ?? '0') == '1',
       );
 }

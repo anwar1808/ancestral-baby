@@ -25,7 +25,8 @@ class _GuidesScreenState extends State<GuidesScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Guides'), automaticallyImplyLeading: false),
+          title: const Text('Guides'),
+          automaticallyImplyLeading: Navigator.canPop(context)),
       body: ListView(
         padding: const EdgeInsets.all(AppSpacing.lg),
         children: [
