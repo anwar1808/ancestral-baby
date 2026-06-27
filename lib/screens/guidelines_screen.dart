@@ -38,9 +38,9 @@ class GuidelinesScreen extends StatelessWidget {
                 const SizedBox(height: AppSpacing.sm),
                 Text(
                   'Pick a question to see how guidance compares across regions — '
-                  'Anglo-West, Scandinavia, and Asia, plus the WHO. Your region '
-                  '(${regionByCode(userRegion).flag} ${regionByCode(userRegion).name}) '
-                  'is highlighted.',
+                  'Anglo-West, Scandinavia, Asia, and Continental Europe, plus '
+                  'the WHO. Your region (${regionByCode(userRegion).flag} '
+                  '${regionByCode(userRegion).name}) is highlighted.',
                   style: const TextStyle(
                       fontSize: 13, color: AppColors.textSecondary, height: 1.4),
                 ),

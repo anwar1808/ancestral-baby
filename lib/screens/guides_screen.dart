@@ -45,7 +45,7 @@ class _GuidesScreenState extends State<GuidesScreen> {
                           style: TextStyle(
                               fontWeight: FontWeight.w800, color: Colors.white)),
                       SizedBox(height: 2),
-                      Text('Anglo-West · Scandinavia · Asia · WHO',
+                      Text('Anglo-West · Scandinavia · Asia · Europe · WHO',
                           style: TextStyle(
                               fontSize: 13, color: Color(0xFFB9C2D6))),
                     ],

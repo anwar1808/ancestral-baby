@@ -21,24 +21,33 @@ class RegionInfo {
 /// Order here is the default display order (user's region gets pinned first).
 /// Regions are grouped (Global / Europe / Americas / Asia-Pacific) in the UI.
 const List<RegionInfo> kRegions = [
-  RegionInfo('UK', 'United Kingdom', '🇬🇧', 'NHS Start4Life · SACN',
-      group: 'Anglo-West'),
+  RegionInfo('WHO', 'World Health Organization', '🌍', 'WHO · Codex',
+      group: 'Global'),
   RegionInfo('US', 'United States', '🇺🇸', 'AAP · NIAID · USDA',
       group: 'Anglo-West'),
+  RegionInfo('UK', 'United Kingdom', '🇬🇧', 'NHS Start4Life · SACN',
+      group: 'Anglo-West'),
   RegionInfo('AU', 'Australia', '🇦🇺', 'NHMRC · ASCIA', group: 'Anglo-West'),
-  RegionInfo('EU', 'Europe', '🇪🇺', 'EFSA · ESPGHAN', group: 'Anglo-West'),
   RegionInfo('SE', 'Sweden', '🇸🇪', 'Livsmedelsverket', group: 'Scandinavia'),
   RegionInfo('IS', 'Iceland', '🇮🇸', 'Directorate of Health',
       group: 'Scandinavia'),
-  RegionInfo('SG', 'Singapore', '🇸🇬', 'HPB · MOH', group: 'Asia'),
   RegionInfo('JP', 'Japan', '🇯🇵', 'MHLW', group: 'Asia'),
+  RegionInfo('SG', 'Singapore', '🇸🇬', 'HPB · MOH', group: 'Asia'),
   RegionInfo('MN', 'Mongolia', '🇲🇳', 'Ministry of Health', group: 'Asia'),
-  RegionInfo('WHO', 'World Health Organization', '🌍', 'WHO · Codex',
-      group: 'Global'),
+  RegionInfo('EU', 'Europe (EU)', '🇪🇺', 'EFSA · ESPGHAN',
+      group: 'Continental Europe'),
+  RegionInfo('FR', 'France', '🇫🇷', 'ANSES · SFP · PNNS',
+      group: 'Continental Europe'),
 ];
 
 /// Group display order.
-const List<String> kRegionGroups = ['Anglo-West', 'Scandinavia', 'Asia', 'Global'];
+const List<String> kRegionGroups = [
+  'Global',
+  'Anglo-West',
+  'Scandinavia',
+  'Asia',
+  'Continental Europe',
+];
 
 RegionInfo regionByCode(String code) =>
     kRegions.firstWhere((r) => r.code == code, orElse: () => kRegions.first);
@@ -104,6 +113,9 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'AU':
           'NHMRC advises around 6 months, and not before 4 months, while '
           'continuing breastfeeding.',
+      'FR':
+          'France recommends starting diversification between 4 and 6 months, '
+          'alongside continued milk feeds.',
     },
     sources: ['WHO complementary feeding', 'NHS Start4Life', 'AAP', 'ESPGHAN', 'HPB 2023'],
   ),
@@ -148,6 +160,9 @@ const List<GuidelineTopic> kGuidelineTopics = [
           'Australia and New Zealand require declaration of a set of allergens '
           '(including peanut, tree nuts, milk, egg, sesame, fish, shellfish, '
           'soy, wheat, and lupin); ASCIA leads clinical advice.',
+      'FR':
+          'As an EU member, France follows EU food law — 14 declarable '
+          'allergens.',
     },
     sources: ['FASTER Act 2021', 'EU FIC 1169/2011', 'UK FIC', 'Codex', 'FSANZ'],
   ),
@@ -197,6 +212,11 @@ const List<GuidelineTopic> kGuidelineTopics = [
           'ASCIA strongly recommends introducing peanut in the first year (by '
           '12 months), including for higher-risk babies, and keeping it in the '
           'diet regularly.',
+      'FR':
+          'French paediatric guidance encourages introducing allergenic foods, '
+          'including peanut, from the start of diversification (around 4–6 '
+          'months) without delay, even for higher-risk infants — discuss '
+          'high-risk cases with a doctor.',
     },
     sources: ['NIAID 2017', 'LEAP trial (NEJM)', 'SACN 2018', 'HPB 2023', 'ASCIA'],
   ),
@@ -239,6 +259,9 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'AU':
           'ASCIA recommends introducing well-cooked egg in the first year '
           '(around 6 months) and keeping it in the diet.',
+      'FR':
+          'Well-cooked egg from the start of diversification (around 4–6 '
+          'months); early introduction is encouraged.',
     },
     sources: ['SACN 2018', 'AAP', 'EAT trial (NEJM)', 'ASCIA'],
   ),
@@ -260,6 +283,7 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'JP': 'No honey before 12 months — infant botulism is a well-recognised risk.',
       'MN': 'No honey before 12 months.',
       'AU': 'No honey before 12 months (infant botulism risk).',
+      'FR': 'No honey before 12 months (infant botulism risk).',
     },
     sources: ['NHS', 'AAP', 'CDC'],
   ),
@@ -297,6 +321,10 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'AU':
           'Cow\'s milk can be used in foods from around 6 months but not as a '
           'main drink before 12 months; full-fat for under-2s.',
+      'FR':
+          'Cow\'s milk not as a main drink before 12 months; follow-on or '
+          'growth milk ("lait de croissance") is commonly used into early '
+          'childhood.',
     },
     sources: ['NHS', 'AAP'],
   ),
@@ -340,6 +368,9 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'AU':
           'Most infants get enough from sunlight, but supplements are advised '
           'for at-risk babies (limited sun, darker skin, or covered).',
+      'FR':
+          'France routinely recommends daily vitamin D supplementation for all '
+          'infants and young children.',
     },
     sources: ['NHS', 'AAP 2008/updates'],
   ),
@@ -366,6 +397,7 @@ const List<GuidelineTopic> kGuidelineTopics = [
       'JP': 'Keep seasoning very light for babies; avoid added salt and sugar.',
       'MN': 'Avoid adding salt and sugar to infant foods.',
       'AU': 'Avoid added salt and sugar for infants and toddlers.',
+      'FR': 'Avoid added salt and sugar in infancy.',
     },
     sources: ['US Dietary Guidelines 2020–2025', 'NHS', 'WHO'],
   ),
@@ -395,6 +427,9 @@ const List<GuidelineTopic> kGuidelineTopics = [
           'Iron-rich first foods (iron-fortified cereal, meat, and '
           'alternatives) are recommended from around 6 months, as iron needs '
           'are high.',
+      'FR':
+          'Iron-rich foods are encouraged; infant and growth formulas are '
+          'often continued to help meet iron needs.',
     },
     sources: ['SACN 2018', 'AAP', 'ESPGHAN'],
   ),
