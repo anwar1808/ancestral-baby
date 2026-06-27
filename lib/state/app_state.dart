@@ -8,6 +8,7 @@ import '../data/seed_foods.dart';
 import '../data/sync_repository.dart';
 import '../models/allergen.dart';
 import '../models/baby.dart';
+import '../models/custom_food.dart';
 import '../models/food.dart';
 import '../models/media.dart';
 import '../models/settings.dart';
@@ -36,6 +37,7 @@ class AppState extends ChangeNotifier {
   Map<String, AllergenStatus> _allergenStatuses = {};
   List<TrackerEntry> trackerEntries = [];
   List<Milestone> milestones = [];
+  List<CustomFood> customFoods = [];
 
   bool _loading = true;
   bool get loading => _loading;
@@ -78,7 +80,9 @@ class AppState extends ChangeNotifier {
         maintenanceIntervalDays: settings.defaultMaintenanceInterval,
       );
 
-  int get triedCount => _foodStates.values.where((s) => s.tried).length;
+  int get triedCount =>
+      _foodStates.values.where((s) => s.tried).length +
+      customFoods.where((f) => f.tried).length;
 
   int get allergensIntroducedCount => _allergenStatuses.values
       .where((s) => s.state != AllergenState.notIntroduced)
@@ -95,6 +99,7 @@ class AppState extends ChangeNotifier {
       _allergenStatuses = await repo.getAllergenStatuses(baby!.id);
       trackerEntries = await repo.getTrackerEntries(baby!.id);
       milestones = await repo.getMilestones(baby!.id);
+      customFoods = await repo.getCustomFoods(baby!.id);
     }
     _loading = false;
     notifyListeners();
@@ -179,6 +184,58 @@ class AppState extends ChangeNotifier {
     if (baby == null) return;
     await repo.setHeroMediaOverride(baby!.id, foodId, uri);
     _foodStates = await repo.getFoodStates(baby!.id);
+    notifyListeners();
+  }
+
+  // ---- Custom foods (user-added, off-catalog) ---------------------------
+  /// Create a custom tried-food. Returns the new food's id so the caller can
+  /// immediately offer to attach a photo.
+  Future<String?> addCustomFood(String name,
+      {String? category, DateTime? when}) async {
+    if (baby == null) return null;
+    final f = CustomFood(
+      id: _uuid.v4(),
+      babyId: baby!.id,
+      name: name.trim(),
+      category: (category?.trim().isEmpty ?? true) ? null : category!.trim(),
+      tried: true,
+      triedDate: when ?? DateTime.now(),
+      createdDate: DateTime.now(),
+    );
+    await repo.saveCustomFood(f);
+    customFoods = await repo.getCustomFoods(baby!.id);
+    await addTrackerEntry(TrackerEntry(
+      id: _uuid.v4(),
+      babyId: baby!.id,
+      type: TrackerType.food,
+      date: f.triedDate ?? DateTime.now(),
+      details: 'Tried ${f.name}',
+    ));
+    await _checkFoodMilestones();
+    notifyListeners();
+    return f.id;
+  }
+
+  Future<void> updateCustomFood(CustomFood f) async {
+    if (baby == null) return;
+    await repo.saveCustomFood(f);
+    customFoods = await repo.getCustomFoods(baby!.id);
+    notifyListeners();
+  }
+
+  Future<void> setCustomFoodPhoto(String id, String? path) async {
+    final f = customFoods.firstWhere((c) => c.id == id,
+        orElse: () => CustomFood(
+            id: id, babyId: baby?.id ?? 'local', name: '', createdDate: DateTime.now()));
+    if (f.name.isEmpty) return;
+    f.photoPath = path;
+    await updateCustomFood(f);
+  }
+
+  Future<void> deleteCustomFood(String id) async {
+    if (baby == null) return;
+    await repo.deleteCustomFood(id);
+    customFoods = await repo.getCustomFoods(baby!.id);
     notifyListeners();
   }
 
@@ -342,6 +399,9 @@ class AppState extends ChangeNotifier {
         if (f != null) cats.add(f.category);
       }
     });
+    for (final cf in customFoods) {
+      if (cf.tried && (cf.category?.isNotEmpty ?? false)) cats.add(cf.category!);
+    }
     return cats.length;
   }
 

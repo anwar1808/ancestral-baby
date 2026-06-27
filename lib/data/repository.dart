@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/allergen.dart';
 import '../models/baby.dart';
+import '../models/custom_food.dart';
 import '../models/settings.dart';
 import '../models/tracker.dart';
 import 'db.dart';
@@ -162,5 +163,24 @@ class Repository {
           conflictAlgorithm: ConflictAlgorithm.replace);
     });
     await batch.commit(noResult: true);
+  }
+
+  // ---- Custom foods (user-added, off-catalog) ---------------------------
+  Future<List<CustomFood>> getCustomFoods(String babyId) async {
+    final db = await _db;
+    final rows = await db.query('custom_food',
+        where: 'babyId = ?', whereArgs: [babyId], orderBy: 'createdDate DESC');
+    return rows.map(CustomFood.fromMap).toList();
+  }
+
+  Future<void> saveCustomFood(CustomFood f) async {
+    final db = await _db;
+    await db.insert('custom_food', f.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<void> deleteCustomFood(String id) async {
+    final db = await _db;
+    await db.delete('custom_food', where: 'id = ?', whereArgs: [id]);
   }
 }

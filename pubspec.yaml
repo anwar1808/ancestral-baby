@@ -66,6 +66,9 @@ dependencies:
   intl: ^0.19.0
   uuid: ^4.5.1
 
+  # Custom-food photos (pick from gallery/camera)
+  image_picker: ^1.1.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
