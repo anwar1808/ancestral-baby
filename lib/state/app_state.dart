@@ -32,6 +32,7 @@ class AppState extends ChangeNotifier {
 
   // Mutable state.
   Baby? baby;
+  List<Baby> babies = [];
   AppSettings settings = const AppSettings();
   Map<String, FoodState> _foodStates = {};
   Map<String, AllergenStatus> _allergenStatuses = {};
@@ -93,13 +94,14 @@ class AppState extends ChangeNotifier {
     _loading = true;
     notifyListeners();
     settings = await repo.getSettings();
-    baby = await repo.getBaby();
+    babies = await repo.getBabies();
+    // Resolve the active baby: stored selection if still present, else first.
+    baby = babies.where((b) => b.id == settings.activeBabyId).cast<Baby?>().firstWhere(
+          (b) => true,
+          orElse: () => babies.isNotEmpty ? babies.first : null,
+        );
     if (baby != null) {
-      _foodStates = await repo.getFoodStates(baby!.id);
-      _allergenStatuses = await repo.getAllergenStatuses(baby!.id);
-      trackerEntries = await repo.getTrackerEntries(baby!.id);
-      milestones = await repo.getMilestones(baby!.id);
-      customFoods = await repo.getCustomFoods(baby!.id);
+      await _loadBabyData(baby!.id);
     }
     _loading = false;
     notifyListeners();
@@ -107,8 +109,76 @@ class AppState extends ChangeNotifier {
     await refreshReminders();
   }
 
-  // ---- Onboarding -------------------------------------------------------
+  /// Load all per-baby data for [babyId] into memory.
+  Future<void> _loadBabyData(String babyId) async {
+    _foodStates = await repo.getFoodStates(babyId);
+    _allergenStatuses = await repo.getAllergenStatuses(babyId);
+    trackerEntries = await repo.getTrackerEntries(babyId);
+    milestones = await repo.getMilestones(babyId);
+    customFoods = await repo.getCustomFoods(babyId);
+  }
+
+  /// Switch the active baby and reload its data.
+  Future<void> switchBaby(String babyId) async {
+    final target = babies.where((b) => b.id == babyId).cast<Baby?>().firstWhere(
+        (b) => true,
+        orElse: () => null);
+    if (target == null || target.id == baby?.id) return;
+    baby = target;
+    await _loadBabyData(target.id);
+    settings = settings.copyWith(activeBabyId: target.id);
+    await repo.saveSettings(settings);
+    notifyListeners();
+    await refreshReminders();
+  }
+
+  // ---- Onboarding / baby management ------------------------------------
   Future<void> completeOnboarding({
+    required String name,
+    required DateTime birthDate,
+    required bool preemie,
+    required bool eczema,
+    required List<String> allergies,
+    required String region,
+  }) async {
+    final b = await _createBaby(
+      name: name,
+      birthDate: birthDate,
+      preemie: preemie,
+      eczema: eczema,
+      allergies: allergies,
+      region: region,
+    );
+    settings = settings.copyWith(
+        onboardingComplete: true, region: region, activeBabyId: b.id);
+    await repo.saveSettings(settings);
+    notifyListeners();
+  }
+
+  /// Add an additional baby (after onboarding) and switch to it.
+  Future<void> addBaby({
+    required String name,
+    required DateTime birthDate,
+    required bool preemie,
+    required bool eczema,
+    required List<String> allergies,
+    required String region,
+  }) async {
+    final b = await _createBaby(
+      name: name,
+      birthDate: birthDate,
+      preemie: preemie,
+      eczema: eczema,
+      allergies: allergies,
+      region: region,
+    );
+    settings = settings.copyWith(activeBabyId: b.id);
+    await repo.saveSettings(settings);
+    notifyListeners();
+    await refreshReminders();
+  }
+
+  Future<Baby> _createBaby({
     required String name,
     required DateTime birthDate,
     required bool preemie,
@@ -126,15 +196,29 @@ class AppState extends ChangeNotifier {
       region: region,
     );
     await repo.saveBaby(b);
+    babies = await repo.getBabies();
     baby = b;
-    settings = settings.copyWith(onboardingComplete: true, region: region);
-    await repo.saveSettings(settings);
+    await _loadBabyData(b.id);
+    return b;
+  }
+
+  Future<void> deleteBaby(String babyId) async {
+    await repo.deleteBaby(babyId);
+    babies = await repo.getBabies();
+    if (baby?.id == babyId) {
+      baby = babies.isNotEmpty ? babies.first : null;
+      if (baby != null) await _loadBabyData(baby!.id);
+      settings = settings.copyWith(activeBabyId: baby?.id);
+      await repo.saveSettings(settings);
+    }
     notifyListeners();
+    await refreshReminders();
   }
 
   Future<void> updateBaby(Baby b) async {
     await repo.saveBaby(b);
-    baby = b;
+    babies = await repo.getBabies();
+    if (b.id == baby?.id) baby = b;
     notifyListeners();
   }
 

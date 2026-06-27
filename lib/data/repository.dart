@@ -39,6 +39,29 @@ class Repository {
     return Baby.fromMap(rows.first);
   }
 
+  Future<List<Baby>> getBabies() async {
+    final db = await _db;
+    final rows = await db.query('baby', orderBy: 'birthDate DESC');
+    return rows.map(Baby.fromMap).toList();
+  }
+
+  Future<Baby?> getBabyById(String id) async {
+    final db = await _db;
+    final rows =
+        await db.query('baby', where: 'id = ?', whereArgs: [id], limit: 1);
+    if (rows.isEmpty) return null;
+    return Baby.fromMap(rows.first);
+  }
+
+  Future<void> deleteBaby(String id) async {
+    final db = await _db;
+    await db.delete('baby', where: 'id = ?', whereArgs: [id]);
+    for (final t in ['food_state', 'allergen_status', 'tracker_entry',
+        'milestone', 'custom_food']) {
+      await db.delete(t, where: 'babyId = ?', whereArgs: [id]);
+    }
+  }
+
   Future<void> saveBaby(Baby baby) async {
     final db = await _db;
     await db.insert('baby', baby.toMap(),

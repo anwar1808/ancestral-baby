@@ -9,7 +9,10 @@ import '../widgets/common.dart';
 /// Lightweight onboarding (§5). No paywall, no auth wall.
 /// name → birth date (+preemie) → optional eczema/allergy flags → region.
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  /// When true, this is adding an extra baby (after first onboarding) rather
+  /// than the first-run flow — it saves via addBaby and pops when done.
+  final bool additional;
+  const OnboardingScreen({super.key, this.additional = false});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -56,14 +59,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _finish() async {
-    await context.read<AppState>().completeOnboarding(
-          name: _nameController.text.trim(),
-          birthDate: _birthDate!,
-          preemie: _preemie,
-          eczema: _eczema,
-          allergies: _allergies.toList(),
-          region: _region,
-        );
+    final state = context.read<AppState>();
+    if (widget.additional) {
+      await state.addBaby(
+        name: _nameController.text.trim(),
+        birthDate: _birthDate!,
+        preemie: _preemie,
+        eczema: _eczema,
+        allergies: _allergies.toList(),
+        region: _region,
+      );
+      if (mounted) Navigator.of(context).pop();
+    } else {
+      await state.completeOnboarding(
+        name: _nameController.text.trim(),
+        birthDate: _birthDate!,
+        preemie: _preemie,
+        eczema: _eczema,
+        allergies: _allergies.toList(),
+        region: _region,
+      );
+    }
   }
 
   @override
@@ -82,6 +98,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onPressed: () => _pageController.previousPage(
                           duration: const Duration(milliseconds: 250),
                           curve: Curves.easeOut),
+                    )
+                  else if (widget.additional)
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.navy),
+                      onPressed: () => Navigator.of(context).maybePop(),
                     )
                   else
                     const SizedBox(width: 48),

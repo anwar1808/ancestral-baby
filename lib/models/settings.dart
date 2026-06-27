@@ -10,6 +10,10 @@ class AppSettings {
   final bool onboardingComplete;
   final bool disclaimerAccepted;
 
+  /// Currently-selected baby (supports multiple baby profiles). Null until the
+  /// first baby is created or when the active baby is removed.
+  final String? activeBabyId;
+
   const AppSettings({
     this.reminderTime = const TimeOfDay(hour: 9, minute: 0),
     this.defaultMaintenanceInterval = 3,
@@ -18,6 +22,7 @@ class AppSettings {
     this.notificationsEnabled = true,
     this.onboardingComplete = false,
     this.disclaimerAccepted = false,
+    this.activeBabyId,
   });
 
   AppSettings copyWith({
@@ -28,6 +33,7 @@ class AppSettings {
     bool? notificationsEnabled,
     bool? onboardingComplete,
     bool? disclaimerAccepted,
+    String? activeBabyId,
   }) =>
       AppSettings(
         reminderTime: reminderTime ?? this.reminderTime,
@@ -39,6 +45,7 @@ class AppSettings {
             notificationsEnabled ?? this.notificationsEnabled,
         onboardingComplete: onboardingComplete ?? this.onboardingComplete,
         disclaimerAccepted: disclaimerAccepted ?? this.disclaimerAccepted,
+        activeBabyId: activeBabyId ?? this.activeBabyId,
       );
 
   Map<String, String> toMap() => {
@@ -50,6 +57,7 @@ class AppSettings {
         'notificationsEnabled': notificationsEnabled ? '1' : '0',
         'onboardingComplete': onboardingComplete ? '1' : '0',
         'disclaimerAccepted': disclaimerAccepted ? '1' : '0',
+        if (activeBabyId != null) 'activeBabyId': activeBabyId!,
       };
 
   factory AppSettings.fromMap(Map<String, String> m) => AppSettings(
@@ -64,5 +72,6 @@ class AppSettings {
         notificationsEnabled: (m['notificationsEnabled'] ?? '1') == '1',
         onboardingComplete: (m['onboardingComplete'] ?? '0') == '1',
         disclaimerAccepted: (m['disclaimerAccepted'] ?? '0') == '1',
+        activeBabyId: m['activeBabyId'],
       );
 }
