@@ -32,6 +32,13 @@ class AppState extends ChangeNotifier {
   final List<Allergen> allergens = List.unmodifiable(kSeedAllergens);
   final List<Skill> skills = List.unmodifiable(kSeedSkills);
 
+  // O(1) id indexes over the immutable catalogs (built once on first use).
+  late final Map<String, Food> _foodIndex = {for (final f in foods) f.id: f};
+  late final Map<String, Allergen> _allergenIndex = {
+    for (final a in allergens) a.id: a
+  };
+  late final Map<String, Skill> _skillIndex = {for (final s in skills) s.id: s};
+
   // Mutable state.
   Baby? baby;
   List<Baby> babies = [];
@@ -46,19 +53,9 @@ class AppState extends ChangeNotifier {
   bool get loading => _loading;
 
   // ---- Lookups ----------------------------------------------------------
-  Food? foodById(String id) {
-    for (final f in foods) {
-      if (f.id == id) return f;
-    }
-    return null;
-  }
+  Food? foodById(String id) => _foodIndex[id];
 
-  Allergen? allergenById(String id) {
-    for (final a in allergens) {
-      if (a.id == id) return a;
-    }
-    return null;
-  }
+  Allergen? allergenById(String id) => _allergenIndex[id];
 
   FoodState foodState(String foodId) =>
       _foodStates[foodId] ?? FoodState(foodId: foodId);
@@ -77,12 +74,7 @@ class AppState extends ChangeNotifier {
       .toList();
 
   // ---- Skills (100 Foods Plan) -----------------------------------------
-  Skill? skillById(String id) {
-    for (final s in skills) {
-      if (s.id == id) return s;
-    }
-    return null;
-  }
+  Skill? skillById(String id) => _skillIndex[id];
 
   int skillTriedCount(Skill s) => s.foodIds.where(isTried).length;
 
