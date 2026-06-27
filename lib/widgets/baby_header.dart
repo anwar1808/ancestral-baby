@@ -7,8 +7,7 @@ import '../theme/tokens.dart';
 
 /// Dark navy baby header (§5): avatar, name, age, calendar/settings affordance.
 class BabyHeader extends StatelessWidget {
-  final String? overrideTitle;
-  const BabyHeader({super.key, this.overrideTitle});
+  const BabyHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +41,7 @@ class BabyHeader extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    overrideTitle ?? baby?.name ?? 'Your baby',
+                    baby?.name ?? 'Your baby',
                     style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,

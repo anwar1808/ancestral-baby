@@ -59,6 +59,16 @@ class AllergenStatus {
   int maintenanceIntervalDays; // default ~3–4 → ~2×/week
   int serveStreak;
 
+  /// How many of the 3 escalating introduction servings have been completed
+  /// cleanly (0–3). At 3 the allergen is considered tolerated → maintaining.
+  /// Mirrors the staged-introduction approach: serve increasing amounts over a
+  /// short series, watching ~2 hours each time (grounded in LEAP/EAT-style
+  /// early-introduction guidance — original wording).
+  int introStep;
+
+  /// Total escalating servings in the introduction series.
+  static const int introServingsTarget = 3;
+
   AllergenStatus({
     required this.babyId,
     required this.allergenId,
@@ -67,7 +77,22 @@ class AllergenStatus {
     this.lastServedDate,
     this.maintenanceIntervalDays = 3,
     this.serveStreak = 0,
+    this.introStep = 0,
   });
+
+  /// Amount guidance for each escalating serving (1-indexed step).
+  static String introAmountFor(int step) {
+    switch (step) {
+      case 1:
+        return 'A tiny taste — a smear on the tip of a spoon or your fingertip.';
+      case 2:
+        return 'About double the first amount (roughly a quarter teaspoon) if the first serving was tolerated.';
+      case 3:
+        return 'A larger portion (roughly half to one teaspoon), building toward a normal serving.';
+      default:
+        return 'A normal serving, kept in regular rotation.';
+    }
+  }
 
   /// When the next maintenance serve is due (null if not maintaining yet).
   DateTime? get nextDueDate {
@@ -91,6 +116,7 @@ class AllergenStatus {
         'lastServedDate': lastServedDate?.toIso8601String(),
         'maintenanceIntervalDays': maintenanceIntervalDays,
         'serveStreak': serveStreak,
+        'introStep': introStep,
       };
 
   factory AllergenStatus.fromMap(Map<String, dynamic> m) => AllergenStatus(
@@ -101,6 +127,7 @@ class AllergenStatus {
         lastServedDate: _date(m['lastServedDate']),
         maintenanceIntervalDays: m['maintenanceIntervalDays'] as int? ?? 3,
         serveStreak: m['serveStreak'] as int? ?? 0,
+        introStep: m['introStep'] as int? ?? 0,
       );
 
   static DateTime? _date(Object? v) =>

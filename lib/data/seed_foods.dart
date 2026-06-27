@@ -16,7 +16,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'avocado',
     name: 'Avocado',
-    slug: 'avocado',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/avocado_hero.jpg'),
     nutritionFlags: ['Healthy fats', 'Fibre'],
@@ -65,7 +64,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'banana',
     name: 'Banana',
-    slug: 'banana',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/banana_hero.jpg'),
     nutritionFlags: ['Fibre', 'Potassium'],
@@ -114,7 +112,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'apple',
     name: 'Apple',
-    slug: 'apple',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/apple_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Fibre'],
@@ -165,7 +162,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'pear',
     name: 'Pear',
-    slug: 'pear',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/pear_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Fibre'],
@@ -213,7 +209,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'blueberry',
     name: 'Blueberry',
-    slug: 'blueberry',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/blueberry_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Antioxidants'],
@@ -262,7 +257,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'mango',
     name: 'Mango',
-    slug: 'mango',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/mango_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Vitamin A'],
@@ -312,7 +306,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'sweet_potato',
     name: 'Sweet potato',
-    slug: 'sweet-potato',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/sweet_potato_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
@@ -358,7 +351,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'broccoli',
     name: 'Broccoli',
-    slug: 'broccoli',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/broccoli_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Folate'],
@@ -404,7 +396,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'carrot',
     name: 'Carrot',
-    slug: 'carrot',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/carrot_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
@@ -452,7 +443,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'spinach',
     name: 'Spinach',
-    slug: 'spinach',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/spinach_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Folate'],
@@ -497,7 +487,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'butternut_squash',
     name: 'Butternut squash',
-    slug: 'butternut-squash',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/butternut_squash_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
@@ -542,7 +531,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'green_pea',
     name: 'Green peas',
-    slug: 'green-peas',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/green_pea_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Fibre'],
@@ -592,7 +580,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'oats',
     name: 'Oats (porridge)',
-    slug: 'oats',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/oats_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Fibre'],
@@ -639,7 +626,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'rice',
     name: 'Rice',
-    slug: 'rice',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/rice_hero.jpg'),
     nutritionFlags: ['Energy', 'Carbohydrate'],
@@ -684,7 +670,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'bread',
     name: 'Bread (wheat)',
-    slug: 'bread',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/bread_hero.jpg'),
     isCommonAllergen: true,
@@ -733,7 +718,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'quinoa',
     name: 'Quinoa',
-    slug: 'quinoa',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/quinoa_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
@@ -778,7 +762,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'pasta',
     name: 'Pasta (wheat)',
-    slug: 'pasta',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/pasta_hero.jpg'),
     isCommonAllergen: true,
@@ -831,7 +814,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'egg',
     name: 'Egg',
-    slug: 'egg',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/egg_hero.jpg'),
     isCommonAllergen: true,
@@ -890,7 +872,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'chicken',
     name: 'Chicken',
-    slug: 'chicken',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/chicken_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron-rich'],
@@ -936,7 +917,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'beef',
     name: 'Beef',
-    slug: 'beef',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/beef_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Protein'],
@@ -982,7 +962,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'salmon',
     name: 'Salmon (fish)',
-    slug: 'salmon',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/salmon_hero.jpg'),
     isCommonAllergen: true,
@@ -1030,7 +1009,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'shrimp',
     name: 'Shrimp / prawn (shellfish)',
-    slug: 'shrimp',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/shrimp_hero.jpg'),
     isCommonAllergen: true,
@@ -1078,7 +1056,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'peanut_butter',
     name: 'Peanut butter',
-    slug: 'peanut-butter',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/peanut_butter_hero.jpg'),
     isCommonAllergen: true,
@@ -1138,7 +1115,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'almond_butter',
     name: 'Almond butter (tree nut)',
-    slug: 'almond-butter',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/almond_butter_hero.jpg'),
     isCommonAllergen: true,
@@ -1188,7 +1164,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tofu',
     name: 'Tofu (soy)',
-    slug: 'tofu',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/tofu_hero.jpg'),
     isCommonAllergen: true,
@@ -1237,7 +1212,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tahini',
     name: 'Tahini (sesame)',
-    slug: 'tahini',
     category: 'Protein',
     heroMedia: AppMedia(uri: 'assets/foods/tahini_hero.jpg'),
     isCommonAllergen: true,
@@ -1290,7 +1264,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'yoghurt',
     name: 'Yoghurt (cow’s milk)',
-    slug: 'yoghurt',
     category: 'Dairy',
     heroMedia: AppMedia(uri: 'assets/foods/yoghurt_hero.jpg'),
     isCommonAllergen: true,
@@ -1338,7 +1311,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'cheese',
     name: 'Cheese (cow’s milk)',
-    slug: 'cheese',
     category: 'Dairy',
     heroMedia: AppMedia(uri: 'assets/foods/cheese_hero.jpg'),
     isCommonAllergen: true,
@@ -1392,7 +1364,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'lentil',
     name: 'Lentils',
-    slug: 'lentils',
     category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/lentil_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Plant protein'],
@@ -1437,7 +1408,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'chickpea',
     name: 'Chickpeas',
-    slug: 'chickpeas',
     category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/chickpea_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
@@ -1483,7 +1453,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'black_bean',
     name: 'Black beans',
-    slug: 'black-beans',
     category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/black_bean_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
@@ -1532,7 +1501,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'honey',
     name: 'Honey',
-    slug: 'honey',
     category: 'Other',
     heroMedia: AppMedia(uri: 'assets/foods/honey_hero.jpg'),
     nutritionFlags: ['Energy'],

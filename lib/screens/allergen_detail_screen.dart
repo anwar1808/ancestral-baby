@@ -65,66 +65,12 @@ class AllergenDetailScreen extends StatelessWidget {
               style: const TextStyle(height: 1.55, fontSize: 15)),
           const SizedBox(height: AppSpacing.lg),
 
-          // Record outcome.
-          InfoCard(
-            color: AppColors.softBlue,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Record an introduction',
-                    style: Theme.of(context).textTheme.titleMedium),
-                const SizedBox(height: 4),
-                const Text(
-                  'Start small, serve earlier in the day, and watch for about '
-                  'two hours.',
-                  style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
-                ),
-                const SizedBox(height: AppSpacing.md),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _OutcomeButton(
-                        label: 'Tolerated',
-                        color: AppColors.success,
-                        onTap: () => _record(
-                            context, allergenId, ReactionSeverity.none),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: _OutcomeButton(
-                        label: 'Mild',
-                        color: AppColors.amber,
-                        onTap: () => _record(
-                            context, allergenId, ReactionSeverity.mild),
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: _OutcomeButton(
-                        label: 'Significant',
-                        color: AppColors.danger,
-                        onTap: () => _record(
-                            context, allergenId, ReactionSeverity.significant),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-
-          if (status.state == AllergenState.maintaining ||
-              status.state == AllergenState.introducing) ...[
-            PrimaryButton(
-              label: 'Served today',
-              icon: Icons.check,
-              onPressed: () =>
-                  context.read<AppState>().logMaintenanceServe(allergenId),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            _IntervalControl(status: status),
+          // Escalating introduction series, or maintenance once tolerated.
+          if (status.state == AllergenState.maintaining) ...[
+            _MaintenanceCard(allergenId: allergenId, status: status),
+            const SizedBox(height: AppSpacing.lg),
+          ] else ...[
+            _IntroSeriesCard(allergenId: allergenId, status: status),
             const SizedBox(height: AppSpacing.lg),
           ],
 
@@ -221,12 +167,207 @@ class AllergenDetailScreen extends StatelessWidget {
     );
   }
 
+}
+
+/// The escalating 3-serving introduction series (the central allergen flow).
+/// Serve increasing amounts over three sittings, watching ~2 hours each; three
+/// clean servings → tolerated (maintaining). A reaction pauses and flags it.
+class _IntroSeriesCard extends StatelessWidget {
+  final String allergenId;
+  final AllergenStatus status;
+  const _IntroSeriesCard({required this.allergenId, required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    final reacted = status.state == AllergenState.reactionNoted;
+    final nextStep =
+        (status.introStep + 1).clamp(1, AllergenStatus.introServingsTarget);
+    return InfoCard(
+      color: reacted ? const Color(0xFFFCEBEA) : AppColors.softBlue,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(reacted ? 'Reaction noted' : 'Introduction series',
+              style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: AppSpacing.sm),
+          // Progress dots for the 3 servings.
+          Row(
+            children: List.generate(AllergenStatus.introServingsTarget, (i) {
+              final done = i < status.introStep;
+              return Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 22,
+                      height: 22,
+                      decoration: BoxDecoration(
+                        color: done ? AppColors.success : Colors.white,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                            color: done
+                                ? AppColors.success
+                                : AppColors.disabledPill,
+                            width: 2),
+                      ),
+                      child: done
+                          ? const Icon(Icons.check,
+                              size: 14, color: Colors.white)
+                          : Center(
+                              child: Text('${i + 1}',
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.textSecondary))),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          if (reacted) ...[
+            const Text(
+              'A reaction was recorded. The series is paused. Discuss next steps '
+              'with your doctor before serving this allergen again. When advised '
+              'it\'s safe, you can resume below.',
+              style: TextStyle(fontSize: 13, color: AppColors.navy, height: 1.4),
+            ),
+          ] else ...[
+            Text('Next: serving $nextStep of ${AllergenStatus.introServingsTarget}',
+                style: const TextStyle(
+                    fontWeight: FontWeight.w800, color: AppColors.navy)),
+            const SizedBox(height: 4),
+            Text(AllergenStatus.introAmountFor(nextStep),
+                style: const TextStyle(
+                    fontSize: 13, color: AppColors.textSecondary, height: 1.4)),
+            const SizedBox(height: AppSpacing.sm),
+            const Text(
+              'Serve earlier in the day and watch for about two hours.',
+              style: TextStyle(fontSize: 12, color: AppColors.textMuted),
+            ),
+          ],
+          const SizedBox(height: AppSpacing.md),
+          PrimaryButton(
+            label: reacted ? 'Resume — served & tolerated' : 'Served & tolerated',
+            icon: Icons.check,
+            onPressed: () {
+              context.read<AppState>().recordIntroServing(allergenId);
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                backgroundColor: AppColors.navy,
+                content: Text('Serving recorded'),
+              ));
+            },
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Center(
+            child: TextButton.icon(
+              icon: const Icon(Icons.warning_amber_rounded,
+                  size: 18, color: AppColors.danger),
+              label: const Text('Baby had a reaction',
+                  style: TextStyle(color: AppColors.danger)),
+              onPressed: () => _reactionSheet(context, allergenId),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _reactionSheet(BuildContext context, String id) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (sheetCtx) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.xl),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text('What did you see?',
+                  style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: AppSpacing.md),
+              _OutcomeButton(
+                label: 'Mild reaction',
+                color: AppColors.amber,
+                onTap: () {
+                  Navigator.pop(sheetCtx);
+                  _record(context, id, ReactionSeverity.mild);
+                },
+              ),
+              const SizedBox(height: 8),
+              _OutcomeButton(
+                label: 'Significant reaction',
+                color: AppColors.danger,
+                onTap: () {
+                  Navigator.pop(sheetCtx);
+                  _record(context, id, ReactionSeverity.significant);
+                },
+              ),
+              const SizedBox(height: AppSpacing.md),
+              const Text(
+                'For severe or fast-spreading symptoms (trouble breathing; '
+                'swelling of lips, tongue, or throat; repeated vomiting; '
+                'lethargy), seek emergency help immediately.',
+                style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   void _record(BuildContext context, String id, ReactionSeverity outcome) {
-    context.read<AppState>().recordAllergenOutcome(id, outcome: outcome);
+    context.read<AppState>().recordAllergenReaction(id, outcome: outcome);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       backgroundColor: AppColors.navy,
       content: Text('Recorded: ${outcome.label}'),
     ));
+  }
+}
+
+/// Shown once an allergen is tolerated — keep it in regular rotation.
+class _MaintenanceCard extends StatelessWidget {
+  final String allergenId;
+  final AllergenStatus status;
+  const _MaintenanceCard({required this.allergenId, required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        InfoCard(
+          color: const Color(0xFFEAF5EE),
+          child: Row(
+            children: [
+              const Icon(Icons.verified, color: AppColors.success),
+              const SizedBox(width: AppSpacing.md),
+              const Expanded(
+                child: Text(
+                  'Tolerated — keep it in rotation to maintain tolerance.',
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700, color: AppColors.navy),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        PrimaryButton(
+          label: 'Served today',
+          icon: Icons.check,
+          onPressed: () =>
+              context.read<AppState>().logMaintenanceServe(allergenId),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        _IntervalControl(status: status),
+      ],
+    );
   }
 }
 

@@ -18,32 +18,11 @@ class ServingBand {
     this.safetyNote = '',
     this.media = AppMedia.empty,
   });
-
-  Map<String, dynamic> toMap() => {
-        'ageBand': ageBand,
-        'howToCut': howToCut,
-        'portion': portion,
-        'texture': texture,
-        'safetyNote': safetyNote,
-        'media': media.toMap(),
-      };
-
-  factory ServingBand.fromMap(Map<String, dynamic> m) => ServingBand(
-        ageBand: m['ageBand'] as String,
-        howToCut: m['howToCut'] as String? ?? '',
-        portion: m['portion'] as String? ?? '',
-        texture: m['texture'] as String? ?? '',
-        safetyNote: m['safetyNote'] as String? ?? '',
-        media: m['media'] != null
-            ? AppMedia.fromMap(Map<String, dynamic>.from(m['media']))
-            : AppMedia.empty,
-      );
 }
 
 class Food {
   final String id;
   final String name;
-  final String slug;
   final String category; // Fruit / Grain / Protein / Veg / Dairy ...
   final AppMedia heroMedia;
   final bool isCommonAllergen;
@@ -67,7 +46,6 @@ class Food {
   const Food({
     required this.id,
     required this.name,
-    required this.slug,
     required this.category,
     required this.heroMedia,
     this.isCommonAllergen = false,

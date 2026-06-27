@@ -196,32 +196,58 @@ class AppState extends ChangeNotifier {
   }
 
   // ---- Allergen programme (§7) -----------------------------------------
-  /// Record an introduction attempt and its outcome.
-  Future<void> recordAllergenOutcome(
-    String allergenId, {
-    required ReactionSeverity outcome,
-    DateTime? when,
-  }) async {
+  /// Record one tolerated serving of the escalating introduction series.
+  /// Three clean, increasing servings (watching ~2 hours each) move an allergen
+  /// from notIntroduced → introducing → maintaining (tolerated, kept in
+  /// rotation). Mirrors staged early-introduction guidance.
+  Future<void> recordIntroServing(String allergenId, {DateTime? when}) async {
     if (baby == null) return;
     final date = when ?? DateTime.now();
     final status = allergenStatus(allergenId);
     status.lastServedDate = date;
     status.firstIntroducedDate ??= date;
+    final servedStep = (status.introStep + 1).clamp(1, AllergenStatus.introServingsTarget);
+    status.introStep = servedStep;
 
-    switch (outcome) {
-      case ReactionSeverity.none:
-        // Tolerated → progress toward / stay in maintenance.
-        status.state = AllergenState.maintaining;
-        status.serveStreak += 1;
-        break;
-      case ReactionSeverity.mild:
-        status.state = AllergenState.introducing;
-        break;
-      case ReactionSeverity.significant:
-        status.state = AllergenState.reactionNoted;
-        status.serveStreak = 0;
-        break;
+    if (status.introStep >= AllergenStatus.introServingsTarget) {
+      status.state = AllergenState.maintaining;
+      status.serveStreak += 1;
+    } else {
+      status.state = AllergenState.introducing;
     }
+    await repo.saveAllergenStatus(status);
+    _allergenStatuses = await repo.getAllergenStatuses(baby!.id);
+
+    final allergen = allergenById(allergenId);
+    await addTrackerEntry(TrackerEntry(
+      id: _uuid.v4(),
+      babyId: baby!.id,
+      type: TrackerType.reaction,
+      allergenId: allergenId,
+      date: date,
+      details:
+          '${allergen?.name ?? allergenId}: serving $servedStep of ${AllergenStatus.introServingsTarget} — tolerated',
+      reactionSeverity: ReactionSeverity.none,
+    ));
+    await _checkAllergenMilestones();
+    await refreshReminders();
+    notifyListeners();
+  }
+
+  /// Record a reaction during introduction. Pauses the series and flags it; the
+  /// app never gives a diagnosis — it points the user to medical guidance.
+  Future<void> recordAllergenReaction(
+    String allergenId, {
+    required ReactionSeverity outcome,
+    DateTime? when,
+  }) async {
+    if (baby == null || outcome == ReactionSeverity.none) return;
+    final date = when ?? DateTime.now();
+    final status = allergenStatus(allergenId);
+    status.lastServedDate = date;
+    status.firstIntroducedDate ??= date;
+    status.state = AllergenState.reactionNoted;
+    status.serveStreak = 0;
     await repo.saveAllergenStatus(status);
     _allergenStatuses = await repo.getAllergenStatuses(baby!.id);
 
@@ -235,7 +261,6 @@ class AppState extends ChangeNotifier {
       details: '${allergen?.name ?? allergenId}: ${outcome.label}',
       reactionSeverity: outcome,
     ));
-    await _checkAllergenMilestones();
     await refreshReminders();
     notifyListeners();
   }
@@ -248,10 +273,11 @@ class AppState extends ChangeNotifier {
     final status = allergenStatus(allergenId);
     status.lastServedDate = date;
     if (status.state == AllergenState.reactionNoted) {
-      // Re-serving after a noted reaction returns to introducing.
+      // Re-serving after a noted reaction resumes the introduction series.
       status.state = AllergenState.introducing;
     } else {
       status.state = AllergenState.maintaining;
+      status.introStep = AllergenStatus.introServingsTarget;
     }
     status.serveStreak += 1;
     status.firstIntroducedDate ??= date;
@@ -277,16 +303,6 @@ class AppState extends ChangeNotifier {
       if (s.state != AllergenState.maintaining) return false;
       final due = s.nextDueDate;
       return due != null && !now.isBefore(due);
-    }).toList();
-  }
-
-  /// Core allergens not yet introduced but the baby is old enough for (§7.3 nudge).
-  List<Allergen> get introduceNudges {
-    final age = baby?.correctedAgeInMonths ?? 0;
-    if (age < 6) return const [];
-    return allergens.where((a) {
-      final st = allergenStatus(a.id);
-      return st.state == AllergenState.notIntroduced;
     }).toList();
   }
 
@@ -316,24 +332,61 @@ class AppState extends ChangeNotifier {
     }
   }
 
-  // ---- Milestones -------------------------------------------------------
-  Future<void> _checkFoodMilestones() async {
-    final count = triedCount;
-    const thresholds = {1: 'first_food', 10: 'ten_foods', 25: 'twenty_five_foods', 50: 'fifty_foods', 100: 'hundred_foods'};
-    final kind = thresholds[count];
-    if (kind != null && !_hasMilestone(kind)) {
-      await _award(kind);
+  // ---- Milestones / badges (taxonomy mirrors Solid Starts) -------------
+  /// Distinct food categories ("food types") among tried foods.
+  int get triedCategoryCount {
+    final cats = <String>{};
+    _foodStates.forEach((id, st) {
+      if (st.tried) {
+        final f = foodById(id);
+        if (f != null) cats.add(f.category);
+      }
+    });
+    return cats.length;
+  }
+
+  // Foods: 1 / 10 / 25 / 50 / 100.
+  static const _foodTiers = <int, String>{
+    1: 'first_food',
+    10: 'ten_foods',
+    25: 'twenty_five_foods',
+    50: 'fifty_foods',
+    100: 'hundred_foods',
+  };
+  // Food types: 1 / 5 / 10.
+  static const _foodTypeTiers = <int, String>{
+    1: 'first_food_type',
+    5: 'five_food_types',
+    10: 'ten_food_types',
+  };
+  // Allergens: 1 / 5 / 11.
+  static const _allergenTiers = <int, String>{
+    1: 'first_allergen',
+    5: 'five_allergens',
+    11: 'eleven_allergens',
+  };
+
+  Future<void> _awardTiers(Map<int, String> tiers, int count) async {
+    for (final entry in tiers.entries) {
+      if (count >= entry.key && !_hasMilestone(entry.value)) {
+        await _award(entry.value);
+      }
     }
   }
 
+  Future<void> _checkFoodMilestones() async {
+    await _awardTiers(_foodTiers, triedCount);
+    await _awardTiers(_foodTypeTiers, triedCategoryCount);
+  }
+
   Future<void> _checkAllergenMilestones() async {
-    if (allergensIntroducedCount >= 1 && !_hasMilestone('first_allergen')) {
-      await _award('first_allergen');
-    }
-    if (allergensIntroducedCount >= allergens.length &&
-        !_hasMilestone('all_allergens')) {
-      await _award('all_allergens');
-    }
+    await _awardTiers(_allergenTiers, allergensIntroducedCount);
+  }
+
+  /// Award a skill-completion badge (wired up by the skill engine, Phase 3).
+  Future<void> awardSkillBadge(String skillId) async {
+    final kind = 'skill_$skillId';
+    if (!_hasMilestone(kind)) await _award(kind);
   }
 
   bool _hasMilestone(String kind) => milestones.any((m) => m.kind == kind);

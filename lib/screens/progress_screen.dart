@@ -13,13 +13,20 @@ class ProgressScreen extends StatelessWidget {
   const ProgressScreen({super.key});
 
   static const _milestoneLabels = {
+    // Foods
     'first_food': 'First food tried 🥄',
     'ten_foods': '10 foods tried 🌱',
     'twenty_five_foods': '25 foods tried 🍎',
     'fifty_foods': '50 foods tried 🥦',
     'hundred_foods': '100 foods tried 🎉',
+    // Food types
+    'first_food_type': 'First food group 🍽️',
+    'five_food_types': '5 food groups 🌈',
+    'ten_food_types': '10 food groups 🍱',
+    // Allergens
     'first_allergen': 'First allergen introduced 🛡️',
-    'all_allergens': 'All allergens introduced ⭐',
+    'five_allergens': '5 allergens introduced 🧪',
+    'eleven_allergens': 'All allergens introduced ⭐',
   };
 
   @override
