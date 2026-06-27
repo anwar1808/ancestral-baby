@@ -19,33 +19,37 @@
   <g transform="rotate(-13 512 512)" stroke="#30384D" stroke-width="26"
      stroke-linejoin="round" stroke-linecap="round">
 
-    <!-- bone: frenched rib shaft + double knuckle (drawn first, behind meat) -->
-    <path d="M 545 545 L 815 405" fill="none" stroke="#30384D" stroke-width="96"/>
-    <path d="M 545 545 L 815 405" fill="none" stroke="#F6EEDB" stroke-width="52"/>
-    <g>
-      <circle cx="835" cy="392" r="62" fill="#F6EEDB"/>
-      <circle cx="806" cy="450" r="54" fill="#F6EEDB"/>
-    </g>
+    <!-- bone: frenched rib, tapered to a sharper tip (drawn first, behind meat) -->
+    <path d="M 545 560
+             L 558 504
+             C 666 458 748 424 824 392
+             L 872 372
+             C 860 408 852 430 824 458
+             C 750 490 664 520 558 560
+             Z"
+          fill="#F6EEDB"/>
 
     <!-- ribeye: irregular, organic outline — flatter top, an asymmetric cap-
-         muscle lobe on the upper-left, lumpy lower edge. Reads as a real cut,
-         not a perfect oval. -->
+         muscle lobe on the upper-left, and a deep fat-cap notch on the lower-
+         left rim. Reads as a real cut, not a perfect oval. -->
     <path d="M 432 388
              C 548 380 604 414 636 476
              C 678 536 668 608 644 668
              C 614 750 540 796 430 804
-             C 326 812 240 776 198 704
-             C 172 658 166 600 184 546
+             C 356 812 306 800 278 764
+             C 262 742 266 714 240 706
+             C 210 696 186 660 182 606
+             C 170 572 170 560 184 546
              C 156 498 178 450 234 446
              C 280 442 300 468 328 462
              C 352 422 388 396 432 388 Z"
           fill="url(#meat)"/>
 
-    <!-- fat cap: cream band along the outer (lower-left) rim, just inside the
-         keyline. -->
-    <path d="M 206 628
-             C 178 694 214 754 296 790"
-          fill="none" stroke="#F6EEDB" stroke-width="36"
+    <!-- fat cap: cream band hugging the notched lower-left rim. -->
+    <path d="M 200 628
+             C 184 676 214 706 244 716
+             C 276 726 286 752 304 782"
+          fill="none" stroke="#F6EEDB" stroke-width="32"
           stroke-linecap="round" opacity="0.9"/>
 
     <!-- marbling: thin cream veins, irregular and branching. -->
