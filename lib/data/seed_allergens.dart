@@ -119,4 +119,28 @@ const List<Allergen> kSeedAllergens = [
     maintenanceServingNote:
         'Keep tolerated shellfish in the diet regularly (about twice a week) once introduced, always thoroughly cooked.',
   ),
+  Allergen(
+    id: 'mustard',
+    name: 'Mustard',
+    regionSets: ['UK-14', 'EU-14'],
+    introductionGuide:
+        'Mustard is a declarable allergen in the UK and EU. It can be introduced from around six months in small amounts as part of cooked dishes — for example a little smooth mustard stirred into a sauce or dressing, rather than as a strong condiment. Offer a small amount on its own, earlier in the day, and watch for about two hours. Keep added salt low, as prepared mustards can be salty.',
+    reactionGuidance:
+        'Mild signs can include a few hives, redness, or mild swelling around the mouth. Significant signs needing urgent attention include difficulty breathing, wheezing, swelling of the lips, tongue, or throat, repeated vomiting, pale or floppy appearance, or unusual lethargy. If you see any severe or fast-spreading symptoms, treat it as an emergency and call your local emergency services immediately. This is general information, not medical advice.',
+    servingIdeaFoodIds: [],
+    maintenanceServingNote:
+        'Once tolerated, mustard can stay in the diet occasionally as part of cooked meals; there is no need to serve it frequently.',
+  ),
+  Allergen(
+    id: 'celery',
+    name: 'Celery',
+    regionSets: ['UK-14', 'EU-14'],
+    introductionGuide:
+        'Celery (including celeriac and celery used in stocks and soups) is a declarable allergen in the UK and EU. It can be introduced from around six months, well-cooked and soft — for example blended into a vegetable soup or soft-cooked until tender. Offer a small amount on its own, earlier in the day, and watch for about two hours. Raw celery is a choking hazard, so cook it soft for babies.',
+    reactionGuidance:
+        'Mild signs can include a few hives, redness, or mild swelling around the mouth. Significant signs needing urgent attention include difficulty breathing, wheezing, swelling of the lips, tongue, or throat, repeated vomiting, pale or floppy appearance, or unusual lethargy. If you see any severe or fast-spreading symptoms, treat it as an emergency and call your local emergency services immediately. This is general information, not medical advice.',
+    servingIdeaFoodIds: ['celery'],
+    maintenanceServingNote:
+        'Once tolerated, keep celery in the diet from time to time within ordinary cooking; frequent dedicated servings are not needed.',
+  ),
 ];
