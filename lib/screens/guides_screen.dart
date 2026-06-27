@@ -7,13 +7,20 @@ import 'guidelines_screen.dart';
 
 /// Guides (§5): browsable how-tos grouped by section, each a card with a
 /// thumbnail + read-time. Original content.
-class GuidesScreen extends StatelessWidget {
+class GuidesScreen extends StatefulWidget {
   const GuidesScreen({super.key});
+
+  @override
+  State<GuidesScreen> createState() => _GuidesScreenState();
+}
+
+class _GuidesScreenState extends State<GuidesScreen> {
+  String _audience = 'Babies';
 
   @override
   Widget build(BuildContext context) {
     final sections = <String, List<Guide>>{};
-    for (final g in kSeedGuides) {
+    for (final g in kSeedGuides.where((g) => g.audience == _audience)) {
       sections.putIfAbsent(g.section, () => []).add(g);
     }
     return Scaffold(
@@ -46,6 +53,37 @@ class GuidesScreen extends StatelessWidget {
                 ),
                 Icon(Icons.chevron_right, color: Colors.white),
               ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          Container(
+            padding: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              color: AppColors.softBlue,
+              borderRadius: BorderRadius.circular(AppRadius.pill),
+            ),
+            child: Row(
+              children: ['Babies', 'Toddlers'].map((a) {
+                final selected = _audience == a;
+                return Expanded(
+                  child: GestureDetector(
+                    onTap: () => setState(() => _audience = a),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 180),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        color: selected ? AppColors.navy : Colors.transparent,
+                        borderRadius: BorderRadius.circular(AppRadius.pill),
+                      ),
+                      child: Text(a,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: selected ? Colors.white : AppColors.navy,
+                              fontWeight: FontWeight.w800)),
+                    ),
+                  ),
+                );
+              }).toList(),
             ),
           ),
           const SizedBox(height: AppSpacing.md),
