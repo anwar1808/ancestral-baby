@@ -34,25 +34,10 @@ class Repository {
   Future<Database> get _db async => _adb.database;
 
   // ---- Baby -------------------------------------------------------------
-  Future<Baby?> getBaby() async {
-    final db = await _db;
-    final rows = await db.query('baby', limit: 1);
-    if (rows.isEmpty) return null;
-    return Baby.fromMap(rows.first);
-  }
-
   Future<List<Baby>> getBabies() async {
     final db = await _db;
     final rows = await db.query('baby', orderBy: 'birthDate DESC');
     return rows.map(Baby.fromMap).toList();
-  }
-
-  Future<Baby?> getBabyById(String id) async {
-    final db = await _db;
-    final rows =
-        await db.query('baby', where: 'id = ?', whereArgs: [id], limit: 1);
-    if (rows.isEmpty) return null;
-    return Baby.fromMap(rows.first);
   }
 
   Future<void> deleteBaby(String id) async {
