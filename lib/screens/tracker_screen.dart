@@ -289,6 +289,8 @@ class _CalendarViewState extends State<_CalendarView> {
         return AppColors.success;
       case TrackerType.note:
         return AppColors.amber;
+      case TrackerType.symptom:
+        return const Color(0xFF7C5CBF);
     }
   }
 
@@ -481,6 +483,8 @@ class _EntryTile extends StatelessWidget {
         return Icons.shield_outlined;
       case TrackerType.note:
         return Icons.edit_note;
+      case TrackerType.symptom:
+        return Icons.air;
     }
   }
 

@@ -5,6 +5,7 @@ import '../data/notification_service.dart';
 import '../data/repository.dart';
 import '../data/seed_allergens.dart';
 import '../data/seed_foods.dart';
+import '../data/seed_nature_allergens.dart';
 import '../data/seed_skills.dart';
 import '../data/sync_repository.dart';
 import '../models/allergen.dart';
@@ -12,6 +13,7 @@ import '../models/baby.dart';
 import '../models/custom_food.dart';
 import '../models/food.dart';
 import '../models/media.dart';
+import '../models/nature_allergen.dart';
 import '../models/settings.dart';
 import '../models/tracker.dart';
 
@@ -68,6 +70,21 @@ class AppState extends ChangeNotifier {
   List<Food> get favouriteFoods =>
       foods.where((f) => isFavourite(f.id)).toList();
   List<Food> get tryLaterFoods => foods.where((f) => isTryLater(f.id)).toList();
+
+  // ---- Environmental ("nature") allergens -------------------------------
+  /// The environmental-allergen profile for the user's region, falling back to
+  /// the temperate (UK) profile for any unmapped region.
+  NatureProfile get natureProfile {
+    final region = settings.region;
+    for (final p in kNatureProfiles) {
+      if (p.regionCodes.contains(region)) return p;
+    }
+    return kNatureProfiles.first;
+  }
+
+  /// Environmental-symptom log entries (hay-fever / dust-mite), newest first.
+  List<TrackerEntry> get symptomEntries =>
+      trackerEntries.where((e) => e.type == TrackerType.symptom).toList();
   List<TrackerEntry> get reactionEntries => trackerEntries
       .where((e) => e.type == TrackerType.reaction && e.reactionSeverity != null
           && e.reactionSeverity != ReactionSeverity.none)
@@ -390,6 +407,23 @@ class AppState extends ChangeNotifier {
     await repo.addTrackerEntry(e);
     trackerEntries = await repo.getTrackerEntries(baby!.id);
     notifyListeners();
+  }
+
+  /// Log an environmental-allergy symptom entry (hay-fever / dust-mite).
+  Future<void> logEnvironmentalSymptoms(
+    List<String> symptoms, {
+    ReactionSeverity severity = ReactionSeverity.mild,
+    DateTime? when,
+  }) async {
+    if (baby == null || symptoms.isEmpty) return;
+    await addTrackerEntry(TrackerEntry(
+      id: _uuid.v4(),
+      babyId: baby!.id,
+      type: TrackerType.symptom,
+      date: when ?? DateTime.now(),
+      details: symptoms.join(', '),
+      reactionSeverity: severity,
+    ));
   }
 
   Future<void> deleteTrackerEntry(String id) async {
