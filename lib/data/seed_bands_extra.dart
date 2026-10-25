@@ -123,7 +123,7 @@ const Map<String, List<ServingBand>> kExtraBands = {
     ServingBand(
       ageBand: '3 yr+',
       howToCut:
-          'Continue to quarter grapes lengthways. UK guidance advises cutting grapes and similar small round foods for young children, at least until around school age.',
+          'Keep quartering grapes lengthways. NHS guidance is to cut small round foods such as grapes into quarters and gives no age to stop, so keep cutting them while your child is young.',
       portion: 'A small handful, quartered.',
       texture: 'Soft once cut.',
       safetyNote:
@@ -222,7 +222,7 @@ const Map<String, List<ServingBand>> kExtraBands = {
       portion: 'A small handful.',
       texture: 'Soft, juicy.',
       safetyNote:
-          'UK guidance treats cherry tomatoes like grapes: cut them for young children, at least until around school age.',
+          'NHS guidance treats cherry tomatoes like grapes: cut them into quarters. It gives no age to stop, so keep cutting them while your child is young.',
     ),
   ],
   'beetroot': [

@@ -701,8 +701,9 @@ class AppState extends ChangeNotifier {
     return s;
   }
 
-  /// Meal slots a day by age (cohesiveness check v2 item 2): one meal at six
-  /// months, two at seven to eight, three from nine, plus a snack from one.
+  /// Meal slots a day by age (cohesiveness check v2 item 2), following NHS
+  /// Best Start in Life: once a day to start, building to three meals, no
+  /// snacks before one, then up to two snacks (we plan one).
   List<String> get slotsForAge {
     final m = babyAgeMonths;
     if (m < 7) return const ['lunch'];

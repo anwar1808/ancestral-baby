@@ -1018,7 +1018,7 @@ const List<Food> kSeedFoods = [
     allergens:
         'Fish is a common allergen. Introduce it alone and watch for hives, swelling, vomiting, or breathing difficulty. Severe reactions need emergency care. This is general information, not medical advice.',
     faq:
-        'Is tinned salmon fine? Yes, lower-salt tinned salmon is convenient; soft tinned bones can be mashed in. How much oily fish? Some guidance suggests limiting oily fish for young children to a small number of portions weekly.',
+        'Is tinned salmon fine? Yes, lower-salt tinned salmon is convenient; soft tinned bones can be mashed in. How much oily fish? The NHS says boys can have up to four portions of oily fish a week and girls no more than two, because pollutants can build up in the body.',
     tips:
         'Mix flaked salmon with mashed potato for an easy meal. Buy boneless fillets and still double-check for stray bones.',
     sourceCitations: ['NIAID 2017', 'NHS Start4Life', 'SACN 2018'],

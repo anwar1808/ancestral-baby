@@ -7,7 +7,7 @@
 | # | Contradiction | Call |
 |---|---|---|
 | 1 | Allergen Programme introduces wheat and soy from six months, but grains and legumes "wait until two". In the code, bread and tofu were already exempt from the delay, but nothing told the parent why, and the wheat series also pointed at pasta, which is delayed. | **[Annie to confirm]** Explicit allergen-exposure exception: small, regular amounts of bread (wheat) and tofu (soy) from six months to build tolerance, not as staples. Written into the canon (§2), on both food cards ("Our approach" note), and the wheat series now points at bread only. |
-| 2 | Planner gives a six-month-old four meals a day. | Meals per day by age: one meal at six months, two at seven to eight, three at nine to eleven, three plus a snack from twelve. NHS-consistent shape; exact counts are our reading, not an NHS table. |
+| 2 | Planner gives a six-month-old four meals a day. | Meals per day by age: one meal at six months, two at seven to eight, three at nine to eleven, three plus a snack from twelve. Matches NHS Best Start in Life (checked 25 Oct 2026): once a day to start, moving towards three meals at seven to nine months, three meals and no snacks at ten to twelve, three meals and up to two snacks from one. Two at seven to eight is our step within "gradually". |
 | 3 | Two first-foods orders: the Ancestral guide put soft vegetables and organ meats before egg, and egg yolk weeks before white; the First Foods stage puts egg third. | **[Annie to confirm]** Stage order wins, guide rewritten to match: stock and soft meat, then a few drops of brine, then well-cooked whole egg early (allergy guidance from BSACI and NHS favours early, regular egg; delaying the white is not advised), fats, liver weekly, soft vegetables alongside. |
 | 4a | "Skill" vs "stage" vocabulary; badges said "Skill complete". | "Stage" everywhere a parent reads it. Code keeps `Skill`. |
 | 4b | Mainstream "Choosing first foods" guide names lentils and fortified cereal with no word on our approach. | Adds one sentence naming our order and pointing to the Ancestral guide. |
@@ -29,3 +29,20 @@
 | 10 | Food picker: Solid Starts asks "choose N this week". Ours only recommends. | Stage screen gets "This week's foods": pick up to the stage's batch target; picked foods go first in Next up and the planner scores recipes containing them higher. |
 | 11 | Toddler content is four short guides. | Ten new toddler and picky-eating guides in our words. |
 | 12 | "100 Foods Plan" name now covers 105 foods across 14 stages. | Name kept; it mirrors the familiar term and the count is approximate by design. |
+
+## C. Facts checked against NHS pages (25 Oct 2026)
+
+| Claim in the app | NHS says | Result |
+|---|---|---|
+| Whole nuts not before five | "shouldn't be given to children under 5" (What to feed young children, reviewed 28 Mar 2023) | Confirmed |
+| Quarter grapes and cherry tomatoes until about five | Cut small round foods such as grapes, cherries, berries, and cherry tomatoes into quarters (Best Start in Life, preparing food safely). No age to stop is given. | Age removed; cards now say NHS gives no age to stop |
+| Toddler milk 300 to 400 ml a day | "at least 350ml (12oz) of milk a day, or 2 servings of foods made from milk" | Corrected to 350 ml |
+| Whole milk until two, then semi-skimmed | Whole or semi-skimmed from age one; no skimmed or 1% before five (Drinks and cups, reviewed 5 Oct 2022) | Corrected; our approach still prefers whole |
+| Move from bottle to cup around 12 months | Cup from around six months; bottle feeding discouraged from one | Corrected |
+| Oily fish: "a weekly upper limit, check the advice" | Boys up to four portions a week, girls no more than two | Figures added (guide and salmon card) |
+| Avoid shark, swordfish, marlin | Children under 16 should avoid them | Confirmed, age added |
+| Vitamins A, C, and D from six months to five years | Confirmed; not needed if having more than 500 ml formula a day | Exception added |
+
+Sources: nhs.uk/baby/weaning-and-feeding/what-to-feed-young-children/ · nhs.uk/conditions/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/ · nhs.uk/live-well/eat-well/food-types/fish-and-shellfish-nutrition/ · nhs.uk/conditions/baby/weaning-and-feeding/vitamins-for-children/ · nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/ (6 months, 7 to 9, 10 to 12, over 12 months) · nhs.uk/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/
+
+Still our own judgement, not NHS: the 24 mo+ and 3 yr+ ages for raw slices, drumsticks, and bones.

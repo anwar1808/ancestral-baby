@@ -195,9 +195,10 @@ const List<Guide> kSeedGuides = [
     title: 'Milk & moving to a cup',
     readMinutes: 3,
     body:
-        'From around 12 months, whole cow\'s milk can become a main drink, and '
-        'most guidance suggests moving from bottles to an open or free-flow cup '
-        'to protect developing teeth. Water and milk are the best drinks; avoid '
+        'From around 12 months, whole or semi-skimmed cow\'s milk can become a '
+        'main drink. The NHS suggests offering a cup from around six months and '
+        'discouraging bottles once your child is one, to protect developing '
+        'teeth. Water and milk are the best drinks; avoid '
         'sugary drinks and limit juice.'
         '\n\nToo much milk can blunt appetite for food and affect iron levels, '
         'so keep it to roughly two to three servings a day and offer it with or '
