@@ -9,10 +9,11 @@ import '../theme/tokens.dart';
 import '../widgets/common.dart';
 import 'food_detail_screen.dart';
 import 'recipe_detail_screen.dart';
+import 'week_plan_view.dart';
 
-/// Meals (§5): age-appropriate meal ideas grouped by stage; each links to its
-/// component foods. A top filter switches between the **Standard** combos and
-/// **Ancestral** alternatives (nutrient-dense, gut-health-first ideas inspired
+/// Meals: a weekly plan for the baby's stage, the recipe library filtered by
+/// stage and grouped by meal type, and quick meal ideas. The Ideas filter
+/// names the mainstream combos alongside the ancestral alternatives (inspired
 /// by Kate Pope / @wildnutritionist).
 class MealsScreen extends StatefulWidget {
   const MealsScreen({super.key});
@@ -22,7 +23,7 @@ class MealsScreen extends StatefulWidget {
 }
 
 class _MealsScreenState extends State<MealsScreen> {
-  int _mode = 0; // 0 = Recipes, 1 = Ideas
+  int _mode = 0; // 0 = This week, 1 = Recipes, 2 = Ideas
   bool _ancestral = false;
 
   @override
@@ -45,21 +46,26 @@ class _MealsScreenState extends State<MealsScreen> {
               child: Row(
                 children: [
                   _FilterTab(
-                    label: 'Recipes',
+                    label: 'This week',
                     selected: _mode == 0,
                     onTap: () => setState(() => _mode = 0),
                   ),
                   _FilterTab(
-                    label: 'Ideas',
+                    label: 'Recipes',
                     selected: _mode == 1,
                     onTap: () => setState(() => _mode = 1),
+                  ),
+                  _FilterTab(
+                    label: 'Ideas',
+                    selected: _mode == 2,
+                    onTap: () => setState(() => _mode = 2),
                   ),
                 ],
               ),
             ),
           ),
-          // In Ideas mode, the Standard / Ancestral filter.
-          if (_mode == 1)
+          // In Ideas mode, the Mainstream / Ancestral filter.
+          if (_mode == 2)
             Padding(
               padding: const EdgeInsets.fromLTRB(
                   AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
@@ -72,7 +78,7 @@ class _MealsScreenState extends State<MealsScreen> {
                 child: Row(
                   children: [
                     _FilterTab(
-                      label: 'Standard',
+                      label: 'Mainstream',
                       selected: !_ancestral,
                       onTap: () => setState(() => _ancestral = false),
                     ),
@@ -86,9 +92,11 @@ class _MealsScreenState extends State<MealsScreen> {
               ),
             ),
           Expanded(
-            child: _mode == 0
-                ? const _RecipesView()
-                : (_ancestral ? const _AncestralList() : const _StandardList()),
+            child: switch (_mode) {
+              0 => const WeekPlanView(),
+              1 => const _RecipesView(),
+              _ => _ancestral ? const _AncestralList() : const _StandardList(),
+            },
           ),
         ],
       ),
@@ -96,75 +104,155 @@ class _MealsScreenState extends State<MealsScreen> {
   }
 }
 
-/// Recipe library grouped by collection (First Meals, Iron-Rich, Quick & Easy,
-/// Ancestral). Tapping a recipe opens its ingredients + method.
-class _RecipesView extends StatelessWidget {
+/// Recipe library: a stage filter (defaults to the baby's stage, earlier
+/// stages stay available), ancestral recipes grouped by meal type, then the
+/// other collections. Tapping a recipe opens its ingredients and method.
+class _RecipesView extends StatefulWidget {
   const _RecipesView();
 
   @override
+  State<_RecipesView> createState() => _RecipesViewState();
+}
+
+class _RecipesViewState extends State<_RecipesView> {
+  static const _stages = ['6 mo+', '9 mo+', '12 mo+', '24 mo+'];
+  String? _stage; // null = the baby's stage until the user picks
+
+  static const _typeOrder = ['breakfast', 'main', 'snack', 'base', ''];
+  static const _typeLabels = {
+    'breakfast': 'Breakfast',
+    'main': 'Mains',
+    'snack': 'Snacks and sides',
+    'base': 'Stocks and ferments',
+    '': 'More',
+  };
+
+  @override
   Widget build(BuildContext context) {
-    final byCollection = <String, List<Recipe>>{};
-    for (final r in kSeedRecipes) {
-      byCollection.putIfAbsent(r.collection, () => []).add(r);
+    final state = context.watch<AppState>();
+    final stage = _stage ?? state.babyStage;
+    final showAll = stage == 'All';
+    final inStage = state.recipes.where((r) => showAll || r.stage == stage);
+
+    final ancestral = <String, List<Recipe>>{};
+    final other = <String, List<Recipe>>{};
+    for (final r in inStage) {
+      if (r.ancestral) {
+        ancestral.putIfAbsent(r.mealType, () => []).add(r);
+      } else {
+        other.putIfAbsent(r.collection, () => []).add(r);
+      }
     }
+
+    Widget header(String text) => Padding(
+          padding:
+              const EdgeInsets.only(top: AppSpacing.sm, bottom: AppSpacing.md),
+          child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+        );
+
     return ListView(
       padding: const EdgeInsets.fromLTRB(
           AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.lg),
-      children: byCollection.entries.expand((e) {
-        return [
-          Padding(
-            padding: const EdgeInsets.only(
-                top: AppSpacing.sm, bottom: AppSpacing.md),
-            child: Text(e.key,
-                style: Theme.of(context).textTheme.titleMedium),
-          ),
-          ...e.value.map((r) => Padding(
-                padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                child: InfoCard(
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => RecipeDetailScreen(recipe: r))),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: r.ancestral
-                              ? AppColors.butter
-                              : AppColors.softBlue,
-                          borderRadius: BorderRadius.circular(AppRadius.chip),
-                        ),
-                        child: Icon(
-                            r.ancestral ? Icons.spa : Icons.restaurant_menu,
-                            color: AppColors.navy),
-                      ),
-                      const SizedBox(width: AppSpacing.md),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(r.title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w800,
-                                    color: AppColors.navy)),
-                            const SizedBox(height: 2),
-                            Text('${r.stage} · ${r.summary}',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                    fontSize: 12,
-                                    color: AppColors.textSecondary)),
-                          ],
-                        ),
-                      ),
-                      const Icon(Icons.chevron_right,
-                          color: AppColors.textMuted),
-                    ],
+      children: [
+        SizedBox(
+          height: 40,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              for (final s in ['All', ..._stages])
+                Padding(
+                  padding: const EdgeInsets.only(right: 8),
+                  child: ChoiceChip(
+                    label: Text(s),
+                    selected: stage == s,
+                    onSelected: (_) => setState(() => _stage = s),
+                    selectedColor: AppColors.navy,
+                    labelStyle: TextStyle(
+                        color: stage == s ? Colors.white : AppColors.navy,
+                        fontWeight: FontWeight.w700),
+                    backgroundColor: Colors.white,
+                    side: const BorderSide(color: AppColors.disabledPill),
                   ),
                 ),
-              )),
-        ];
-      }).toList(),
+            ],
+          ),
+        ),
+        if (!showAll && stage == '24 mo+')
+          const Padding(
+            padding: EdgeInsets.only(top: AppSpacing.md),
+            child: Text(
+              'Grains, starches, and legumes join the table from around two in '
+              'our approach. Mainstream guidance includes them from six months.',
+              style: TextStyle(
+                  fontSize: 12, color: AppColors.textSecondary, height: 1.4),
+            ),
+          ),
+        for (final t in _typeOrder)
+          if (ancestral[t]?.isNotEmpty ?? false) ...[
+            header('${_typeLabels[t]!} · Ancestral'),
+            ...ancestral[t]!.map((r) => _RecipeRow(recipe: r)),
+          ],
+        for (final e in other.entries) ...[
+          header(e.key),
+          ...e.value.map((r) => _RecipeRow(recipe: r)),
+        ],
+        if (ancestral.isEmpty && other.isEmpty)
+          const Padding(
+            padding: EdgeInsets.all(AppSpacing.xl),
+            child: Text('No recipes for this stage yet.',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: AppColors.textSecondary)),
+          ),
+      ],
+    );
+  }
+}
+
+class _RecipeRow extends StatelessWidget {
+  final Recipe recipe;
+  const _RecipeRow({required this.recipe});
+
+  @override
+  Widget build(BuildContext context) {
+    final r = recipe;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: InfoCard(
+        onTap: () => Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => RecipeDetailScreen(recipe: r))),
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: r.ancestral ? AppColors.butter : AppColors.softBlue,
+                borderRadius: BorderRadius.circular(AppRadius.chip),
+              ),
+              child: Icon(r.ancestral ? Icons.spa : Icons.restaurant_menu,
+                  color: AppColors.navy),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(r.title,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w800, color: AppColors.navy)),
+                  const SizedBox(height: 2),
+                  Text('${r.stage} · ${r.summary}',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.textSecondary)),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: AppColors.textMuted),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -92,7 +92,13 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                 Text(food.name,
                     style: Theme.of(context).textTheme.headlineSmall),
                 const SizedBox(height: AppSpacing.md),
-                _MetaRow(label: 'Age', value: food.ageLabel),
+                if (food.isDelayedByApproach) ...[
+                  _MetaRow(
+                      label: 'Our approach',
+                      value: 'From ${food.effectiveFromMonths} months'),
+                  _MetaRow(label: 'Mainstream', value: 'From ${food.ageLabel}'),
+                ] else
+                  _MetaRow(label: 'Age', value: food.ageLabel),
                 _MetaRow(
                     label: 'Common allergen',
                     value: food.isCommonAllergen ? 'Yes' : 'No'),
@@ -101,6 +107,37 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                       label: 'Nutrition',
                       value: food.nutritionFlags.join(', ')),
                 _MetaRow(label: 'Choking risk', value: food.chokingRisk),
+                if (food.whyFirst != null) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  InfoCard(
+                    color: AppColors.butter,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Icon(Icons.spa, color: AppColors.navy, size: 20),
+                        const SizedBox(width: AppSpacing.md),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Why this first',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.navy,
+                                      fontSize: 13)),
+                              const SizedBox(height: 2),
+                              Text(food.whyFirst!,
+                                  style: const TextStyle(
+                                      fontSize: 13,
+                                      color: AppColors.navy,
+                                      height: 1.4)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
                 const SizedBox(height: AppSpacing.lg),
                 // Segmented pill tabs.
                 Wrap(

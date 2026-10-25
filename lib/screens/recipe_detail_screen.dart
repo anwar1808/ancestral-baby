@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../data/seed_recipes.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
+import '../widgets/common.dart';
 import 'food_detail_screen.dart';
 
 /// A single recipe: ingredients, method, and links to the catalog foods it uses.
@@ -14,6 +15,7 @@ class RecipeDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.read<AppState>();
+    final contains = state.recipeAllergens(recipe);
     return Scaffold(
       appBar: AppBar(title: Text(recipe.title)),
       body: ListView(
@@ -34,6 +36,23 @@ class RecipeDetailScreen extends StatelessWidget {
           Text(recipe.summary,
               style: const TextStyle(
                   fontSize: 15, color: AppColors.textSecondary, height: 1.4)),
+          if (contains.isNotEmpty) ...[
+            const SizedBox(height: AppSpacing.md),
+            Row(
+              children: [
+                const Icon(Icons.shield_outlined,
+                    size: 18, color: AppColors.amber),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text('Contains common allergens: ${contains.join(', ')}',
+                      style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.navy)),
+                ),
+              ],
+            ),
+          ],
           const SizedBox(height: AppSpacing.lg),
           Text('Ingredients', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: AppSpacing.sm),
@@ -102,6 +121,20 @@ class RecipeDetailScreen extends StatelessWidget {
             ),
           ],
           const SizedBox(height: AppSpacing.xl),
+          PrimaryButton(
+            label: 'Log this meal',
+            onPressed: () async {
+              final messenger = ScaffoldMessenger.of(context);
+              await context
+                  .read<AppState>()
+                  .logMeal(recipe.title, foodIds: recipe.foodIds);
+              messenger.showSnackBar(SnackBar(
+                  content: Text(recipe.foodIds.isEmpty
+                      ? 'Logged in the journal.'
+                      : 'Logged, and its foods marked as tried.')));
+            },
+          ),
+          const SizedBox(height: AppSpacing.md),
           const Text(
             'General information, not medical advice. Always follow safe-serving '
             'basics for your baby\'s age, and introduce one new food at a time.',

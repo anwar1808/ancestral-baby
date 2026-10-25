@@ -23,6 +23,7 @@ class SkillDetailScreen extends StatelessWidget {
     }
     final done = state.skillComplete(skill);
     final pct = (state.skillProgress(skill) * 100).round();
+    final open = state.skillOpen(skill);
 
     return Scaffold(
       appBar: AppBar(title: Text(skill.title)),
@@ -74,6 +75,28 @@ class SkillDetailScreen extends StatelessWidget {
           Text(skill.description,
               style: const TextStyle(height: 1.55, fontSize: 15)),
           const SizedBox(height: AppSpacing.lg),
+
+          if (!open) ...[
+            InfoCard(
+              color: AppColors.softBlue,
+              child: Row(
+                children: [
+                  const Icon(Icons.schedule, color: AppColors.navy),
+                  const SizedBox(width: AppSpacing.md),
+                  Expanded(
+                    child: Text(
+                      'In our approach this stage opens at ${skill.fromMonths} '
+                      'months. Browse it now; it will count towards the plan '
+                      'from then.',
+                      style: const TextStyle(
+                          fontSize: 13, color: AppColors.navy, height: 1.4),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+          ],
 
           if (skill.linksAllergens) ...[
             InfoCard(
@@ -127,13 +150,36 @@ class SkillDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: AppSpacing.md),
                     Expanded(
-                      child: Text(food.name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.navy,
-                              decoration: tried
-                                  ? TextDecoration.lineThrough
-                                  : null)),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(food.name,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.navy,
+                                  decoration: tried
+                                      ? TextDecoration.lineThrough
+                                      : null)),
+                          if (food.whyFirst != null && !tried) ...[
+                            const SizedBox(height: 2),
+                            Text(food.whyFirst!,
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.textSecondary,
+                                    height: 1.35)),
+                          ],
+                          if (food.isDelayedByApproach) ...[
+                            const SizedBox(height: 2),
+                            Text(
+                                'Our approach: from ${food.effectiveFromMonths} '
+                                'months. Mainstream: from ${food.minAgeMonths}.',
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.textMuted,
+                                    fontStyle: FontStyle.italic)),
+                          ],
+                        ],
+                      ),
                     ),
                     const Icon(Icons.chevron_right, color: AppColors.textMuted),
                   ],

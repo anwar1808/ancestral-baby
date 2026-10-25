@@ -64,7 +64,7 @@ class AppSettings {
         'onboardingComplete': onboardingComplete ? '1' : '0',
         'disclaimerAccepted': disclaimerAccepted ? '1' : '0',
         'foodNoticeSeen': foodNoticeSeen ? '1' : '0',
-        if (activeBabyId != null) 'activeBabyId': activeBabyId!,
+        'activeBabyId': ?activeBabyId,
       };
 
   factory AppSettings.fromMap(Map<String, String> m) => AppSettings(

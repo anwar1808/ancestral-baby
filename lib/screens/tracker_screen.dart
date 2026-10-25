@@ -207,6 +207,16 @@ class _TrackerScreenState extends State<TrackerScreen> {
     );
     if (text != null && text.isNotEmpty && context.mounted) {
       final state = context.read<AppState>();
+      if (type == TrackerType.meal) {
+        // Catalogue foods named in the text are marked tried as well.
+        final lower = text.toLowerCase();
+        final named = [
+          for (final f in state.foods)
+            if (lower.contains(f.name.toLowerCase())) f.id
+        ];
+        await state.logMeal(text, foodIds: named);
+        return;
+      }
       await state.addTrackerEntry(TrackerEntry(
         id: DateTime.now().microsecondsSinceEpoch.toString(),
         babyId: state.baby!.id,
@@ -579,7 +589,7 @@ class _FoodList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.all(AppSpacing.lg),
       itemCount: foods.length,
-      separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+      separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.sm),
       itemBuilder: (_, i) {
         final f = foods[i];
         return InfoCard(
@@ -616,7 +626,7 @@ class _ReactionsView extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.all(AppSpacing.lg),
       itemCount: reactions.length,
-      separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.sm),
+      separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.sm),
       itemBuilder: (_, i) {
         final e = reactions[i];
         final severe = e.reactionSeverity == ReactionSeverity.significant;

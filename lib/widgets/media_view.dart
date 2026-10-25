@@ -68,17 +68,17 @@ class _ImageMedia extends StatelessWidget {
         return CachedNetworkImage(
           imageUrl: media.uri,
           fit: fit,
-          placeholder: (_, __) => const _Placeholder(loading: true),
-          errorWidget: (_, __, ___) => const _Placeholder(),
+          placeholder: (_, _) => const _Placeholder(loading: true),
+          errorWidget: (_, _, _) => const _Placeholder(),
         );
       case MediaSource.file:
         final f = File(media.uri.replaceFirst('file://', ''));
         if (!f.existsSync()) return const _Placeholder();
         return Image.file(f, fit: fit,
-            errorBuilder: (_, __, ___) => const _Placeholder());
+            errorBuilder: (_, _, _) => const _Placeholder());
       case MediaSource.asset:
         return Image.asset(media.uri, fit: fit,
-            errorBuilder: (_, __, ___) => const _Placeholder());
+            errorBuilder: (_, _, _) => const _Placeholder());
     }
   }
 }

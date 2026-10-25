@@ -43,6 +43,14 @@ class Food {
 
   final List<String> sourceCitations;
 
+  /// The app's own (ancestral) recommended starting age when it differs from
+  /// the mainstream [minAgeMonths]. Null means "same as mainstream".
+  /// Decision A (25 Oct 2026): grains, starches, and legumes wait until 24.
+  final int? ancestralFromMonths;
+
+  /// One line shown on First Foods cards: why this food leads in our approach.
+  final String? whyFirst;
+
   const Food({
     required this.id,
     required this.name,
@@ -60,8 +68,19 @@ class Food {
     this.faq = '',
     this.tips = '',
     this.sourceCitations = const [],
+    this.ancestralFromMonths,
+    this.whyFirst,
   });
 
   String get ageLabel =>
       minAgeMonths <= 0 ? 'From birth' : '$minAgeMonths months';
+
+  /// Age the app recommends from: the ancestral layer when set, else mainstream.
+  int get effectiveFromMonths => ancestralFromMonths ?? minAgeMonths;
+
+  /// True when our approach delays this food beyond mainstream guidance.
+  bool get isDelayedByApproach =>
+      ancestralFromMonths != null && ancestralFromMonths! > minAgeMonths;
+
+  String get approachAgeLabel => '$effectiveFromMonths months';
 }

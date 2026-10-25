@@ -1,6 +1,6 @@
 # Ancestral Baby — Content Canon v1 (draft for Annie's sign-off)
 
-**Status:** DRAFT, 25 Oct 2026. Nothing below is wired into the app yet. The decisions in §6 need Annie's answer before recipes are authored.
+**Status:** IMPLEMENTED in v1.3.0 (25 Oct 2026). Annie answered §6 the same day: **A** delay grains, starches, and legumes to 24 months; **B** add all five canon foods to the catalogue; **C** onboarding "Our approach" page plus a "why this first" line on First Foods cards; **D** name Kate Pope's approach as the inspiration, cite the safety-floor bodies, no titles until verified. §8 records what shipped.
 **Rule this document implements:** *mechanics from Solid Starts, judgement from the ancestral canon.* Judgement covers defaults, order, and recommendations, not only recipes.
 **Companion:** `~/Annie-Claude/solid-starts-teardown/gap_analysis_ancestral_baby_v1.md` §3–4.
 
@@ -98,3 +98,20 @@ My recommendation is **Delay**: it is defensible against the safety floor, it ke
 3. Author the 48 recipes into `seed_recipes.dart` (same `Recipe` model, `ancestral: true`), retire the separate `AncestralMeal` list by folding its nine ideas in.
 4. Add meat stock and ghee to the catalogue if B says yes.
 5. Only then switch on the meal-plan mechanic from the gap analysis.
+
+## 8. What shipped in v1.3.0 (25 Oct 2026)
+
+| Canon item | Where it lives |
+|---|---|
+| Decision A: 22 grain, starch, and legume foods carry `ancestralFromMonths: 24`; food cards show "Our approach: from 24 months" beside the mainstream age; recipes using them are staged 24 mo+ | `lib/models/food.dart`, `lib/data/seed_foods.dart`, `lib/data/seed_recipes.dart` |
+| Decision B: meat stock, ghee, bone marrow, fish roe (9 mo+), fermented vegetable brine added with serving bands, safety notes, and CC-licensed heroes (credits in `assets/foods/PHOTO_CREDITS.json`) | `lib/data/seed_foods.dart`, `assets/foods/` |
+| Decision C: onboarding ends with "Our approach" (three cards, mainstream named); ten First Foods carry a `whyFirst` line shown on the stage list, the food card, and the home "Next up" card | `lib/screens/onboarding_screen.dart`, `skill_detail_screen.dart`, `food_detail_screen.dart`, `home_screen.dart` |
+| Decision D: Kate Pope named as inspiration on the onboarding page and in the existing guide; safety bodies cited per food | as above, `lib/data/seed_guides.dart` |
+| §3 First Foods recomposed (12 foods: meat stock, beef, egg, avocado, lamb, salmon, liver, courgette, broccoli, butter, kefir, brine); seven stages with `fromMonths` gating (Big Flavors and Chewing from 9, Grains, Starches & Legumes from 24); plan progress counts open stages only | `lib/data/seed_skills.dart`, `lib/state/app_state.dart` |
+| §4 ranking as `AppState.recommendedNext`: allergen series food first, then the current stage in order, then canon tiers (animal, fat or fermented, non-starchy veg, low-sugar fruit, rest, delayed last); Try Later and iron or fat flags break ties; liver only when seven or more days since the last liver log; known allergies and noted reactions excluded | `lib/state/app_state.dart`, tests in `test/recommendation_test.dart` |
+| §5 recipe plan: 48 ancestral recipes (16 per stage: 4 breakfast, 8 main, 3 snack, 1 stock or ferment base), one liver recipe per stage, no seed oils, sugar, honey, raw dairy, grains, starches, or legumes | `lib/data/seed_recipes_ancestral.dart` |
+| Meal-plan mechanic: Meals tab "This week" generates a seven-day, four-slot plan from the stage's ancestral pool, tilted towards recommended-next foods, liver at most once a week, with swap per slot and a cooked tick that logs the meal and marks its foods tried; stored per ISO week (schema v4, table `meal_plan`) | `lib/screens/week_plan_view.dart`, `lib/data/db.dart`, `lib/models/meal_plan.dart` |
+
+**Deviations from §5 the recipe author made, all driven by the safety floor:** soft peach and dates dropped (not low-sugar); olives only at 12 mo+ (quartered, rinsed); no home-fermenting recipe (needs added salt), so each stage's base is a stock with brine as a few-drops stir-in; cucumber unused (raw); fish roe is warmed in butter until cooked through rather than served raw.
+
+**Still open:** Kate Pope publication unverified (approach named, no title); the June `AncestralMeal` ideas remain under Meals → Ideas → Ancestral alongside the new library rather than being deleted; per-food video has no supply.

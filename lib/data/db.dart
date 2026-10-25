@@ -21,7 +21,7 @@ class AppDatabase {
     final path = p.join(dir, 'ancestral_baby.db');
     return openDatabase(
       path,
-      version: 3,
+      version: 4,
       onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onCreate: _create,
       onUpgrade: _upgrade,
@@ -31,6 +31,7 @@ class AppDatabase {
   /// Schema migrations.
   /// v2: escalating allergen intro step + custom foods.
   /// v3: "try later" flag on food_state.
+  /// v4: weekly meal plan (one row per baby, ISO week, day, slot).
   Future<void> _upgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
       await db.execute(
@@ -41,7 +42,21 @@ class AppDatabase {
       await db.execute(
           'ALTER TABLE food_state ADD COLUMN tryLater INTEGER DEFAULT 0');
     }
+    if (oldVersion < 4) {
+      await db.execute(_mealPlanTable);
+    }
   }
+
+  static const _mealPlanTable = '''
+      CREATE TABLE meal_plan (
+        babyId TEXT NOT NULL,
+        weekKey TEXT NOT NULL,
+        day INTEGER NOT NULL,
+        slot TEXT NOT NULL,
+        recipeId TEXT NOT NULL,
+        cooked INTEGER DEFAULT 0,
+        PRIMARY KEY (babyId, weekKey, day, slot)
+      )''';
 
   static const _customFoodTable = '''
       CREATE TABLE custom_food (
@@ -116,6 +131,8 @@ class AppDatabase {
         kind TEXT NOT NULL,
         achievedDate TEXT NOT NULL
       )''');
+
+    await db.execute(_mealPlanTable);
 
     await db.execute('''
       CREATE TABLE settings (

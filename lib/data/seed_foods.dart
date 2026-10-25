@@ -20,6 +20,8 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/avocado_hero.jpg'),
     nutritionFlags: ['Healthy fats', 'Fibre'],
     minAgeMonths: 6,
+    whyFirst:
+        'Fat and softness with no cooking: a bridge between milk and meals.',
     chokingRisk: 'Low',
     introduction:
         'Avocado is a popular first food and can generally be offered from around six months, when most babies are showing signs of readiness for solids. Its soft, buttery flesh is easy to mash or hold, which makes it well suited to both spoon-feeding and baby-led approaches.\n\n'
@@ -310,6 +312,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/sweet_potato_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Sweet potato is a gentle, popular first vegetable that can be offered from around six months once cooked until soft. It mashes easily and holds together well as a soft finger food.\n\n'
@@ -355,6 +358,8 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/broccoli_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Folate'],
     minAgeMonths: 6,
+    whyFirst:
+        'A floret is a handle. Its vitamin C helps the iron from meat go further.',
     chokingRisk: 'Low',
     introduction:
         'Broccoli can be offered from around six months once steamed until soft. Its tree-like florets give babies a natural handle, which makes it a friendly early finger food.\n\n'
@@ -584,6 +589,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/oats_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Fibre'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Oats, usually served as porridge, can be offered from around six months. Cooked soft with milk or water, they make a smooth, easy first cereal that is gentle on a baby’s digestion.\n\n'
@@ -630,6 +636,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/rice_hero.jpg'),
     nutritionFlags: ['Energy', 'Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Well-cooked rice can be offered from around six months as a soft, easy grain. Sticky or soft-cooked rice clumps together and is simple for babies to scoop or pick up.\n\n'
@@ -722,6 +729,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/quinoa_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Quinoa, a small seed cooked like a grain, can be offered from around six months once cooked soft. It is naturally gluten-free and works well mixed into other foods.\n\n'
@@ -768,6 +776,7 @@ const List<Food> kSeedFoods = [
     allergenId: 'wheat',
     nutritionFlags: ['Energy', 'Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Pasta, usually made from wheat, can be introduced from around six months cooked until soft. Because wheat is a common allergen, the first serving is sensibly small and on its own so any reaction can be observed.\n\n'
@@ -820,6 +829,8 @@ const List<Food> kSeedFoods = [
     allergenId: 'egg',
     nutritionFlags: ['Protein', 'Iron-rich'],
     minAgeMonths: 6,
+    whyFirst:
+        'Yolk before white. Choline, DHA, and iron, and an early start on a top allergen.',
     chokingRisk: 'Low',
     introduction:
         'Well-cooked egg is a nutritious early food and can generally be introduced from around six months. Egg is a common allergen, so it is offered on its own at first, in a small amount and earlier in the day, with the baby watched afterwards.\n\n'
@@ -921,6 +932,8 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/beef_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Protein'],
     minAgeMonths: 6,
+    whyFirst:
+        'Slow-cooked in its own stock, beef is our first food: haem iron, zinc, and gelatine in a form a six-month-old can manage.',
     chokingRisk: 'Moderate',
     introduction:
         'Beef can be offered from around six months once cooked through and served in a soft form such as mince or a moist, blended puree. Red meat is one of the best early sources of iron.\n\n'
@@ -968,6 +981,8 @@ const List<Food> kSeedFoods = [
     allergenId: 'fish',
     nutritionFlags: ['Healthy fats', 'Protein'],
     minAgeMonths: 6,
+    whyFirst:
+        'Oily fish for DHA and vitamin D, and an early, careful start on the fish allergen.',
     chokingRisk: 'Low',
     introduction:
         'Salmon can be introduced from around six months once cooked through and carefully checked for bones. Fish is a common allergen, so the first serving is offered on its own in a small amount, with the baby watched afterwards.\n\n'
@@ -1368,6 +1383,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/lentil_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Plant protein'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Lentils can be offered from around six months once cooked soft. They cook down to a soft texture that mashes easily and mixes into many family dishes, making them a flexible early food.\n\n'
@@ -1412,6 +1428,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/chickpea_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Moderate',
     introduction:
         'Chickpeas can be offered from around six months once cooked very soft. Because whole chickpeas are round and firm with a skin, they are usually smashed or blended for younger babies, for example as hummus.\n\n'
@@ -1457,6 +1474,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/black_bean_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Moderate',
     introduction:
         'Black beans can be offered from around six months once cooked soft. Like other beans, they are usually smashed or lightly mashed for younger babies because whole beans have a firm skin.\n\n'
@@ -2105,6 +2123,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/potato_hero.jpg'),
     nutritionFlags: ['Potassium', 'Vitamin C'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Well-cooked potato is a soft, mild starchy vegetable suitable from around six months. Mashed or as soft wedges, it is easy to eat and pairs with almost anything.',
@@ -2139,6 +2158,8 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/courgette_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Hydrating'],
     minAgeMonths: 6,
+    whyFirst:
+        'The first non-starchy vegetable: soft, mild, and easy to cook down in butter.',
     chokingRisk: 'Low',
     introduction:
         'Courgette is a mild, soft vegetable that cooks quickly, suitable from around six months. It is a gentle way to add green vegetables to meals.',
@@ -2373,6 +2394,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/parsnip_hero.jpg'),
     nutritionFlags: ['Fibre', 'Vitamin C'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Parsnip is a sweet, soft root vegetable, suitable from around six months when well-cooked. It is a comforting, mild first vegetable.',
@@ -2574,6 +2596,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/corn_hero.jpg'),
     nutritionFlags: ['Fibre', 'Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Moderate',
     introduction:
         'Corn can be offered from around six months. A cob can be gnawed under supervision, while loose kernels need care because of their shape and skin.',
@@ -2716,6 +2739,8 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/lamb_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron', 'Zinc'],
     minAgeMonths: 6,
+    whyFirst:
+        'A second gelatinous slow-cook meat that keeps iron coming while textures stay soft.',
     chokingRisk: 'Moderate',
     introduction:
         'Lamb is rich in iron and zinc and suitable from around six months when slow-cooked until tender and served moist.',
@@ -2963,6 +2988,8 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/liver_hero.jpg'),
     nutritionFlags: ['Iron', 'Vitamin A', 'B12'],
     minAgeMonths: 6,
+    whyFirst:
+        'The densest source of iron, vitamin A, and B12 we have. Small, and about once a week.',
     chokingRisk: 'Low',
     introduction:
         'Liver is exceptionally rich in iron, vitamin A, and B12, and can be introduced from around six months. Because of its very high vitamin A, it should be offered in small amounts and only about once a week.',
@@ -3001,6 +3028,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/barley_hero.jpg'),
     nutritionFlags: ['Fibre', 'Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Soft-cooked barley is a hearty, fibre-rich grain suitable from around six months. It contains gluten, so introduce it as you would other gluten grains.',
@@ -3034,6 +3062,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/millet_hero.jpg'),
     nutritionFlags: ['Iron', 'Gluten-free'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Millet is a mild, naturally gluten-free grain suitable from around six months. Cooked soft, it makes a fluffy porridge.',
@@ -3067,6 +3096,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/buckwheat_hero.jpg'),
     nutritionFlags: ['Fibre', 'Gluten-free', 'Iron'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Despite its name, buckwheat is gluten-free and unrelated to wheat. Cooked soft, it is a nutritious grain alternative from around six months.',
@@ -3102,6 +3132,7 @@ const List<Food> kSeedFoods = [
     allergenId: 'wheat',
     nutritionFlags: ['Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Couscous is made from wheat, so it is a way to introduce the wheat allergen from around six months. Cooked soft and fluffy, it mixes easily into other foods.',
@@ -3138,6 +3169,7 @@ const List<Food> kSeedFoods = [
     allergenId: 'wheat',
     nutritionFlags: ['Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Semolina, made from wheat, cooks into a smooth, soft pudding-like porridge — an easy way to offer the wheat allergen from around six months.',
@@ -3173,6 +3205,7 @@ const List<Food> kSeedFoods = [
     allergenId: 'wheat',
     nutritionFlags: ['Carbohydrate'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Soft wheat noodles are an easy, fun finger food from around six months and a way to offer the wheat allergen. Choose plain noodles, not salty instant-noodle seasoning.',
@@ -3207,6 +3240,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/polenta_hero.jpg'),
     nutritionFlags: ['Carbohydrate', 'Gluten-free'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Polenta (cooked cornmeal) is naturally gluten-free and suitable from around six months, served soft and creamy or as soft set fingers.',
@@ -3242,6 +3276,7 @@ const List<Food> kSeedFoods = [
     allergenId: 'wheat',
     nutritionFlags: ['Iron', 'Fortified'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Low',
     introduction:
         'Iron-fortified infant cereals are a common early food because a baby\'s iron stores fall from around six months. Wheat-based cereals also help introduce the wheat allergen.',
@@ -3281,6 +3316,8 @@ const List<Food> kSeedFoods = [
     allergenId: 'dairy',
     nutritionFlags: ['Healthy fats', 'Vitamin A'],
     minAgeMonths: 6,
+    whyFirst:
+        'The first fat on its own. Pasteurised butter also starts the dairy allergen gently.',
     chokingRisk: 'Low',
     introduction:
         'A little butter can be used in cooking from around six months and is a way dairy enters the diet. It adds energy-dense fat and helps the body absorb fat-soluble vitamins from vegetables.',
@@ -3422,6 +3459,8 @@ const List<Food> kSeedFoods = [
     allergenId: 'dairy',
     nutritionFlags: ['Probiotics', 'Calcium', 'Protein'],
     minAgeMonths: 6,
+    whyFirst:
+        'The first fermented dairy: live cultures, fat, and protein, once butter is tolerated.',
     chokingRisk: 'Low',
     introduction:
         'Kefir is a cultured, drinkable dairy product with live cultures, suitable in small amounts from around six months. Choose plain, full-fat, unsweetened kefir.',
@@ -3495,6 +3534,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/kidney_bean_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron', 'Fibre'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Moderate',
     introduction:
         'Kidney beans are a plant protein and iron source suitable from around six months when very well cooked and soft. Always cook dried kidney beans thoroughly, or use tinned.',
@@ -3529,6 +3569,7 @@ const List<Food> kSeedFoods = [
     heroMedia: AppMedia(uri: 'assets/foods/white_bean_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron', 'Fibre'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Moderate',
     introduction:
         'Soft white beans (such as cannellini or butter beans) are creamy and mild, suitable from around six months when well cooked and mashed.',
@@ -3565,6 +3606,7 @@ const List<Food> kSeedFoods = [
     allergenId: 'soy',
     nutritionFlags: ['Protein', 'Iron', 'Fibre'],
     minAgeMonths: 6,
+    ancestralFromMonths: 24,
     chokingRisk: 'Moderate',
     introduction:
         'Edamame (young soybeans) is a way to introduce the soy allergen from around six months. The whole beans are firm and round, so smash them well for babies.',
@@ -3902,5 +3944,228 @@ const List<Food> kSeedFoods = [
     tips:
         'A spoon of prune puree stirred into porridge can help a constipated baby. Start small.',
     sourceCitations: ['NHS Start4Life'],
+  ),
+  // ---------------------------------------------------------------------------
+  // ANCESTRAL CANON ADDITIONS (25 Oct 2026, decision B)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'meat_stock',
+    name: 'Meat stock',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/meat_stock_hero.jpg'),
+    nutritionFlags: ['Gelatine', 'Minerals', 'Hydrating'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    whyFirst:
+        'In our approach this is the very first food beyond milk: a spoon of warm, '
+        'short-cooked stock from meaty bones, gentle on a new gut.',
+    introduction:
+        'Meat stock is water in which meaty bones and joints have simmered for a few hours. It is shorter-cooked and milder than a long-simmered bone broth, which is why the ancestral approach offers it first: a spoonful of warm, gelatinous liquid is about as gentle a start as solids can be.\n\n'
+        'Nutritionally it brings gelatine, a little fat, and minerals, and it makes a useful base for loosening mashes and cooking vegetables. It is not a meal on its own, and milk remains the main source of nutrition for the first year. Mainstream guidance does not single out stock as a first food, but there is nothing in it that conflicts with that guidance as long as it is homemade and unsalted.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer a teaspoon or two of warm (not hot) stock from a spoon, or stir it into mashed vegetables or shredded meat.',
+        portion: 'A few teaspoons, building to a small cup over weeks.',
+        texture: 'Thin liquid; set to a soft jelly when cold.',
+        safetyNote:
+            'Homemade only, with no salt or stock cubes. Skim fat if it is very rich, and always check the temperature.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut:
+            'Use as the cooking liquid for soft vegetables and meats, or serve a small cup to sip with help.',
+        portion: 'Up to a small cup alongside a meal.',
+        texture: 'Liquid or soft jelly.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut:
+            'Serve as a light soup with soft pieces in it, or in an open cup to drink.',
+        portion: 'Varies with appetite.',
+        texture: 'Soup.',
+      ),
+    ],
+    choking:
+        'A thin liquid carries no choking risk of its own. Any pieces served in it must follow the age guidance for that food.',
+    allergens:
+        'Not a common allergen on its own. Watch what goes into the pot: celery is a listed allergen in the UK and EU, and some bones are sold with seasoning.',
+    faq:
+        'Is this the same as bone broth? Broth is simmered much longer, which draws out more and can be harder on a young gut; stock is the gentler starting point. Can I use shop-bought stock? Most contain salt, so no. Does it replace milk? No; it is a first taste, not a meal.',
+    tips:
+        'Make a batch from a chicken carcass or beef bones with a splash of vinegar, simmer three to four hours, strain, cool, and freeze in ice-cube trays. One cube is a serving.',
+    sourceCitations: ['NHS Start for Life (no added salt under 12 months)', 'SACN Feeding in the First Year of Life (2018)'],
+  ),
+  Food(
+    id: 'ghee',
+    name: 'Ghee',
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/ghee_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Healthy fats', 'Vitamin A', 'Energy'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    whyFirst:
+        'Clarified butter is the canon\'s cooking fat: stable, mild, and most of the milk protein skimmed away.',
+    introduction:
+        'Ghee is butter that has been simmered until the water cooks off and the milk solids separate and are removed, leaving clear golden fat. It keeps well, tolerates heat, and tastes gently nutty, which makes it the everyday cooking fat in the ancestral kitchen.\n\n'
+        'Fat matters for babies: it carries energy and the fat-soluble vitamins, and it makes vegetables and meats easier to swallow. Because most of the milk proteins are removed, some babies with mild dairy sensitivity tolerate ghee, but it is still a dairy product and should be treated as one for allergen purposes.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Melt a small knob into mashed vegetables, shredded meat, or warm stock.',
+        portion: 'About half a teaspoon in a serving.',
+        texture: 'Melts into the food.',
+        safetyNote:
+            'Ghee is dairy. Introduce it as you would butter, on its own first, and watch for a reaction.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Use for pan-cooking soft vegetable pieces and egg.',
+        portion: 'A teaspoon in cooking.',
+        texture: 'Cooking fat.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Cook with it freely; spread thinly where you would use butter.',
+        portion: 'Varies.',
+        texture: 'Cooking fat or spread.',
+      ),
+    ],
+    choking: 'No choking risk of its own.',
+    allergens:
+        'Dairy. Trace milk proteins remain, so a baby with a diagnosed cow\'s milk allergy should not have ghee unless their allergy team says so.',
+    faq:
+        'Is ghee better than butter? It is more heat-stable and lower in milk protein; butter has a little more flavour. Both have a place. Can I make it? Yes: melt unsalted butter gently, skim the foam, and pour off the clear fat, leaving the solids behind.',
+    tips: 'Buy unsalted, or make your own from unsalted butter. A jar keeps for weeks in a cool cupboard.',
+    sourceCitations: ['NHS Start for Life (dairy allergen introduction)', 'BSACI early feeding guidance'],
+  ),
+  Food(
+    id: 'bone_marrow',
+    name: 'Bone marrow',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/bone_marrow_hero.jpg'),
+    nutritionFlags: ['Healthy fats', 'Energy', 'Collagen'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    whyFirst:
+        'Soft, rich, and spoonable straight from a roasted bone: an ancestral fat source babies take to easily.',
+    introduction:
+        'Bone marrow is the soft fatty tissue inside large bones. Roasted, it becomes spreadable and mild, and it has been a prized baby food in many traditional cultures because it is energy-dense and needs no chewing.\n\n'
+        'It is mostly fat, with some collagen and small amounts of minerals. In our approach it sits alongside butter and ghee as an early fat, offered in small amounts stirred into meat, stock, or vegetables.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Roast marrow bones until the marrow is soft, scoop it out, and mash a little into vegetables or shredded meat.',
+        portion: 'About a teaspoon.',
+        texture: 'Soft, spreadable.',
+        safetyNote:
+            'Never give the bone itself. Check for and remove any small bone fragments after scooping.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread thinly on soft cooked vegetable strips, or melt into stock.',
+        portion: 'A teaspoon or two.',
+        texture: 'Spread or melted.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Use as a cooking fat or stir into stews.',
+        portion: 'Varies.',
+        texture: 'Rich, soft.',
+      ),
+    ],
+    choking:
+        'The marrow itself is soft. The risk is bone fragments, so scoop carefully and never offer the bone.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Is it too rich? A teaspoon at a time is plenty for a baby; it is a fat, not a protein food. Where do I buy it? Butchers sell marrow bones cheaply, often cut lengthways for roasting.',
+    tips: 'Roast at a high heat for about twenty minutes until the marrow is soft and just starting to melt. Cool before scooping.',
+    sourceCitations: ['NHS Start for Life (fats in weaning)', 'SACN Feeding in the First Year of Life (2018)'],
+  ),
+  Food(
+    id: 'fish_roe',
+    name: 'Fish roe',
+    category: 'Fish & Seafood',
+    heroMedia: AppMedia(uri: 'assets/foods/fish_roe_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'fish',
+    nutritionFlags: ['Omega-3', 'Vitamin D', 'Choline'],
+    minAgeMonths: 9,
+    chokingRisk: 'Low',
+    introduction:
+        'Fish roe, the eggs of fish such as salmon, trout, or cod, is one of the most concentrated sources of DHA, vitamin D, and choline in any food. Traditional coastal diets gave it to babies early and often.\n\n'
+        'The limit is salt. Most roe sold for eating is cured in salt, and cured caviar-style products are far too salty for a baby. Fresh or lightly salted roe, rinsed, in small amounts is what we mean here. Roe is a fish product and counts as the fish allergen.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut:
+            'A few rinsed eggs mashed into cooked egg yolk, avocado, or full-fat yoghurt.',
+        portion: 'Half a teaspoon.',
+        texture: 'Small soft beads that pop.',
+        safetyNote:
+            'Only fresh or lightly salted roe, rinsed well. Skip anything labelled caviar or heavily cured. Fish allergen: introduce after fish itself has been tolerated.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Spoon a little over soft fish or egg.',
+        portion: 'A teaspoon.',
+        texture: 'Beads.',
+      ),
+    ],
+    choking:
+        'Individual eggs are small and soft and present a low choking risk. Serve mixed into a soft food rather than loose.',
+    allergens: 'Fish. Treat as part of the fish allergen and keep it in rotation once tolerated.',
+    faq:
+        'Why not from six months? Because almost all roe is salted, and we would rather fish itself goes first. Is smoked cod roe suitable? No; it is heavily salted and often smoked with additives.',
+    tips: 'Ask a fishmonger for fresh roe in season, freeze in tiny portions, and rinse before serving.',
+    sourceCitations: ['NHS Start for Life (salt and fish)', 'BSACI early feeding guidance'],
+  ),
+  Food(
+    id: 'fermented_brine',
+    name: 'Fermented vegetable brine',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/fermented_brine_hero.jpg'),
+    nutritionFlags: ['Probiotics', 'Enzymes'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    whyFirst:
+        'A few drops of the liquid from naturally fermented vegetables, stirred into stock: the canon\'s first taste of live cultures.',
+    introduction:
+        'The brine from naturally fermented vegetables such as sauerkraut or fermented cucumbers carries live cultures and the sour, savoury flavour of the ferment without the fibrous vegetable itself. The ancestral approach introduces it very early, a few drops at a time, as a first exposure to beneficial bacteria.\n\n'
+        'Brine is salty by nature, which is why the amounts are tiny: drops, not spoonfuls, and never as a drink. Mainstream guidance has no position on fermented brine for babies; it simply asks that salt be kept to a minimum, and a few drops keep within that.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Stir two or three drops into warm meat stock or a mashed vegetable.',
+        portion: 'Drops.',
+        texture: 'Liquid.',
+        safetyNote:
+            'Use only a naturally fermented product with no vinegar, sugar, or preservatives. Drops only, because of the salt.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Up to half a teaspoon stirred into food, plus a small shred of the fermented vegetable itself, finely chopped.',
+        portion: 'Half a teaspoon.',
+        texture: 'Liquid plus soft shreds.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'A teaspoon of well-rinsed fermented vegetable alongside meals.',
+        portion: 'A teaspoon.',
+        texture: 'Soft shreds.',
+      ),
+    ],
+    choking: 'Liquid carries no risk. Chop any vegetable shreds finely.',
+    allergens: 'Not a common allergen. Check the label for celery or mustard seed in mixed ferments.',
+    faq:
+        'Is shop sauerkraut fine? Only the refrigerated, unpasteurised kind with no vinegar; shelf-stable jars are pickled, not fermented. Will the salt harm my baby? At drop level the amount is tiny, which is why we keep it to drops until later.',
+    tips: 'Making your own is cheap: shredded cabbage and salt in a jar, pressed under its own brine for a week or two.',
+    sourceCitations: ['NHS Start for Life (salt under 12 months)', 'SACN Feeding in the First Year of Life (2018)'],
   ),
 ];

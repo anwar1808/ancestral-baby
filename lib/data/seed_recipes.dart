@@ -16,6 +16,10 @@ class Recipe {
   final List<String> foodIds; // catalog links
   final bool ancestral;
 
+  /// 'breakfast' | 'main' | 'snack' | 'base' (stock or ferment). Empty for
+  /// older entries; the meal planner groups by this.
+  final String mealType;
+
   const Recipe({
     required this.id,
     required this.title,
@@ -26,6 +30,7 @@ class Recipe {
     required this.steps,
     this.foodIds = const [],
     this.ancestral = false,
+    this.mealType = '',
   });
 }
 
@@ -49,7 +54,7 @@ const List<Recipe> kSeedRecipes = [
     id: 'r_banana_oats',
     title: 'Banana porridge',
     collection: 'First Meals',
-    stage: '6 mo+',
+    stage: '24 mo+',
     summary: 'Soft oats with mashed banana — gentle and filling.',
     ingredients: ['2 tbsp porridge oats', 'Milk or water to cook', '½ ripe banana'],
     steps: [
@@ -63,7 +68,7 @@ const List<Recipe> kSeedRecipes = [
     id: 'r_sweet_potato_mash',
     title: 'Roasted sweet potato mash',
     collection: 'First Meals',
-    stage: '6 mo+',
+    stage: '24 mo+',
     summary: 'Naturally sweet, soft, and easy to self-feed.',
     ingredients: ['1 small sweet potato', 'A drizzle of olive oil'],
     steps: [
@@ -78,7 +83,7 @@ const List<Recipe> kSeedRecipes = [
     id: 'r_lentil_veg',
     title: 'Soft lentil & carrot mash',
     collection: 'Iron-Rich',
-    stage: '6 mo+',
+    stage: '24 mo+',
     summary: 'Iron-rich red lentils with sweet carrot.',
     ingredients: ['3 tbsp red lentils', '½ carrot, diced', 'Water or stock'],
     steps: [
@@ -135,7 +140,7 @@ const List<Recipe> kSeedRecipes = [
     id: 'r_hummus_plate',
     title: 'Chickpea & tahini hummus plate',
     collection: 'Quick & Easy',
-    stage: '9 mo+',
+    stage: '24 mo+',
     summary: 'Smooth hummus with soft dippers — introduces sesame.',
     ingredients: ['Cooked chickpeas', 'Smooth tahini', 'Lemon and olive oil',
         'Soft veg batons or bread'],

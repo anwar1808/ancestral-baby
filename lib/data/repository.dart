@@ -3,6 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../models/allergen.dart';
 import '../models/baby.dart';
 import '../models/custom_food.dart';
+import '../models/meal_plan.dart';
 import '../models/settings.dart';
 import '../models/tracker.dart';
 import 'db.dart';
@@ -158,6 +159,35 @@ class Repository {
   Future<void> addMilestone(Milestone m) async {
     final db = await _db;
     await db.insert('milestone', m.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  // ---- Weekly meal plan -------------------------------------------------
+  Future<List<PlannedMeal>> getMealPlan(String babyId, String weekKey) async {
+    final db = await _db;
+    final rows = await db.query('meal_plan',
+        where: 'babyId = ? AND weekKey = ?',
+        whereArgs: [babyId, weekKey],
+        orderBy: 'day ASC, slot ASC');
+    return rows.map(PlannedMeal.fromMap).toList();
+  }
+
+  Future<void> replaceMealPlan(
+      String babyId, String weekKey, List<PlannedMeal> meals) async {
+    final db = await _db;
+    await db.transaction((txn) async {
+      await txn.delete('meal_plan',
+          where: 'babyId = ? AND weekKey = ?', whereArgs: [babyId, weekKey]);
+      for (final m in meals) {
+        await txn.insert('meal_plan', m.toMap(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+    });
+  }
+
+  Future<void> savePlannedMeal(PlannedMeal m) async {
+    final db = await _db;
+    await db.insert('meal_plan', m.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 

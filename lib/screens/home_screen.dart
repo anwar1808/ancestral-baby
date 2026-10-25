@@ -6,6 +6,7 @@ import '../theme/tokens.dart';
 import '../widgets/baby_header.dart';
 import '../widgets/common.dart';
 import 'allergen_screen.dart';
+import 'food_detail_screen.dart';
 import 'guides_screen.dart';
 import 'plan_screen.dart';
 import 'progress_screen.dart';
@@ -67,8 +68,14 @@ class HomeScreen extends StatelessWidget {
                   _AllergenDueBanner(count: due),
                   const SizedBox(height: AppSpacing.lg),
                 ],
-                _PlanHero(onTap: () => _go(context, const PlanScreen())),
-                const SizedBox(height: AppSpacing.xl),
+                if (state.recommendedNext(limit: 1).isNotEmpty) ...[
+                  _NextFoodsCard(
+                      onPlan: () => _go(context, const PlanScreen())),
+                  const SizedBox(height: AppSpacing.xl),
+                ] else ...[
+                  _PlanHero(onTap: () => _go(context, const PlanScreen())),
+                  const SizedBox(height: AppSpacing.xl),
+                ],
                 _AllergenCard(onTap: () => _go(context, const AllergenScreen())),
                 const SizedBox(height: AppSpacing.xl),
                 const SectionHeader(title: 'For You'),
@@ -323,6 +330,85 @@ class _ForYouCard extends StatelessWidget {
                     fontSize: 12)),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// "Next up" — the first few untried foods our approach would offer now
+/// (AppState.recommendedNext: active allergen series first, then the current
+/// stage in order, then the canon tiers). Tap a food to see how to serve it.
+class _NextFoodsCard extends StatelessWidget {
+  final VoidCallback onPlan;
+  const _NextFoodsCard({required this.onPlan});
+
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<AppState>();
+    final next = state.recommendedNext(limit: 4);
+    final stage = state.currentSkill;
+    final name = state.baby?.name ?? 'baby';
+    return InfoCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(
+                child: Text('Next up for $name',
+                    style: Theme.of(context).textTheme.titleLarge),
+              ),
+              TextButton(onPressed: onPlan, child: const Text('Plan')),
+            ],
+          ),
+          if (stage != null)
+            Text('Stage: ${stage.title}',
+                style: const TextStyle(
+                    color: AppColors.textSecondary, fontSize: 13)),
+          const SizedBox(height: AppSpacing.md),
+          ...next.map((f) => Padding(
+                padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => FoodDetailScreen(foodId: f.id))),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 36,
+                        height: 36,
+                        decoration: const BoxDecoration(
+                            color: AppColors.softBlue, shape: BoxShape.circle),
+                        child: const Icon(Icons.restaurant,
+                            size: 18, color: AppColors.navy),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(f.name,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    color: AppColors.navy)),
+                            if (f.whyFirst != null)
+                              Text(f.whyFirst!,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                      fontSize: 12,
+                                      color: AppColors.textSecondary,
+                                      height: 1.3)),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.chevron_right,
+                          color: AppColors.textMuted),
+                    ],
+                  ),
+                ),
+              )),
+        ],
       ),
     );
   }

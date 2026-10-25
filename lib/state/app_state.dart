@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -6,12 +8,15 @@ import '../data/repository.dart';
 import '../data/seed_allergens.dart';
 import '../data/seed_foods.dart';
 import '../data/seed_nature_allergens.dart';
+import '../data/seed_recipes.dart';
+import '../data/seed_recipes_ancestral.dart';
 import '../data/seed_skills.dart';
 import '../data/sync_repository.dart';
 import '../models/allergen.dart';
 import '../models/baby.dart';
 import '../models/custom_food.dart';
 import '../models/food.dart';
+import '../models/meal_plan.dart';
 import '../models/media.dart';
 import '../models/nature_allergen.dart';
 import '../models/settings.dart';
@@ -50,6 +55,7 @@ class AppState extends ChangeNotifier {
   List<TrackerEntry> trackerEntries = [];
   List<Milestone> milestones = [];
   List<CustomFood> customFoods = [];
+  List<PlannedMeal> mealPlan = [];
 
   bool _loading = true;
   bool get loading => _loading;
@@ -114,6 +120,163 @@ class AppState extends ChangeNotifier {
     }
   }
 
+  // ---- Age gating + "recommended next" (docs/ancestral_canon_v1.md §4) ---
+  /// Corrected age in months; 6 when no baby is set so the catalogue is
+  /// browsable in previews.
+  int get babyAgeMonths => baby?.correctedAgeInMonths ?? 6;
+
+  /// Stage label used by recipes and the planner for the baby's age.
+  String get babyStage {
+    final m = babyAgeMonths;
+    if (m >= 24) return '24 mo+';
+    if (m >= 12) return '12 mo+';
+    if (m >= 9) return '9 mo+';
+    return '6 mo+';
+  }
+
+  /// A skill is open once the baby's corrected age reaches its start age.
+  bool skillOpen(Skill s) => babyAgeMonths >= s.fromMonths;
+
+  /// The first open skill that still has untried foods, in curriculum order.
+  Skill? get currentSkill {
+    for (final s in skills) {
+      if (skillOpen(s) && !skillComplete(s)) return s;
+    }
+    return null;
+  }
+
+  /// Plan progress counts only the skills open at this age, so a nine-month-
+  /// old is not held at 80% by a stage that starts at two.
+  double get planProgressForAge {
+    final all = <String>{
+      for (final s in skills)
+        if (skillOpen(s)) ...s.foodIds
+    };
+    if (all.isEmpty) return 0;
+    return all.where(isTried).length / all.length;
+  }
+
+  /// Safety floor plus the ancestral delay: can this food be recommended now?
+  bool foodOpenForAge(Food f) => f.effectiveFromMonths <= babyAgeMonths;
+
+  /// Last time liver was logged as tried or in a meal, if ever.
+  DateTime? get lastLiverDate {
+    DateTime? last;
+    for (final e in trackerEntries) {
+      final isLiver = e.foodId == 'liver' ||
+          (e.type == TrackerType.meal &&
+              e.details.toLowerCase().contains('liver'));
+      if (isLiver && (last == null || e.date.isAfter(last))) last = e.date;
+    }
+    return last;
+  }
+
+  /// Liver is recommended at most about once a week (vitamin A).
+  bool get liverDueNow {
+    final last = lastLiverDate;
+    return last == null || DateTime.now().difference(last).inDays >= 7;
+  }
+
+  /// Allergens the baby must not be nudged towards: a noted reaction, or a
+  /// known allergy flagged at onboarding.
+  bool _allergenBlocked(Food f) {
+    final a = f.allergenId;
+    if (a == null) return false;
+    if (allergenStatus(a).state == AllergenState.reactionNoted) return true;
+    return baby?.allergies.contains(a) ?? false;
+  }
+
+  /// Food that continues an allergen series currently being introduced.
+  Food? get activeAllergenSeriesFood {
+    for (final st in _allergenStatuses.values) {
+      if (st.state != AllergenState.introducing) continue;
+      final a = allergenById(st.allergenId);
+      if (a == null) continue;
+      for (final id in a.servingIdeaFoodIds) {
+        final f = foodById(id);
+        if (f != null && foodOpenForAge(f)) return f;
+      }
+    }
+    return null;
+  }
+
+  static const _fatAndFermented = {
+    'avocado', 'butter', 'ghee', 'bone_marrow', 'kefir', 'yoghurt', 'cheese',
+    'cottage_cheese', 'ricotta', 'cream_cheese', 'whole_milk',
+    'fermented_brine', 'coconut',
+  };
+  static const _lowSugarFruit = {
+    'blueberry', 'raspberry', 'blackberry', 'strawberry', 'tomato',
+  };
+
+  /// Canon tier: 0 animal food, 1 fat or fermented dairy, 2 non-starchy
+  /// vegetable, 3 low-sugar fruit, 4 the rest, 5 delayed starches and grains.
+  int _canonTier(Food f) {
+    if (f.isDelayedByApproach) return 5;
+    if (_fatAndFermented.contains(f.id)) return 1;
+    switch (f.category) {
+      case 'Meat & Poultry':
+      case 'Fish & Seafood':
+      case 'Egg':
+        return 0;
+      case 'Dairy':
+        return 1;
+      case 'Vegetable':
+        return 2;
+      case 'Fruit':
+        return _lowSugarFruit.contains(f.id) ? 3 : 4;
+      default:
+        return 4;
+    }
+  }
+
+  bool _flaggedIronOrFat(Food f) => f.nutritionFlags.any((n) {
+        final l = n.toLowerCase();
+        return l.contains('iron') || l.contains('fat');
+      });
+
+  /// Untried foods we would offer next, best first. Order: the food that
+  /// continues an active allergen series; then the current skill's foods in
+  /// curriculum order; then the rest of the catalogue by canon tier, Try
+  /// Later first, iron-rich or fat-rich first. Liver only when due.
+  List<Food> recommendedNext({int limit = 5}) {
+    if (babyAgeMonths < 6) return const [];
+    bool eligible(Food f) =>
+        !isTried(f.id) &&
+        foodOpenForAge(f) &&
+        !_allergenBlocked(f) &&
+        (f.id != 'liver' || liverDueNow);
+
+    final out = <Food>[];
+    final seen = <String>{};
+    void add(Food? f) {
+      if (f == null || seen.contains(f.id) || !eligible(f)) return;
+      seen.add(f.id);
+      out.add(f);
+    }
+
+    add(activeAllergenSeriesFood);
+    final cur = currentSkill;
+    if (cur != null) {
+      for (final id in cur.foodIds) {
+        add(foodById(id));
+      }
+    }
+    final rest = foods.where((f) => !seen.contains(f.id) && eligible(f)).toList();
+    final index = {for (var i = 0; i < foods.length; i++) foods[i].id: i};
+    int key(Food f) =>
+        _canonTier(f) * 1000000 +
+        (isTryLater(f.id) ? 0 : 100000) +
+        (_flaggedIronOrFat(f) ? 0 : 10000) +
+        index[f.id]!;
+    rest.sort((a, b) => key(a).compareTo(key(b)));
+    for (final f in rest) {
+      add(f);
+      if (out.length >= limit) break;
+    }
+    return out.length > limit ? out.sublist(0, limit) : out;
+  }
+
   /// Resolve a food's hero media, honouring a user override (§6).
   AppMedia heroMediaFor(Food food) {
     final override = foodState(food.id).heroMediaOverride;
@@ -166,6 +329,7 @@ class AppState extends ChangeNotifier {
     trackerEntries = await repo.getTrackerEntries(babyId);
     milestones = await repo.getMilestones(babyId);
     customFoods = await repo.getCustomFoods(babyId);
+    mealPlan = await repo.getMealPlan(babyId, currentWeekKey);
   }
 
   /// Switch the active baby and reload its data.
@@ -345,6 +509,194 @@ class AppState extends ChangeNotifier {
     await repo.setTryLater(baby!.id, foodId, next);
     _foodStates = await repo.getFoodStates(baby!.id);
     notifyListeners();
+  }
+
+  // ---- Recipes + weekly meal plan ---------------------------------------
+  static const _stageOrder = ['6 mo+', '9 mo+', '12 mo+', '24 mo+'];
+  static int _stageIndex(String s) => _stageOrder.indexOf(s);
+
+  /// Every recipe in the app: the ancestral library plus the original set.
+  final List<Recipe> recipes =
+      List.unmodifiable([...kAncestralRecipes, ...kSeedRecipes]);
+  late final Map<String, Recipe> _recipeIndex = {
+    for (final r in recipes) r.id: r
+  };
+  Recipe? recipeById(String id) => _recipeIndex[id];
+
+  /// Recipes our approach would cook now: ancestral, at or below the stage.
+  List<Recipe> get recipesForStage {
+    final idx = _stageIndex(babyStage);
+    return recipes
+        .where((r) =>
+            r.ancestral &&
+            _stageIndex(r.stage) >= 0 &&
+            _stageIndex(r.stage) <= idx)
+        .toList();
+  }
+
+  /// Common allergens a recipe contains, by catalogue flags.
+  List<String> recipeAllergens(Recipe r) {
+    final out = <String>{};
+    for (final id in r.foodIds) {
+      final f = foodById(id);
+      if (f != null && f.isCommonAllergen && f.allergenId != null) {
+        out.add(allergenById(f.allergenId!)?.name ?? f.allergenId!);
+      }
+    }
+    return out.toList();
+  }
+
+  /// ISO-8601 week key, e.g. 2026-W44. Weeks start on Monday. Day arithmetic
+  /// is done in UTC so a clock change inside the week cannot shift the count.
+  static String weekKeyFor(DateTime d) {
+    final date = DateTime.utc(d.year, d.month, d.day);
+    final thursday = date.add(Duration(days: 4 - date.weekday));
+    final jan1 = DateTime.utc(thursday.year, 1, 1);
+    final week = (thursday.difference(jan1).inDays ~/ 7) + 1;
+    return '${thursday.year}-W${week.toString().padLeft(2, '0')}';
+  }
+
+  static DateTime mondayOf(DateTime d) {
+    final m = DateTime.utc(d.year, d.month, d.day)
+        .subtract(Duration(days: d.weekday - 1));
+    return DateTime(m.year, m.month, m.day);
+  }
+
+  String get currentWeekKey => weekKeyFor(DateTime.now());
+
+  bool _recipeHasLiver(Recipe r) =>
+      r.foodIds.contains('liver') || r.title.toLowerCase().contains('liver');
+
+  List<Recipe> _slotPool(String slot) {
+    final pool = recipesForStage;
+    final type = (slot == 'lunch' || slot == 'dinner') ? 'main' : slot;
+    var list = pool
+        .where((r) => (r.mealType.isEmpty ? 'main' : r.mealType) == type)
+        .toList();
+    if (list.isEmpty) list = pool.where((r) => r.mealType != 'base').toList();
+    return list;
+  }
+
+  /// Make-ahead bases (stock, ferment) for the stage.
+  List<Recipe> get weekBases =>
+      recipesForStage.where((r) => r.mealType == 'base').toList();
+
+  /// How much a recipe moves the plan forward: foods in the recommended-next
+  /// list count most, other untried catalogue foods a little.
+  int _recipeScore(Recipe r, Set<String> nextIds) {
+    var s = 0;
+    for (final id in r.foodIds) {
+      if (nextIds.contains(id)) {
+        s += 3;
+      } else if (!isTried(id) && foodById(id) != null) {
+        s += 1;
+      }
+    }
+    return s;
+  }
+
+  /// Build (or rebuild) this week's plan: four slots a day, recipes for the
+  /// baby's stage, spread evenly, favouring foods that are next in the plan.
+  /// Liver appears at most once a week and only when it is due.
+  Future<void> generateWeekPlan({bool regenerate = false}) async {
+    if (baby == null) return;
+    final weekKey = currentWeekKey;
+    final rng = Random(Object.hash(baby!.id, weekKey,
+        regenerate ? DateTime.now().millisecondsSinceEpoch : 0));
+    final nextIds = recommendedNext(limit: 12).map((f) => f.id).toSet();
+    final usage = <String, int>{};
+    var liverUsed = !liverDueNow;
+    final out = <PlannedMeal>[];
+    for (var day = 0; day < 7; day++) {
+      final usedToday = <String>{};
+      for (final slot in PlannedMeal.slots) {
+        final cands = _slotPool(slot)
+            .where((r) =>
+                !usedToday.contains(r.id) && !(liverUsed && _recipeHasLiver(r)))
+            .toList();
+        if (cands.isEmpty) continue;
+        cands.sort((a, b) {
+          final ua = usage[a.id] ?? 0, ub = usage[b.id] ?? 0;
+          if (ua != ub) return ua.compareTo(ub);
+          return _recipeScore(b, nextIds).compareTo(_recipeScore(a, nextIds));
+        });
+        final top = cands.take(3).toList();
+        final pick = top[rng.nextInt(top.length)];
+        if (_recipeHasLiver(pick)) liverUsed = true;
+        usage[pick.id] = (usage[pick.id] ?? 0) + 1;
+        usedToday.add(pick.id);
+        out.add(PlannedMeal(
+          babyId: baby!.id,
+          weekKey: weekKey,
+          day: day,
+          slot: slot,
+          recipeId: pick.id,
+        ));
+      }
+    }
+    await repo.replaceMealPlan(baby!.id, weekKey, out);
+    mealPlan = out;
+    notifyListeners();
+  }
+
+  /// Replace one planned meal with the least-used alternative for its slot.
+  Future<void> swapPlannedMeal(PlannedMeal m) async {
+    final usedToday =
+        mealPlan.where((x) => x.day == m.day).map((x) => x.recipeId).toSet();
+    final liverPlanned = mealPlan.any((x) {
+      final r = recipeById(x.recipeId);
+      return r != null && _recipeHasLiver(r) && x.recipeId != m.recipeId;
+    });
+    final usage = <String, int>{};
+    for (final x in mealPlan) {
+      usage[x.recipeId] = (usage[x.recipeId] ?? 0) + 1;
+    }
+    final cands = _slotPool(m.slot)
+        .where((r) =>
+            !usedToday.contains(r.id) &&
+            !((liverPlanned || !liverDueNow) && _recipeHasLiver(r)))
+        .toList();
+    if (cands.isEmpty) return;
+    cands.sort((a, b) => (usage[a.id] ?? 0).compareTo(usage[b.id] ?? 0));
+    final updated = m.copyWith(recipeId: cands.first.id, cooked: false);
+    await repo.savePlannedMeal(updated);
+    mealPlan = [
+      for (final x in mealPlan)
+        (x.day == m.day && x.slot == m.slot) ? updated : x
+    ];
+    notifyListeners();
+  }
+
+  /// Tick a planned meal as cooked. The first tick logs the meal and marks
+  /// its foods tried; unticking leaves the journal alone.
+  Future<void> setPlannedMealCooked(PlannedMeal m, bool cooked) async {
+    final updated = m.copyWith(cooked: cooked);
+    await repo.savePlannedMeal(updated);
+    mealPlan = [
+      for (final x in mealPlan)
+        (x.day == m.day && x.slot == m.slot) ? updated : x
+    ];
+    notifyListeners();
+    if (cooked && !m.cooked) {
+      final r = recipeById(m.recipeId);
+      await logMeal(r?.title ?? m.recipeId, foodIds: r?.foodIds ?? const []);
+    }
+  }
+
+  /// Log a meal in the journal; any catalogue foods in it are marked tried.
+  Future<void> logMeal(String title,
+      {List<String> foodIds = const [], DateTime? when}) async {
+    if (baby == null) return;
+    await addTrackerEntry(TrackerEntry(
+      id: _uuid.v4(),
+      babyId: baby!.id,
+      type: TrackerType.meal,
+      date: when ?? DateTime.now(),
+      details: title,
+    ));
+    for (final id in foodIds) {
+      if (!isTried(id) && foodById(id) != null) await markTried(id);
+    }
   }
 
   // ---- Custom foods (user-added, off-catalog) ---------------------------

@@ -16,7 +16,7 @@ class PlanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
-    final pct = (state.planProgress * 100).round();
+    final pct = (state.planProgressForAge * 100).round();
     return Scaffold(
       appBar: AppBar(title: const Text('100 Foods Plan')),
       body: ListView(
@@ -36,7 +36,7 @@ class PlanScreen extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(AppRadius.pill),
                   child: LinearProgressIndicator(
-                    value: state.planProgress,
+                    value: state.planProgressForAge,
                     minHeight: 8,
                     backgroundColor: Colors.white.withValues(alpha: 0.2),
                     valueColor:
@@ -45,8 +45,9 @@ class PlanScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 const Text(
-                  'Work through the skills in order, or jump to whichever fits '
-                  'your baby right now. Mark foods as tried to fill the plan.',
+                  'Animal foods and fats first, vegetables alongside, grains and '
+                  'starches from around two. Work through the stages in order, '
+                  'or jump to whichever fits your baby right now.',
                   style: TextStyle(color: Color(0xFFD7DEEC), fontSize: 13, height: 1.4),
                 ),
               ],
@@ -72,6 +73,7 @@ class _SkillCard extends StatelessWidget {
     final state = context.watch<AppState>();
     final progress = state.skillProgress(skill);
     final done = state.skillComplete(skill);
+    final open = state.skillOpen(skill);
     final pct = (progress * 100).round();
     return InfoCard(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
@@ -133,6 +135,22 @@ class _SkillCard extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               color: AppColors.navy)),
                     ),
+                    if (!open) ...[
+                      const SizedBox(width: 6),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: AppColors.butter,
+                          borderRadius: BorderRadius.circular(AppRadius.pill),
+                        ),
+                        child: Text('from ${skill.fromMonths} mo',
+                            style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w700,
+                                color: AppColors.navy)),
+                      ),
+                    ],
                   ],
                 ),
                 const SizedBox(height: 2),

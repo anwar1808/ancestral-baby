@@ -30,7 +30,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   final Set<String> _allergies = {};
   String _region = 'UK';
 
-  static const _steps = 4;
+  // The first-run flow ends with a short "Our approach" page; adding a
+  // second baby skips it.
+  int get _steps => widget.additional ? 4 : 5;
 
   @override
   void dispose() {
@@ -141,6 +143,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     region: _region,
                     onRegion: (r) => setState(() => _region = r),
                   ),
+                  if (!widget.additional) const _ApproachStep(),
                 ],
               ),
             ),
@@ -387,6 +390,77 @@ class _RegionStep extends StatelessWidget {
             ),
           );
         }).toList(),
+      ),
+    );
+  }
+}
+
+/// Decision C (25 Oct 2026): say what the app's point of view is before the
+/// first screen, with the mainstream position named alongside it.
+class _ApproachStep extends StatelessWidget {
+  const _ApproachStep();
+
+  @override
+  Widget build(BuildContext context) {
+    const items = [
+      (
+        Icons.set_meal_outlined,
+        'Animal foods and fats first',
+        'Meat in its stock, egg yolk, oily fish, a little liver about once a '
+            'week, then butter and fermented dairy. These carry the iron and '
+            'fat a six-month-old needs most. Soft vegetables come alongside.',
+      ),
+      (
+        Icons.grass_outlined,
+        'Grains, starches, and legumes from around two',
+        'Mainstream guidance includes them from six months. We wait, and we '
+            'say so wherever the two differ, so you can choose.',
+      ),
+      (
+        Icons.shield_outlined,
+        'Safety guidance always wins',
+        'Choking shapes, allergen introduction, no honey, no added salt or '
+            'sugar, no unpasteurised dairy: NHS, SACN, BSACI, AAP, and WHO '
+            'guidance sits under everything here, and nothing in our approach '
+            'goes below it.',
+      ),
+    ];
+    return _StepScaffold(
+      title: 'Our approach',
+      subtitle: 'Inspired by the ancestral feeding work of Kate Pope. General '
+          'information, not medical advice.',
+      child: Column(
+        children: items
+            .map((it) => Padding(
+                  padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                  child: InfoCard(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(it.$1, color: AppColors.navy),
+                        const SizedBox(width: AppSpacing.md),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(it.$2,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w800,
+                                      color: AppColors.navy)),
+                              const SizedBox(height: 4),
+                              Text(it.$3,
+                                  style: const TextStyle(
+                                      fontSize: 13,
+                                      color: AppColors.textSecondary,
+                                      height: 1.4)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ))
+            .toList(),
       ),
     );
   }
