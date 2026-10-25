@@ -51,6 +51,10 @@ class Food {
   /// One line shown on First Foods cards: why this food leads in our approach.
   final String? whyFirst;
 
+  /// Extra line under "Our approach" on the card (for example the allergen-
+  /// exposure exception for bread and tofu, cohesiveness check v2 item 1).
+  final String? approachNote;
+
   const Food({
     required this.id,
     required this.name,
@@ -70,12 +74,36 @@ class Food {
     this.sourceCitations = const [],
     this.ancestralFromMonths,
     this.whyFirst,
+    this.approachNote,
   });
 
   String get ageLabel =>
       minAgeMonths <= 0 ? 'From birth' : '$minAgeMonths months';
 
   /// Age the app recommends from: the ancestral layer when set, else mainstream.
+  /// Copy with [extra] serving bands appended (seed_bands_extra.dart).
+  Food withExtraBands(List<ServingBand> extra) => Food(
+        id: id,
+        name: name,
+        category: category,
+        heroMedia: heroMedia,
+        isCommonAllergen: isCommonAllergen,
+        allergenId: allergenId,
+        nutritionFlags: nutritionFlags,
+        minAgeMonths: minAgeMonths,
+        chokingRisk: chokingRisk,
+        introduction: introduction,
+        howToServeByAge: [...howToServeByAge, ...extra],
+        choking: choking,
+        allergens: allergens,
+        faq: faq,
+        tips: tips,
+        sourceCitations: sourceCitations,
+        ancestralFromMonths: ancestralFromMonths,
+        whyFirst: whyFirst,
+        approachNote: approachNote,
+      );
+
   int get effectiveFromMonths => ancestralFromMonths ?? minAgeMonths;
 
   /// True when our approach delays this food beyond mainstream guidance.

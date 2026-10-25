@@ -682,6 +682,8 @@ const List<Food> kSeedFoods = [
     isCommonAllergen: true,
     allergenId: 'wheat',
     nutritionFlags: ['Energy', 'Fibre'],
+    approachNote:
+        'Grains wait until about two in our approach. Bread is the exception: small, regular tastes from six months build tolerance to wheat, a common allergen. Offer it for allergen exposure, not as a staple.',
     minAgeMonths: 6,
     chokingRisk: 'Moderate',
     introduction:
@@ -830,7 +832,7 @@ const List<Food> kSeedFoods = [
     nutritionFlags: ['Protein', 'Iron-rich'],
     minAgeMonths: 6,
     whyFirst:
-        'Yolk before white. Choline, DHA, and iron, and an early start on a top allergen.',
+        'Well-cooked whole egg, early and often: choline, DHA, and iron, and the best start on a top allergen.',
     chokingRisk: 'Low',
     introduction:
         'Well-cooked egg is a nutritious early food and can generally be introduced from around six months. Egg is a common allergen, so it is offered on its own at first, in a small amount and earlier in the day, with the baby watched afterwards.\n\n'
@@ -933,7 +935,7 @@ const List<Food> kSeedFoods = [
     nutritionFlags: ['Iron-rich', 'Protein'],
     minAgeMonths: 6,
     whyFirst:
-        'Slow-cooked in its own stock, beef is our first food: haem iron, zinc, and gelatine in a form a six-month-old can manage.',
+        'Slow-cooked in its own stock, beef is the first solid after the stock itself: haem iron, zinc, and gelatine in a form a six-month-old can manage.',
     chokingRisk: 'Moderate',
     introduction:
         'Beef can be offered from around six months once cooked through and served in a soft form such as mince or a moist, blended puree. Red meat is one of the best early sources of iron.\n\n'
@@ -1184,6 +1186,8 @@ const List<Food> kSeedFoods = [
     isCommonAllergen: true,
     allergenId: 'soy',
     nutritionFlags: ['Plant protein', 'Iron-rich'],
+    approachNote:
+        'Legumes wait until about two in our approach. Tofu is the exception: small, regular tastes from six months build tolerance to soy, a common allergen. Offer it for allergen exposure, not as a staple.',
     minAgeMonths: 6,
     chokingRisk: 'Low',
     introduction:

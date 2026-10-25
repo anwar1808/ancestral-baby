@@ -5,6 +5,7 @@ import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/baby_header.dart';
 import '../widgets/common.dart';
+import 'already_tried_screen.dart';
 import 'allergen_screen.dart';
 import 'food_detail_screen.dart';
 import 'guides_screen.dart';
@@ -31,12 +32,12 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SectionHeader(
-                  title: 'First Foods',
+                  title: "${state.baby?.name ?? 'Baby'}'s foods",
                   trailing: Row(
                     children: [
                       const Icon(Icons.eco, color: AppColors.success, size: 18),
                       const SizedBox(width: 4),
-                      Text('${state.triedCount} foods',
+                      Text('${state.triedCount} ${state.triedCount == 1 ? 'food' : 'foods'}',
                           style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               color: AppColors.textSecondary)),
@@ -66,6 +67,27 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: AppSpacing.xl),
                 if (due > 0) ...[
                   _AllergenDueBanner(count: due),
+                  const SizedBox(height: AppSpacing.lg),
+                ],
+                if (state.babyAgeMonths >= 7 && state.triedCount < 5) ...[
+                  InfoCard(
+                    color: AppColors.butter,
+                    onTap: () => _go(context, const AlreadyTriedScreen()),
+                    child: const Row(
+                      children: [
+                        Icon(Icons.playlist_add_check, color: AppColors.navy),
+                        SizedBox(width: AppSpacing.md),
+                        Expanded(
+                          child: Text(
+                            'Already started solids? Tick what your baby has '
+                            'eaten so the plan starts in the right place.',
+                            style: TextStyle(fontSize: 13, height: 1.4),
+                          ),
+                        ),
+                        Icon(Icons.chevron_right, color: AppColors.navy),
+                      ],
+                    ),
+                  ),
                   const SizedBox(height: AppSpacing.lg),
                 ],
                 if (state.recommendedNext(limit: 1).isNotEmpty) ...[

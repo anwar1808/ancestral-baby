@@ -419,7 +419,7 @@ class _ApproachStep extends StatelessWidget {
       (
         Icons.shield_outlined,
         'Safety guidance always wins',
-        'Choking shapes, allergen introduction, no honey, no added salt or '
+        'Choking shapes, allergen introduction, no honey before 12 months, no added salt or '
             'sugar, no unpasteurised dairy: NHS, SACN, BSACI, AAP, and WHO '
             'guidance sits under everything here, and nothing in our approach '
             'goes below it.',

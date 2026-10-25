@@ -175,7 +175,7 @@ class ProgressScreen extends StatelessWidget {
   String _milestoneLabel(AppState state, String kind) {
     if (kind.startsWith('skill_')) {
       final s = state.skillById(kind.substring(6));
-      return s == null ? 'Skill complete 🏅' : '${s.title} skill mastered 🏅';
+      return s == null ? 'Stage complete 🏅' : '${s.title} stage complete 🏅';
     }
     return _milestoneLabels[kind] ?? kind;
   }

@@ -115,7 +115,7 @@ class _RecipesView extends StatefulWidget {
 }
 
 class _RecipesViewState extends State<_RecipesView> {
-  static const _stages = ['6 mo+', '9 mo+', '12 mo+', '24 mo+'];
+  static const _stages = ['6 mo+', '9 mo+', '12 mo+', '18 mo+', '24 mo+'];
   String? _stage; // null = the baby's stage until the user picks
 
   static const _typeOrder = ['breakfast', 'main', 'snack', 'base', ''];
@@ -177,6 +177,17 @@ class _RecipesViewState extends State<_RecipesView> {
             ],
           ),
         ),
+        if (!showAll && stage == '18 mo+')
+          const Padding(
+            padding: EdgeInsets.only(top: AppSpacing.md),
+            child: Text(
+              'Family meals for two adults and a toddler. Each recipe says how '
+              'to portion and cut the toddler share. Still grain-free in our '
+              'approach until around two.',
+              style: TextStyle(
+                  fontSize: 12, color: AppColors.textSecondary, height: 1.4),
+            ),
+          ),
         if (!showAll && stage == '24 mo+')
           const Padding(
             padding: EdgeInsets.only(top: AppSpacing.md),

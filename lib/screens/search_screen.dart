@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../data/seed_guides.dart';
+import '../data/seed_guides_toddler.dart';
 import '../data/seed_meals.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
@@ -31,7 +31,7 @@ class _SearchScreenState extends State<SearchScreen> {
             .toList();
     final guides = q.isEmpty
         ? []
-        : kSeedGuides
+        : kAllGuides
             .where((g) =>
                 g.title.toLowerCase().contains(q) ||
                 g.body.toLowerCase().contains(q))

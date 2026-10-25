@@ -19,12 +19,13 @@ The disclaimers already in the app stay as they are. The ancestral layer is pres
 
 Drawn from the app's own guide `ancestral_first_foods_order` and the header of `seed_ancestral_meals.dart`, both written in June. These are the principles already in the product:
 
-1. **Animal foods first.** Meat stock, slow-cooked gelatinous meats, egg yolk before white, oily fish, and small weekly servings of liver lead the first weeks.
+1. **Animal foods first.** Meat stock, slow-cooked gelatinous meats, well-cooked whole egg early (the June guide's yolk-before-white is overruled by allergy guidance; cohesiveness check v2 item 3), oily fish, and small weekly servings of liver lead the first weeks.
 2. **Fat is a feature.** Butter, ghee, animal fats, avocado, and full-fat fermented dairy once tolerated. No seed oils in recipes.
 3. **Fermented foods early and small.** A few drops of fermented vegetable brine in stock, then kefir and yoghurt.
 4. **Whole food, nothing processed.** No pouches, no fortified cereals as a staple, no added sugar in any form.
 5. **Produce is real but secondary.** Soft non-starchy vegetables are welcome. Fruit is kept low-sugar and small: avocado, berries, tomato, coconut, olives.
-6. **Starches, grains, and legumes are the open question.** The June meal file swaps them out entirely. The June guide only delays them. See §6, decision A.
+6. **Starches, grains, and legumes wait until about two** (decision A).
+7. **Allergen-exposure exception** (cohesiveness check v2 item 1, 25 Oct 2026). Bread (wheat) and tofu (soy) are offered from six months in small, regular amounts to build tolerance, because early allergen introduction is part of the safety floor. They are exposures, not staples. Both food cards say so in an "Our approach" note, and the wheat series points at bread only.
 
 **Named sources to confirm (VERIFY before citing in-app):**
 - Kate Pope, @wildnutritionist. Annie's stated reference; the June content already names her. I have not verified any specific publication of hers, so the app should cite her approach, not a title, until Annie confirms one.
@@ -115,3 +116,7 @@ My recommendation is **Delay**: it is defensible against the safety floor, it ke
 **Deviations from §5 the recipe author made, all driven by the safety floor:** soft peach and dates dropped (not low-sugar); olives only at 12 mo+ (quartered, rinsed); no home-fermenting recipe (needs added salt), so each stage's base is a stock with brine as a few-drops stir-in; cucumber unused (raw); fish roe is warmed in butter until cooked through rather than served raw.
 
 **Still open:** Kate Pope publication unverified (approach named, no title); the June `AncestralMeal` ideas remain under Meals → Ideas → Ancestral alongside the new library rather than being deleted; per-food video has no supply.
+
+## 9. Readiness model and second year (v1.4.0, 25 Oct 2026)
+
+After teardown v3 (`solid-starts-teardown/solid_starts_teardown_v3_subscriber.md`) the plan follows the readiness model: thirteen stages open from about six months, with a suggested start age, plus Grains, Starches & Legumes locked until 24 months. Parents pick "This week's foods" per stage (four, or one for allergens), which lead Next up and the planner. The planner gives one meal a day at six months, two at seven to eight, three from nine, and adds a snack from one. Serving ladders extend to 12 mo+, 18 mo+, 24 mo+, and 3 yr+ where the safe preparation changes. An 18 mo+ recipe stage (still grain-free) and 24 mo+ recipes (grains, starches, and legumes join) complete the second year. Decisions and contradictions resolved are in `docs/cohesiveness_check_v2.md`.

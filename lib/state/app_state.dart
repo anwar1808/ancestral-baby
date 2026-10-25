@@ -6,10 +6,12 @@ import 'package:uuid/uuid.dart';
 import '../data/notification_service.dart';
 import '../data/repository.dart';
 import '../data/seed_allergens.dart';
+import '../data/seed_bands_extra.dart';
 import '../data/seed_foods.dart';
 import '../data/seed_nature_allergens.dart';
 import '../data/seed_recipes.dart';
 import '../data/seed_recipes_ancestral.dart';
+import '../data/seed_recipes_toddler.dart';
 import '../data/seed_skills.dart';
 import '../data/sync_repository.dart';
 import '../models/allergen.dart';
@@ -35,7 +37,11 @@ class AppState extends ChangeNotifier {
         sync = syncRepository ?? LocalOnlySync();
 
   // Catalogs (seeded original content).
-  final List<Food> foods = List.unmodifiable(kSeedFoods);
+  /// Catalogue foods with the extra 12 mo+ to 3 yr+ serving bands merged in.
+  final List<Food> foods = List.unmodifiable([
+    for (final f in kSeedFoods)
+      kExtraBands.containsKey(f.id) ? f.withExtraBands(kExtraBands[f.id]!) : f
+  ]);
   final List<Allergen> allergens = List.unmodifiable(kSeedAllergens);
   final List<Skill> skills = List.unmodifiable(kSeedSkills);
 
@@ -129,13 +135,102 @@ class AppState extends ChangeNotifier {
   String get babyStage {
     final m = babyAgeMonths;
     if (m >= 24) return '24 mo+';
+    if (m >= 18) return '18 mo+';
     if (m >= 12) return '12 mo+';
     if (m >= 9) return '9 mo+';
     return '6 mo+';
   }
 
-  /// A skill is open once the baby's corrected age reaches its start age.
-  bool skillOpen(Skill s) => babyAgeMonths >= s.fromMonths;
+  /// Stages open by readiness, not age (teardown v3): every stage is open
+  /// except one the canon gates by age (Grains, Starches & Legumes at 24).
+  bool skillOpen(Skill s) => !s.ageGated || babyAgeMonths >= s.fromMonths;
+
+  // ---- This week's foods (per-stage picker, teardown v3) ----------------
+  Set<String> _picks = {};
+  String get _picksKey => 'picks_${baby?.id ?? 'local'}';
+
+  /// Foods the parent picked to introduce, still untried, in stage order.
+  List<Food> get pickedFoods => [
+        for (final s in skills)
+          for (final id in s.foodIds)
+            if (_picks.contains(id) && !isTried(id)) ?foodById(id)
+      ];
+
+  bool isPicked(String foodId) => _picks.contains(foodId);
+
+  /// Untried picks that belong to [s].
+  int pickedCountIn(Skill s) =>
+      s.foodIds.where((id) => _picks.contains(id) && !isTried(id)).length;
+
+  /// Pick or unpick a food. Returns false when the stage's weekly pick is
+  /// already full.
+  Future<bool> togglePick(Skill s, String foodId) async {
+    if (_picks.contains(foodId)) {
+      _picks.remove(foodId);
+    } else {
+      if (pickedCountIn(s) >= s.weeklyPick) return false;
+      final f = foodById(foodId);
+      if (f == null || !foodOpenForAge(f)) return false;
+      _picks.add(foodId);
+    }
+    await repo.setKv(_picksKey, _picks.join(','));
+    notifyListeners();
+    return true;
+  }
+
+  /// Pre-fill a stage's picks with its first untried, eligible foods (the
+  /// "recommended, already checked" default).
+  Future<void> suggestPicks(Skill s) async {
+    for (final id in s.foodIds) {
+      if (pickedCountIn(s) >= s.weeklyPick) break;
+      final f = foodById(id);
+      if (f == null || isTried(id) || _picks.contains(id)) continue;
+      if (!foodOpenForAge(f) || _allergenBlocked(f)) continue;
+      if (id == 'liver' && !liverDueNow) continue;
+      _picks.add(id);
+    }
+    await repo.setKv(_picksKey, _picks.join(','));
+    notifyListeners();
+  }
+
+  // ---- Already-tried intake (cohesiveness check v2 item 7) -------------
+  /// Record foods and allergens the baby had before using the app. Foods are
+  /// marked tried without journal entries; allergens move to maintenance so
+  /// rotation reminders start. Milestones are awarded quietly.
+  Future<void> recordAlreadyTried(
+      {Set<String> foodIds = const {}, Set<String> allergenIds = const {}}) async {
+    if (baby == null) return;
+    final when = DateTime.now();
+    // An allergen already in the diet implies its single serving food was
+    // eaten too (egg, peanut butter, tofu ...); dairy has two, so it is left.
+    final all = {...foodIds};
+    for (final a in allergenIds) {
+      final ideas = allergenById(a)?.servingIdeaFoodIds ?? const [];
+      if (ideas.length == 1) all.add(ideas.first);
+    }
+    for (final id in all) {
+      if (!isTried(id)) await repo.setTried(baby!.id, id, true, when);
+    }
+    _foodStates = await repo.getFoodStates(baby!.id);
+    for (final a in allergenIds) {
+      final st = allergenStatus(a);
+      if (st.state == AllergenState.reactionNoted) continue;
+      st.state = AllergenState.maintaining;
+      st.introStep = AllergenStatus.introServingsTarget;
+      st.firstIntroducedDate ??= when;
+      st.lastServedDate ??= when;
+      await repo.saveAllergenStatus(st);
+    }
+    _allergenStatuses = await repo.getAllergenStatuses(baby!.id);
+    _picks.removeWhere(isTried);
+    await repo.setKv(_picksKey, _picks.join(','));
+    await _checkFoodMilestones();
+    await _checkSkillBadges();
+    await _checkAllergenMilestones();
+    consumeJustEarnedMilestone();
+    await refreshReminders();
+    notifyListeners();
+  }
 
   /// The first open skill that still has untried foods, in curriculum order.
   Skill? get currentSkill {
@@ -236,7 +331,8 @@ class AppState extends ChangeNotifier {
       });
 
   /// Untried foods we would offer next, best first. Order: the food that
-  /// continues an active allergen series; then the current skill's foods in
+  /// continues an active allergen series; then this week's picked foods; then
+  /// the current skill's foods in
   /// curriculum order; then the rest of the catalogue by canon tier, Try
   /// Later first, iron-rich or fat-rich first. Liver only when due.
   List<Food> recommendedNext({int limit = 5}) {
@@ -256,6 +352,9 @@ class AppState extends ChangeNotifier {
     }
 
     add(activeAllergenSeriesFood);
+    for (final f in pickedFoods) {
+      add(f);
+    }
     final cur = currentSkill;
     if (cur != null) {
       for (final id in cur.foodIds) {
@@ -318,8 +417,13 @@ class AppState extends ChangeNotifier {
     }
     _loading = false;
     notifyListeners();
-    // Refresh reminders against current data.
-    await refreshReminders();
+    // Refresh reminders against current data. Never let a notification
+    // failure block the first frame (v1.4.0 launch-hang fix).
+    try {
+      await refreshReminders();
+    } catch (e) {
+      debugPrint('refreshReminders failed: $e');
+    }
   }
 
   /// Load all per-baby data for [babyId] into memory.
@@ -330,6 +434,8 @@ class AppState extends ChangeNotifier {
     milestones = await repo.getMilestones(babyId);
     customFoods = await repo.getCustomFoods(babyId);
     mealPlan = await repo.getMealPlan(babyId, currentWeekKey);
+    final raw = await repo.getKv('picks_$babyId') ?? '';
+    _picks = raw.split(',').where((x) => x.isNotEmpty).toSet();
   }
 
   /// Switch the active baby and reload its data.
@@ -512,12 +618,12 @@ class AppState extends ChangeNotifier {
   }
 
   // ---- Recipes + weekly meal plan ---------------------------------------
-  static const _stageOrder = ['6 mo+', '9 mo+', '12 mo+', '24 mo+'];
+  static const _stageOrder = ['6 mo+', '9 mo+', '12 mo+', '18 mo+', '24 mo+'];
   static int _stageIndex(String s) => _stageOrder.indexOf(s);
 
   /// Every recipe in the app: the ancestral library plus the original set.
   final List<Recipe> recipes =
-      List.unmodifiable([...kAncestralRecipes, ...kSeedRecipes]);
+      List.unmodifiable([...kAncestralRecipes, ...kToddlerRecipes, ...kSeedRecipes]);
   late final Map<String, Recipe> _recipeIndex = {
     for (final r in recipes) r.id: r
   };
@@ -595,7 +701,17 @@ class AppState extends ChangeNotifier {
     return s;
   }
 
-  /// Build (or rebuild) this week's plan: four slots a day, recipes for the
+  /// Meal slots a day by age (cohesiveness check v2 item 2): one meal at six
+  /// months, two at seven to eight, three from nine, plus a snack from one.
+  List<String> get slotsForAge {
+    final m = babyAgeMonths;
+    if (m < 7) return const ['lunch'];
+    if (m < 9) return const ['breakfast', 'lunch'];
+    if (m < 12) return const ['breakfast', 'lunch', 'dinner'];
+    return PlannedMeal.slots;
+  }
+
+  /// Build (or rebuild) this week's plan: slots a day by age, recipes for the
   /// baby's stage, spread evenly, favouring foods that are next in the plan.
   /// Liver appears at most once a week and only when it is due.
   Future<void> generateWeekPlan({bool regenerate = false}) async {
@@ -609,7 +725,7 @@ class AppState extends ChangeNotifier {
     final out = <PlannedMeal>[];
     for (var day = 0; day < 7; day++) {
       final usedToday = <String>{};
-      for (final slot in PlannedMeal.slots) {
+      for (final slot in slotsForAge) {
         final cands = _slotPool(slot)
             .where((r) =>
                 !usedToday.contains(r.id) && !(liverUsed && _recipeHasLiver(r)))

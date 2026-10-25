@@ -168,15 +168,15 @@ const List<Recipe> kSeedRecipes = [
   // ---- Ancestral ----
   Recipe(
     id: 'r_anc_eggyolk_avocado',
-    title: 'Egg yolk & avocado with a spoon of broth',
+    title: 'Egg & avocado with a spoon of broth',
     collection: 'Ancestral',
     stage: '6 mo+',
-    summary: 'A grain-free, nutrient-dense start with egg yolk and broth.',
-    ingredients: ['1 well-cooked egg yolk', '¼ ripe avocado',
+    summary: 'A grain-free, nutrient-dense start with well-cooked egg and broth.',
+    ingredients: ['1 well-cooked egg', '¼ ripe avocado',
         '1 tsp warm meat stock'],
     steps: [
-      'Cook the egg fully and separate the yolk.',
-      'Mash the yolk with avocado, loosening with a little warm stock.',
+      'Cook the egg fully; mash the yolk and chop the white very finely.',
+      'Mash the egg with avocado, loosening with a little warm stock.',
       'Serve warm. Introduce egg on its own the first few times.',
     ],
     foodIds: ['egg', 'avocado'],

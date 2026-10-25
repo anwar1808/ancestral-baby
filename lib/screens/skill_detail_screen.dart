@@ -7,9 +7,9 @@ import '../widgets/common.dart';
 import 'allergen_screen.dart';
 import 'food_detail_screen.dart';
 
-/// One skill in the 100 Foods Plan: guidance, progress, and the foods that
-/// build it. Marking foods tried (from a food's page) fills progress; finishing
-/// the skill earns its badge.
+/// One stage in the 100 Foods Plan: guidance, progress, "This week's foods"
+/// (pick up to the stage's weekly number; picks lead Next up and the planner),
+/// and the foods that build it. Finishing the stage earns its badge.
 class SkillDetailScreen extends StatelessWidget {
   final String skillId;
   const SkillDetailScreen({super.key, required this.skillId});
@@ -19,7 +19,7 @@ class SkillDetailScreen extends StatelessWidget {
     final state = context.watch<AppState>();
     final skill = state.skillById(skillId);
     if (skill == null) {
-      return const Scaffold(body: Center(child: Text('Skill not found')));
+      return const Scaffold(body: Center(child: Text('Stage not found')));
     }
     final done = state.skillComplete(skill);
     final pct = (state.skillProgress(skill) * 100).round();
@@ -76,7 +76,10 @@ class SkillDetailScreen extends StatelessWidget {
               style: const TextStyle(height: 1.55, fontSize: 15)),
           const SizedBox(height: AppSpacing.lg),
 
-          if (!open) ...[
+          if (open && !done) ...[
+            _WeeklyPickHeader(skillId: skill.id),
+            const SizedBox(height: AppSpacing.lg),
+          ] else if (!open) ...[
             InfoCard(
               color: AppColors.softBlue,
               child: Row(
@@ -86,8 +89,7 @@ class SkillDetailScreen extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'In our approach this stage opens at ${skill.fromMonths} '
-                      'months. Browse it now; it will count towards the plan '
-                      'from then.',
+                      'months. Browse it now; you can pick foods from it then.',
                       style: const TextStyle(
                           fontSize: 13, color: AppColors.navy, height: 1.4),
                     ),
@@ -121,13 +123,14 @@ class SkillDetailScreen extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
           ],
 
-          Text('Foods for this skill',
+          Text('Foods in this stage',
               style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: AppSpacing.sm),
           ...skill.foodIds.map((id) {
             final food = state.foodById(id);
             if (food == null) return const SizedBox.shrink();
             final tried = state.isTried(id);
+            final picked = state.isPicked(id);
             return Padding(
               padding: const EdgeInsets.only(bottom: AppSpacing.sm),
               child: InfoCard(
@@ -181,7 +184,29 @@ class SkillDetailScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const Icon(Icons.chevron_right, color: AppColors.textMuted),
+                    if (open && !tried && state.foodOpenForAge(food))
+                      IconButton(
+                        tooltip: picked
+                            ? 'Remove from this week'
+                            : 'Add to this week',
+                        icon: Icon(
+                            picked
+                                ? Icons.check_box
+                                : Icons.check_box_outline_blank,
+                            color: picked ? AppColors.success : AppColors.navy),
+                        onPressed: () async {
+                          final ok = await state.togglePick(skill, id);
+                          if (!ok && context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                content: Text(
+                                    'This week already has ${skill.weeklyPick} '
+                                    'from this stage. Untick one first.')));
+                          }
+                        },
+                      )
+                    else
+                      const Icon(Icons.chevron_right,
+                          color: AppColors.textMuted),
                   ],
                 ),
               ),
@@ -195,6 +220,52 @@ class SkillDetailScreen extends StatelessWidget {
             style: TextStyle(
                 fontSize: 13, color: AppColors.textSecondary, height: 1.4),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+/// "This week's foods" for one stage: how many are picked out of the weekly
+/// number, and a one-tap suggestion that pre-ticks the recommended foods.
+class _WeeklyPickHeader extends StatelessWidget {
+  final String skillId;
+  const _WeeklyPickHeader({required this.skillId});
+
+  @override
+  Widget build(BuildContext context) {
+    final state = context.watch<AppState>();
+    final skill = state.skillById(skillId)!;
+    final n = state.pickedCountIn(skill);
+    final target = skill.weeklyPick;
+    final what = target == 1 ? 'one food' : '$target foods';
+    return InfoCard(
+      color: AppColors.butter,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("This week's foods",
+              style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 4),
+          Text(
+            n == 0
+                ? 'Choose $what to introduce this week. Tick them below, or '
+                    'let us suggest. You choose more once these are tried.'
+                : '$n of $target picked. They lead Next up on Home and the '
+                    'weekly meal plan.',
+            style: const TextStyle(fontSize: 13, height: 1.4),
+          ),
+          if (n < target) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton.icon(
+                onPressed: () => state.suggestPicks(skill),
+                icon: const Icon(Icons.auto_awesome, size: 18),
+                label: Text(n == 0 ? 'Suggest $what' : 'Fill the rest'),
+              ),
+            ),
+          ],
         ],
       ),
     );

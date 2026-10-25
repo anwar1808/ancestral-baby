@@ -5,11 +5,14 @@ import '../data/seed_skills.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
+import 'already_tried_screen.dart';
 import 'skill_detail_screen.dart';
 
-/// The "100 Foods Plan" — a guided skill journey. Each skill suggests foods to
-/// introduce and tracks progress; finishing one earns a badge. Structure
-/// mirrors a staged plan; content is original.
+/// The "100 Foods Plan": thirteen readiness stages plus the grains stage at
+/// two. Stages are open by readiness, not age (teardown v3); a pill shows
+/// the suggested start age where the baby is younger, and the grains stage
+/// stays locked until 24 months (decision A). Structure mirrors a staged
+/// plan; content is original.
 class PlanScreen extends StatelessWidget {
   const PlanScreen({super.key});
 
@@ -45,11 +48,31 @@ class PlanScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 const Text(
-                  'Animal foods and fats first, vegetables alongside, grains and '
-                  'starches from around two. Work through the stages in order, '
-                  'or jump to whichever fits your baby right now.',
+                  'Start with First Foods, then Introduce Allergens. After that, '
+                  'pick any 1.0 stage that suits your baby, and move to 2.0 and '
+                  '3.0 when they are ready. Animal foods and fats first; grains '
+                  'and starches from around two.',
                   style: TextStyle(color: Color(0xFFD7DEEC), fontSize: 13, height: 1.4),
                 ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          InfoCard(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => const AlreadyTriedScreen())),
+            child: const Row(
+              children: [
+                Icon(Icons.playlist_add_check, color: AppColors.navy),
+                SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Text(
+                    'Already started solids? Mark the foods and allergens your '
+                    'baby has had, so the plan starts in the right place.',
+                    style: TextStyle(fontSize: 13, height: 1.4),
+                  ),
+                ),
+                Icon(Icons.chevron_right, color: AppColors.textMuted),
               ],
             ),
           ),
@@ -135,7 +158,7 @@ class _SkillCard extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               color: AppColors.navy)),
                     ),
-                    if (!open) ...[
+                    if (!open || skill.fromMonths > state.babyAgeMonths) ...[
                       const SizedBox(width: 6),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -144,7 +167,10 @@ class _SkillCard extends StatelessWidget {
                           color: AppColors.butter,
                           borderRadius: BorderRadius.circular(AppRadius.pill),
                         ),
-                        child: Text('from ${skill.fromMonths} mo',
+                        child: Text(
+                            open
+                                ? 'about ${skill.fromMonths} mo'
+                                : 'from ${skill.fromMonths} mo',
                             style: const TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w700,

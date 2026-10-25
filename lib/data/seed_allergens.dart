@@ -79,7 +79,7 @@ const List<Allergen> kSeedAllergens = [
         'Wheat can generally be introduced from around six months (not before four months) through foods such as lightly toasted bread, soft cooked pasta, or wheat-based cereals. Offer a small amount on its own, earlier in the day, and watch for about two hours. If tolerated, increase gradually and keep wheat in the diet regularly. Wheat allergy is distinct from coeliac disease; if there is a family history of coeliac disease, discuss introduction with a clinician.',
     reactionGuidance:
         'Mild signs can include a few hives, redness, or mild swelling around the mouth. Significant signs needing urgent attention include difficulty breathing, wheezing, swelling of the lips, tongue, or throat, repeated vomiting, pale or floppy appearance, or unusual lethargy. If you see any severe or fast-spreading symptoms, treat it as an emergency and call your local emergency services immediately. This is general information, not medical advice.',
-    servingIdeaFoodIds: ['bread', 'pasta'],
+    servingIdeaFoodIds: ['bread'],
     maintenanceServingNote:
         'About 2 g allergen protein per week sufficed in the EAT trial; keep tolerated wheat foods in the diet regularly (about twice a week).',
   ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/seed_guides.dart';
+import '../data/seed_guides_toddler.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
 import 'guidelines_screen.dart';
@@ -20,7 +21,7 @@ class _GuidesScreenState extends State<GuidesScreen> {
   @override
   Widget build(BuildContext context) {
     final sections = <String, List<Guide>>{};
-    for (final g in kSeedGuides.where((g) => g.audience == _audience)) {
+    for (final g in kAllGuides.where((g) => g.audience == _audience)) {
       sections.putIfAbsent(g.section, () => []).add(g);
     }
     return Scaffold(
@@ -157,6 +158,10 @@ class _GuidesScreenState extends State<GuidesScreen> {
         return Icons.health_and_safety_outlined;
       case 'Feeding':
         return Icons.restaurant_menu;
+      case 'Picky Eating':
+        return Icons.sentiment_satisfied_alt_outlined;
+      case 'Toddlers':
+        return Icons.child_care_outlined;
       default:
         return Icons.lightbulb_outline;
     }

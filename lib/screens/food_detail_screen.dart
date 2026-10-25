@@ -107,6 +107,24 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
                       label: 'Nutrition',
                       value: food.nutritionFlags.join(', ')),
                 _MetaRow(label: 'Choking risk', value: food.chokingRisk),
+                if (food.approachNote != null) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  InfoCard(
+                    color: AppColors.softBlue,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Our approach',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w800,
+                                color: AppColors.navy)),
+                        const SizedBox(height: 4),
+                        Text(food.approachNote!,
+                            style: const TextStyle(height: 1.4)),
+                      ],
+                    ),
+                  ),
+                ],
                 if (food.whyFirst != null) ...[
                   const SizedBox(height: AppSpacing.md),
                   InfoCard(

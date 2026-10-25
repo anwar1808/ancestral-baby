@@ -20,7 +20,7 @@ void main() {
 
     test('follows the First Foods order from the canon', () {
       final ids = state.recommendedNext(limit: 5).map((f) => f.id).toList();
-      expect(ids, ['meat_stock', 'beef', 'egg', 'avocado', 'lamb']);
+      expect(ids, ['meat_stock', 'fermented_brine', 'beef', 'egg', 'avocado']);
     });
 
     test('liver is offered when it has never been logged', () {
@@ -47,12 +47,75 @@ void main() {
       expect(at('blueberry'), lessThan(at('apple'))); // low-sugar fruit first
     });
 
-    test('stage gating: grains skill opens at 24 months, First Foods at 6', () {
-      final grains = state.skillById('grains_starches_legumes')!;
-      final first = state.skillById('first_foods')!;
-      expect(state.skillOpen(first), isTrue);
-      expect(state.skillOpen(grains), isFalse);
+    test('readiness model: every stage open at 6 months except grains', () {
+      for (final s in state.skills) {
+        expect(state.skillOpen(s), s.id != 'grains_starches_legumes',
+            reason: s.id);
+      }
       expect(state.currentSkill?.id, 'first_foods');
+      expect(state.skills.length, 14);
+    });
+
+    test('every catalogue food sits in exactly one stage', () {
+      final seen = <String, String>{};
+      for (final s in state.skills) {
+        for (final id in s.foodIds) {
+          expect(seen.containsKey(id), isFalse,
+              reason: '$id in ${seen[id]} and ${s.id}');
+          seen[id] = s.id;
+          expect(state.foodById(id), isNotNull, reason: id);
+        }
+      }
+      expect(seen.length, state.foods.length);
+    });
+
+    test('v1.3.0 stage ids survive so earned badges still resolve', () {
+      for (final id in [
+        'first_foods', 'introduce_allergens', 'scoop_mash', 'dip_and_bite',
+        'big_flavors', 'chewing', 'grains_starches_legumes'
+      ]) {
+        expect(state.skillById(id), isNotNull, reason: id);
+      }
+    });
+
+    test('one meal a day at six months', () {
+      expect(state.slotsForAge, ['lunch']);
+    });
+
+    test('extra serving bands are merged onto the catalogue', () {
+      final bands = state
+          .foodById('strawberry')!
+          .howToServeByAge
+          .map((b) => b.ageBand)
+          .toList();
+      expect(bands, contains('12 mo+'));
+      expect(state.foodById('grape')!.howToServeByAge.map((b) => b.ageBand),
+          contains('3 yr+'));
+    });
+
+    test('bread and tofu carry the allergen-exposure note and are not delayed',
+        () {
+      for (final id in ['bread', 'tofu']) {
+        final f = state.foodById(id)!;
+        expect(f.approachNote, isNotNull);
+        expect(f.isDelayedByApproach, isFalse);
+      }
+    });
+
+    test('toddler recipes use real foods and the 18 and 24 month stages', () {
+      final toddler = state.recipes.where((r) => r.id.startsWith('rt_'));
+      expect(toddler.where((r) => r.stage == '18 mo+').length, 16);
+      expect(toddler.where((r) => r.stage == '24 mo+').length, 12);
+      for (final r in toddler) {
+        for (final id in r.foodIds) {
+          expect(state.foodById(id), isNotNull, reason: '${r.id}: $id');
+        }
+        if (r.stage == '18 mo+') {
+          expect(r.foodIds.where((id) => state.foodById(id)!.isDelayedByApproach),
+              isEmpty,
+              reason: r.id);
+        }
+      }
     });
 
     test('recipe pool for 6 mo+ is the ancestral library plus June extras',

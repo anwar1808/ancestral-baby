@@ -1,7 +1,7 @@
 /// Ancestral recipe library for the Meals tab. Forty-eight original recipes,
 /// sixteen per stage, written for this app in our own words. The judgement is
 /// the ancestral canon (docs/ancestral_canon_v1.md): animal foods and their
-/// fats first, egg yolk before white, oily fish, a small weekly serving of
+/// fats first, well-cooked whole egg early, oily fish, a small weekly serving of
 /// liver, soft non-starchy vegetables, low-sugar fruit, and fermented dairy
 /// once tolerated. Under decision A there are no grains, starches, or legumes
 /// in this library before 24 months.
@@ -26,12 +26,12 @@ const List<Recipe> kAncestralRecipes = [
   // ---- 6 mo+ breakfast ----
   Recipe(
     id: 'ra_yolk_avocado_mash',
-    title: 'Yolk and avocado mash',
+    title: 'Egg and avocado mash',
     collection: 'Ancestral',
     stage: '6 mo+',
     mealType: 'breakfast',
     summary:
-        'A hard-cooked yolk gives choline and iron, and avocado and warm '
+        'A hard-cooked egg gives choline and iron, and avocado and warm '
         'stock bring the fat and gelatine that help baby use them. Contains '
         'egg, a common allergen.',
     ingredients: [
@@ -42,9 +42,9 @@ const List<Recipe> kAncestralRecipes = [
     steps: [
       'Lower the egg into boiling water and cook for 10 minutes so the yolk '
           'is fully hard, then cool it in cold water.',
-      'Peel the egg and lift out the yolk; keep the white for later, since '
-          'yolk comes first in this approach.',
-      'Mash the yolk with the avocado, loosening with warm stock until it '
+      'Peel the egg. Mash the yolk and chop the white very finely; offering '
+          'both early is the allergy guidance.',
+      'Mash the egg with the avocado, loosening with warm stock until it '
           'slides off a spoon.',
       'Check it is only warm, then offer on a pre-loaded spoon or as a thick '
           'smear baby can scoop.',
@@ -54,12 +54,12 @@ const List<Recipe> kAncestralRecipes = [
   ),
   Recipe(
     id: 'ra_crumbled_yolk_warm_stock',
-    title: 'Crumbled yolk in warm stock',
+    title: 'Crumbled egg in warm stock',
     collection: 'Ancestral',
     stage: '6 mo+',
     mealType: 'breakfast',
     summary:
-        'The simplest canon breakfast: hard yolk for choline and iron, '
+        'The simplest canon breakfast: hard-cooked egg for choline and iron, '
         'stirred into gelatine-rich stock so it is easy to swallow. Contains '
         'egg, a common allergen, and milk if you add the butter.',
     ingredients: [
@@ -71,8 +71,8 @@ const List<Recipe> kAncestralRecipes = [
       'Hard-boil the egg for 10 minutes, cool it under the tap, and peel it.',
       'Warm the stock gently in a small pan with the butter until it just '
           'steams; do not let it boil hard.',
-      'Crumble the yolk into the stock with a fork and stir to a loose, '
-          'spoonable slurry.',
+      'Mash the yolk and chop the white very finely, then stir both into '
+          'the stock to a loose, spoonable slurry.',
       'Let it cool to warm and feed from a spoon, a little at a time.',
     ],
     foodIds: ['egg', 'meat_stock', 'butter'],

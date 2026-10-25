@@ -72,7 +72,12 @@ class NotificationService {
 
   Future<void> cancelAll() async {
     await init();
-    await _plugin.cancelAll();
+    try {
+      await _plugin.cancelAll();
+    } catch (e) {
+      // A platform failure here must never stop the app opening.
+      debugPrint('cancelAll failed: $e');
+    }
   }
 
   tz.TZDateTime _nextInstance(DateTime day, TimeOfDay time) {
