@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../data/seed_guidelines.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
@@ -9,7 +10,10 @@ import '../widgets/common.dart';
 /// Lightweight onboarding (§5). No paywall, no auth wall.
 /// name → birth date (+preemie) → optional eczema/allergy flags → region.
 class OnboardingScreen extends StatefulWidget {
-  const OnboardingScreen({super.key});
+  /// When true, this is adding an extra baby (after first onboarding) rather
+  /// than the first-run flow — it saves via addBaby and pops when done.
+  final bool additional;
+  const OnboardingScreen({super.key, this.additional = false});
 
   @override
   State<OnboardingScreen> createState() => _OnboardingScreenState();
@@ -56,14 +60,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _finish() async {
-    await context.read<AppState>().completeOnboarding(
-          name: _nameController.text.trim(),
-          birthDate: _birthDate!,
-          preemie: _preemie,
-          eczema: _eczema,
-          allergies: _allergies.toList(),
-          region: _region,
-        );
+    final state = context.read<AppState>();
+    if (widget.additional) {
+      await state.addBaby(
+        name: _nameController.text.trim(),
+        birthDate: _birthDate!,
+        preemie: _preemie,
+        eczema: _eczema,
+        allergies: _allergies.toList(),
+        region: _region,
+      );
+      if (mounted) Navigator.of(context).pop();
+    } else {
+      await state.completeOnboarding(
+        name: _nameController.text.trim(),
+        birthDate: _birthDate!,
+        preemie: _preemie,
+        eczema: _eczema,
+        allergies: _allergies.toList(),
+        region: _region,
+      );
+    }
   }
 
   @override
@@ -82,6 +99,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       onPressed: () => _pageController.previousPage(
                           duration: const Duration(milliseconds: 250),
                           curve: Curves.easeOut),
+                    )
+                  else if (widget.additional)
+                    IconButton(
+                      icon: const Icon(Icons.close, color: AppColors.navy),
+                      onPressed: () => Navigator.of(context).maybePop(),
                     )
                   else
                     const SizedBox(width: 48),
@@ -321,26 +343,21 @@ class _RegionStep extends StatelessWidget {
   final ValueChanged<String> onRegion;
   const _RegionStep({required this.region, required this.onRegion});
 
-  static const _regions = {
-    'UK': 'United Kingdom (NHS Start4Life, SACN)',
-    'US': 'United States (AAP, NIAID, USDA)',
-    'EU': 'Europe',
-    'SG': 'Singapore (HPB)',
-  };
-
   @override
   Widget build(BuildContext context) {
+    // All comparable regions except the global WHO entry.
+    final regions = kRegions.where((r) => r.group != 'Global').toList();
     return _StepScaffold(
       title: 'Where are you?',
       subtitle: 'Allergen lists and guidance vary by region.',
       child: Column(
-        children: _regions.entries.map((e) {
-          final selected = region == e.key;
+        children: regions.map((r) {
+          final selected = region == r.code;
           return Padding(
             padding: const EdgeInsets.only(bottom: AppSpacing.sm),
             child: InfoCard(
               color: selected ? AppColors.softBlue : Colors.white,
-              onTap: () => onRegion(e.key),
+              onTap: () => onRegion(r.code),
               child: Row(
                 children: [
                   Icon(
@@ -350,9 +367,20 @@ class _RegionStep extends StatelessWidget {
                     color: AppColors.navy,
                   ),
                   const SizedBox(width: AppSpacing.md),
+                  Text(r.flag, style: const TextStyle(fontSize: 20)),
+                  const SizedBox(width: AppSpacing.sm),
                   Expanded(
-                    child: Text(e.value,
-                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(r.name,
+                            style:
+                                const TextStyle(fontWeight: FontWeight.w700)),
+                        Text(r.bodies,
+                            style: const TextStyle(
+                                fontSize: 12, color: AppColors.textMuted)),
+                      ],
+                    ),
                   ),
                 ],
               ),

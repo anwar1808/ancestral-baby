@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Ancestral Baby app icon — tomahawk steak.
      Palette: butter #FCEFC7 tile, navy #30384D keyline, coral ribeye, cream bone.
-     1024x1024 master; rasterise to Android launcher densities. -->
+     1024x1024 master; rasterise to Android launcher densities.
+     Ribeye is an irregular organic outline (not a perfect ellipse) so it reads
+     as a real cut of meat. -->
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <defs>
     <linearGradient id="meat" x1="0" y1="0" x2="1" y2="1">
@@ -17,27 +19,46 @@
   <g transform="rotate(-13 512 512)" stroke="#30384D" stroke-width="26"
      stroke-linejoin="round" stroke-linecap="round">
 
-    <!-- bone: frenched rib shaft + double knuckle (drawn first, behind meat) -->
-    <path d="M 545 545 L 815 405" fill="none" stroke="#30384D" stroke-width="96"/>
-    <path d="M 545 545 L 815 405" fill="none" stroke="#F6EEDB" stroke-width="52"/>
-    <g>
-      <circle cx="835" cy="392" r="62" fill="#F6EEDB"/>
-      <circle cx="806" cy="450" r="54" fill="#F6EEDB"/>
-    </g>
+    <!-- bone: frenched rib, tapered to a sharper tip (drawn first, behind meat) -->
+    <path d="M 545 560
+             L 558 504
+             C 666 458 748 424 824 392
+             L 872 372
+             C 860 408 852 430 824 458
+             C 750 490 664 520 558 560
+             Z"
+          fill="#F6EEDB"/>
 
-    <!-- ribeye: round, marbled -->
-    <ellipse cx="408" cy="588" rx="252" ry="220" fill="url(#meat)"/>
+    <!-- ribeye: irregular, organic outline — flatter top, an asymmetric cap-
+         muscle lobe on the upper-left, and a deep fat-cap notch on the lower-
+         left rim. Reads as a real cut, not a perfect oval. -->
+    <path d="M 432 388
+             C 548 380 604 414 636 476
+             C 678 536 668 608 644 668
+             C 614 750 540 796 430 804
+             C 356 812 306 800 278 764
+             C 262 742 266 714 240 706
+             C 210 696 186 660 182 606
+             C 170 572 170 560 184 546
+             C 156 498 178 450 234 446
+             C 280 442 300 468 328 462
+             C 352 422 388 396 432 388 Z"
+          fill="url(#meat)"/>
 
-    <!-- fat cap crescent along the lower-left edge -->
-    <path d="M 214 640
-             a 252 220 0 0 0 360 150"
-          fill="none" stroke="#F6EEDB" stroke-width="40" opacity="0.9"/>
+    <!-- fat cap: cream band hugging the notched lower-left rim. -->
+    <path d="M 200 628
+             C 184 676 214 706 244 716
+             C 276 726 286 752 304 782"
+          fill="none" stroke="#F6EEDB" stroke-width="32"
+          stroke-linecap="round" opacity="0.9"/>
 
-    <!-- marbling (thin cream strokes), no individual outline -->
-    <g stroke="#F6EEDB" stroke-width="14" stroke-linecap="round" fill="none" opacity="0.85">
-      <path d="M 330 520 q 60 50 30 130"/>
-      <path d="M 430 540 q 40 60 -10 150"/>
-      <path d="M 360 660 q 70 10 120 -20"/>
+    <!-- marbling: thin cream veins, irregular and branching. -->
+    <g stroke="#F6EEDB" stroke-width="13" stroke-linecap="round" fill="none"
+       opacity="0.8">
+      <path d="M 336 466 q 54 66 20 150"/>
+      <path d="M 438 496 q 44 60 -8 166"/>
+      <path d="M 366 648 q 80 14 132 -28"/>
+      <path d="M 280 556 q 38 28 10 92"/>
     </g>
   </g>
 </svg>

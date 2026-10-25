@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../models/allergen.dart';
 import '../models/baby.dart';
+import '../models/custom_food.dart';
 import '../models/settings.dart';
 import '../models/tracker.dart';
 import 'db.dart';
@@ -13,6 +14,7 @@ class FoodState {
   final bool tried;
   final DateTime? triedDate;
   final String? heroMediaOverride;
+  final bool tryLater;
 
   const FoodState({
     required this.foodId,
@@ -20,6 +22,7 @@ class FoodState {
     this.tried = false,
     this.triedDate,
     this.heroMediaOverride,
+    this.tryLater = false,
   });
 }
 
@@ -31,11 +34,19 @@ class Repository {
   Future<Database> get _db async => _adb.database;
 
   // ---- Baby -------------------------------------------------------------
-  Future<Baby?> getBaby() async {
+  Future<List<Baby>> getBabies() async {
     final db = await _db;
-    final rows = await db.query('baby', limit: 1);
-    if (rows.isEmpty) return null;
-    return Baby.fromMap(rows.first);
+    final rows = await db.query('baby', orderBy: 'birthDate DESC');
+    return rows.map(Baby.fromMap).toList();
+  }
+
+  Future<void> deleteBaby(String id) async {
+    final db = await _db;
+    await db.delete('baby', where: 'id = ?', whereArgs: [id]);
+    for (final t in ['food_state', 'allergen_status', 'tracker_entry',
+        'milestone', 'custom_food']) {
+      await db.delete(t, where: 'babyId = ?', whereArgs: [id]);
+    }
   }
 
   Future<void> saveBaby(Baby baby) async {
@@ -59,6 +70,7 @@ class Repository {
               ? null
               : DateTime.tryParse(r['triedDate'] as String),
           heroMediaOverride: r['heroMediaOverride'] as String?,
+          tryLater: (r['tryLater'] as int? ?? 0) == 1,
         )
     };
   }
@@ -94,6 +106,9 @@ class Repository {
   Future<void> setHeroMediaOverride(
           String babyId, String foodId, String? uri) =>
       _upsertFoodState(babyId, foodId, {'heroMediaOverride': uri});
+
+  Future<void> setTryLater(String babyId, String foodId, bool v) =>
+      _upsertFoodState(babyId, foodId, {'tryLater': v ? 1 : 0});
 
   // ---- Allergen status --------------------------------------------------
   Future<Map<String, AllergenStatus>> getAllergenStatuses(
@@ -162,5 +177,24 @@ class Repository {
           conflictAlgorithm: ConflictAlgorithm.replace);
     });
     await batch.commit(noResult: true);
+  }
+
+  // ---- Custom foods (user-added, off-catalog) ---------------------------
+  Future<List<CustomFood>> getCustomFoods(String babyId) async {
+    final db = await _db;
+    final rows = await db.query('custom_food',
+        where: 'babyId = ?', whereArgs: [babyId], orderBy: 'createdDate DESC');
+    return rows.map(CustomFood.fromMap).toList();
+  }
+
+  Future<void> saveCustomFood(CustomFood f) async {
+    final db = await _db;
+    await db.insert('custom_food', f.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<void> deleteCustomFood(String id) async {
+    final db = await _db;
+    await db.delete('custom_food', where: 'id = ?', whereArgs: [id]);
   }
 }

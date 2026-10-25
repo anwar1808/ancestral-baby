@@ -1,5 +1,6 @@
-/// A tracker log entry (§8) — food tried, meal, reaction, or note.
-enum TrackerType { food, meal, reaction, note }
+/// A tracker log entry (§8) — food tried, meal, reaction, note, or an
+/// environmental-allergy symptom entry (hay-fever / dust-mite symptoms).
+enum TrackerType { food, meal, reaction, note, symptom }
 
 enum ReactionSeverity { none, mild, significant }
 

@@ -57,14 +57,4 @@ class AppMedia {
         s.contains('vimeo.com') ||
         s.contains('player.vimeo');
   }
-
-  Map<String, dynamic> toMap() => {'kind': kind.name, 'uri': uri};
-
-  factory AppMedia.fromMap(Map<String, dynamic> m) => AppMedia(
-        kind: MediaKind.values.firstWhere(
-          (k) => k.name == (m['kind'] ?? 'auto'),
-          orElse: () => MediaKind.auto,
-        ),
-        uri: (m['uri'] ?? '') as String,
-      );
 }

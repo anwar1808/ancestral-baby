@@ -2,16 +2,18 @@
 /// from public-health sources; general information, not medical advice.
 class Guide {
   final String id;
-  final String section; // Getting Ready / Safety / Feeding
+  final String section; // Getting Ready / Safety / Feeding / Ancestral
   final String title;
   final int readMinutes;
   final String body;
+  final String audience; // Babies / Toddlers
   const Guide({
     required this.id,
     required this.section,
     required this.title,
     required this.readMinutes,
     required this.body,
+    this.audience = 'Babies',
   });
 }
 
@@ -142,5 +144,68 @@ const List<Guide> kSeedGuides = [
         'thoroughly, use pasteurised dairy, no honey before 12 months, and '
         'introduce one new food at a time while watching for reactions. You '
         'can explore these ideas as meal swaps under Meals → Ancestral.',
+  ),
+
+  // ---- Toddlers ----
+  Guide(
+    id: 't_portion_sizes',
+    section: 'Feeding',
+    audience: 'Toddlers',
+    title: 'Toddler portions',
+    readMinutes: 3,
+    body:
+        'Toddlers have small stomachs and appetites that swing from day to day. '
+        'A rough guide is a portion about the size of your child\'s own hand or '
+        'fist for each food, offered across three meals and a couple of snacks.'
+        '\n\nYour job is to offer balanced choices on a regular rhythm; theirs is '
+        'to decide how much to eat. Appetite naturally dips as growth slows after '
+        'the first year, so judge intake over a week rather than a single meal.',
+  ),
+  Guide(
+    id: 't_picky_eating',
+    section: 'Feeding',
+    audience: 'Toddlers',
+    title: 'Handling picky eating',
+    readMinutes: 4,
+    body:
+        'Fussiness is a normal developmental stage, not a sign you\'ve done '
+        'something wrong. Toddlers are wired to be wary of new foods, and it can '
+        'take many calm, pressure-free exposures before a food is accepted.'
+        '\n\nKeep serving rejected foods alongside familiar ones without '
+        'comment, eat the same foods together, and avoid turning meals into a '
+        'battle or a bribe. Offer, don\'t force; model enjoyment; and trust that '
+        'variety builds over time. If your child is losing weight, gagging '
+        'frequently, or eating an extremely narrow range, speak to your health '
+        'team.',
+  ),
+  Guide(
+    id: 't_milk_and_cups',
+    section: 'Feeding',
+    audience: 'Toddlers',
+    title: 'Milk & moving to a cup',
+    readMinutes: 3,
+    body:
+        'From around 12 months, whole cow\'s milk can become a main drink, and '
+        'most guidance suggests moving from bottles to an open or free-flow cup '
+        'to protect developing teeth. Water and milk are the best drinks; avoid '
+        'sugary drinks and limit juice.'
+        '\n\nToo much milk can blunt appetite for food and affect iron levels, '
+        'so keep it to roughly two to three servings a day and offer it with or '
+        'after meals rather than sipping all day.',
+  ),
+  Guide(
+    id: 't_family_meals',
+    section: 'Feeding',
+    audience: 'Toddlers',
+    title: 'Family meals & independence',
+    readMinutes: 2,
+    body:
+        'Eating together is one of the most powerful things you can do for a '
+        'toddler\'s eating. Children learn by watching, so sharing the same food '
+        'at the same table — even briefly — encourages them to try more.'
+        '\n\nLet them practise self-feeding with a spoon and fork, pour from a '
+        'small jug, and make some choices. Expect mess; it\'s part of learning. '
+        'Keep mealtimes calm, screen-free where you can, and roughly to a '
+        'routine so hunger and fullness stay predictable.',
   ),
 ];

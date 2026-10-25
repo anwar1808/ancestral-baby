@@ -21,20 +21,41 @@ class AppDatabase {
     final path = p.join(dir, 'ancestral_baby.db');
     return openDatabase(
       path,
-      version: 1,
+      version: 3,
       onConfigure: (db) => db.execute('PRAGMA foreign_keys = ON'),
       onCreate: _create,
+      onUpgrade: _upgrade,
     );
   }
 
-  Future<void> _create(Database db, int version) async {
-    await db.execute('''
-      CREATE TABLE household (
-        id TEXT PRIMARY KEY,
-        owner_user_id TEXT,
-        member_user_ids TEXT
-      )''');
+  /// Schema migrations.
+  /// v2: escalating allergen intro step + custom foods.
+  /// v3: "try later" flag on food_state.
+  Future<void> _upgrade(Database db, int oldVersion, int newVersion) async {
+    if (oldVersion < 2) {
+      await db.execute(
+          'ALTER TABLE allergen_status ADD COLUMN introStep INTEGER DEFAULT 0');
+      await db.execute(_customFoodTable);
+    }
+    if (oldVersion < 3) {
+      await db.execute(
+          'ALTER TABLE food_state ADD COLUMN tryLater INTEGER DEFAULT 0');
+    }
+  }
 
+  static const _customFoodTable = '''
+      CREATE TABLE custom_food (
+        id TEXT PRIMARY KEY,
+        babyId TEXT NOT NULL,
+        name TEXT NOT NULL,
+        category TEXT,
+        photoPath TEXT,
+        tried INTEGER DEFAULT 1,
+        triedDate TEXT,
+        createdDate TEXT NOT NULL
+      )''';
+
+  Future<void> _create(Database db, int version) async {
     await db.execute('''
       CREATE TABLE baby (
         id TEXT PRIMARY KEY,
@@ -57,6 +78,7 @@ class AppDatabase {
         tried INTEGER DEFAULT 0,
         triedDate TEXT,
         heroMediaOverride TEXT,
+        tryLater INTEGER DEFAULT 0,
         PRIMARY KEY (babyId, foodId)
       )''');
 
@@ -69,8 +91,11 @@ class AppDatabase {
         lastServedDate TEXT,
         maintenanceIntervalDays INTEGER DEFAULT 3,
         serveStreak INTEGER DEFAULT 0,
+        introStep INTEGER DEFAULT 0,
         PRIMARY KEY (babyId, allergenId)
       )''');
+
+    await db.execute(_customFoodTable);
 
     await db.execute('''
       CREATE TABLE tracker_entry (
@@ -90,16 +115,6 @@ class AppDatabase {
         babyId TEXT NOT NULL,
         kind TEXT NOT NULL,
         achievedDate TEXT NOT NULL
-      )''');
-
-    await db.execute('''
-      CREATE TABLE reminder (
-        id TEXT PRIMARY KEY,
-        babyId TEXT NOT NULL,
-        allergenId TEXT,
-        kind TEXT NOT NULL,
-        due_date TEXT,
-        status TEXT DEFAULT 'pending'
       )''');
 
     await db.execute('''

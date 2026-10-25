@@ -6,6 +6,7 @@ import '../models/allergen.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
+import 'plan_screen.dart';
 
 /// Progress / Milestones (§5): foods tried, meals, allergens introduced,
 /// milestones, with a small celebration on key milestones.
@@ -13,13 +14,20 @@ class ProgressScreen extends StatelessWidget {
   const ProgressScreen({super.key});
 
   static const _milestoneLabels = {
+    // Foods
     'first_food': 'First food tried 🥄',
     'ten_foods': '10 foods tried 🌱',
     'twenty_five_foods': '25 foods tried 🍎',
     'fifty_foods': '50 foods tried 🥦',
     'hundred_foods': '100 foods tried 🎉',
+    // Food types
+    'first_food_type': 'First food group 🍽️',
+    'five_food_types': '5 food groups 🌈',
+    'ten_food_types': 'All 10 food groups 🍱',
+    // Allergens
     'first_allergen': 'First allergen introduced 🛡️',
-    'all_allergens': 'All allergens introduced ⭐',
+    'five_allergens': '5 allergens introduced 🧪',
+    'eleven_allergens': 'All allergens introduced ⭐',
   };
 
   @override
@@ -27,6 +35,9 @@ class ProgressScreen extends StatelessWidget {
     final state = context.watch<AppState>();
     final tried = state.triedCount;
     final total = state.foods.length;
+    // Catalog-only tried count for the "of N in the database" pie (triedCount
+    // also includes off-catalog custom foods, which aren't in the database total).
+    final catalogTried = state.foods.where((f) => state.isTried(f.id)).length;
     final maintaining = state.allergens
         .where((a) => state.allergenStatus(a.id).state ==
             AllergenState.maintaining)
@@ -59,6 +70,34 @@ class ProgressScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.xl),
+          InfoCard(
+            color: AppColors.softBlue,
+            onTap: () => Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const PlanScreen())),
+            child: Row(
+              children: [
+                const Icon(Icons.flag_outlined, color: AppColors.navy),
+                const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('100 Foods Plan',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w800,
+                              color: AppColors.navy)),
+                      const SizedBox(height: 2),
+                      Text('${(state.planProgress * 100).round()}% explored',
+                          style: const TextStyle(
+                              fontSize: 13, color: AppColors.textSecondary)),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right, color: AppColors.navy),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.xl),
           Text('Foods explored', style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: AppSpacing.md),
           InfoCard(
@@ -72,16 +111,16 @@ class ProgressScreen extends StatelessWidget {
                       centerSpaceRadius: 38,
                       sections: [
                         PieChartSectionData(
-                          value: tried.toDouble(),
+                          value: catalogTried.toDouble(),
                           color: AppColors.success,
-                          title: '$tried',
+                          title: '$catalogTried',
                           radius: 28,
                           titleStyle: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w800),
                         ),
                         PieChartSectionData(
-                          value: (total - tried).toDouble(),
+                          value: (total - catalogTried).toDouble(),
                           color: AppColors.softBlue,
                           title: '',
                           radius: 24,
@@ -91,7 +130,7 @@ class ProgressScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                Text('$tried of $total foods in the database',
+                Text('$catalogTried of $total foods in the database',
                     style: const TextStyle(color: AppColors.textSecondary)),
               ],
             ),
@@ -118,7 +157,7 @@ class ProgressScreen extends StatelessWidget {
                         const SizedBox(width: AppSpacing.md),
                         Expanded(
                           child: Text(
-                            _milestoneLabels[m.kind] ?? m.kind,
+                            _milestoneLabel(state, m.kind),
                             style: const TextStyle(
                                 fontWeight: FontWeight.w800,
                                 color: AppColors.navy),
@@ -131,6 +170,14 @@ class ProgressScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String _milestoneLabel(AppState state, String kind) {
+    if (kind.startsWith('skill_')) {
+      final s = state.skillById(kind.substring(6));
+      return s == null ? 'Skill complete 🏅' : '${s.title} skill mastered 🏅';
+    }
+    return _milestoneLabels[kind] ?? kind;
   }
 }
 

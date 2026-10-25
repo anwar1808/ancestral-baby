@@ -7,6 +7,7 @@ import '../data/sync_repository.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
+import 'edit_baby_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -63,7 +64,41 @@ class SettingsScreen extends StatelessWidget {
                   leading: const Icon(Icons.cake_outlined, color: AppColors.navy),
                   title: Text(state.baby?.name ?? 'Baby'),
                   subtitle: Text(state.baby?.ageLabel ?? ''),
+                  onTap: state.baby == null
+                      ? null
+                      : () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const EditBabyScreen())),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (state.baby != null)
+                        IconButton(
+                          tooltip: 'Edit baby',
+                          icon: const Icon(Icons.edit_outlined,
+                              color: AppColors.navy),
+                          onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => const EditBabyScreen())),
+                        ),
+                      if (state.babies.length > 1 && state.baby != null)
+                        IconButton(
+                          tooltip: 'Remove baby',
+                          icon: const Icon(Icons.delete_outline,
+                              color: AppColors.danger),
+                          onPressed: () => _confirmRemoveBaby(context, state),
+                        ),
+                    ],
+                  ),
                 ),
+                if (state.babies.length > 1)
+                  const Padding(
+                    padding: EdgeInsets.only(top: AppSpacing.sm),
+                    child: Text(
+                      'Switch or add babies from the avatar on the Home screen.',
+                      style: TextStyle(
+                          fontSize: 12, color: AppColors.textMuted),
+                    ),
+                  ),
               ],
             ),
           ),
@@ -82,6 +117,7 @@ class SettingsScreen extends StatelessWidget {
                       'Get nudged to keep introduced allergens in rotation'),
                   onChanged: (v) async {
                     if (v) await NotificationService.instance.requestPermissions();
+                    if (!context.mounted) return;
                     await context
                         .read<AppState>()
                         .updateSettings(s.copyWith(notificationsEnabled: v));
@@ -213,6 +249,32 @@ class SettingsScreen extends StatelessWidget {
       await context
           .read<AppState>()
           .updateSettings(s.copyWith(defaultMaintenanceInterval: picked));
+    }
+  }
+
+  Future<void> _confirmRemoveBaby(BuildContext context, AppState state) async {
+    final baby = state.baby;
+    if (baby == null) return;
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (dialogCtx) => AlertDialog(
+        title: Text('Remove ${baby.name}?'),
+        content: const Text(
+            'This permanently deletes this baby\'s foods, allergen progress, '
+            'tracker, and milestones. This can\'t be undone.'),
+        actions: [
+          TextButton(
+              onPressed: () => Navigator.pop(dialogCtx, false),
+              child: const Text('Cancel')),
+          TextButton(
+              onPressed: () => Navigator.pop(dialogCtx, true),
+              child: const Text('Remove',
+                  style: TextStyle(color: AppColors.danger))),
+        ],
+      ),
+    );
+    if (confirmed == true) {
+      await state.deleteBaby(baby.id);
     }
   }
 

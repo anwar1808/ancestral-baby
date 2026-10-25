@@ -16,7 +16,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'avocado',
     name: 'Avocado',
-    slug: 'avocado',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/avocado_hero.jpg'),
     nutritionFlags: ['Healthy fats', 'Fibre'],
@@ -65,7 +64,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'banana',
     name: 'Banana',
-    slug: 'banana',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/banana_hero.jpg'),
     nutritionFlags: ['Fibre', 'Potassium'],
@@ -114,7 +112,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'apple',
     name: 'Apple',
-    slug: 'apple',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/apple_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Fibre'],
@@ -165,7 +162,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'pear',
     name: 'Pear',
-    slug: 'pear',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/pear_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Fibre'],
@@ -213,7 +209,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'blueberry',
     name: 'Blueberry',
-    slug: 'blueberry',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/blueberry_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Antioxidants'],
@@ -262,7 +257,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'mango',
     name: 'Mango',
-    slug: 'mango',
     category: 'Fruit',
     heroMedia: AppMedia(uri: 'assets/foods/mango_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Vitamin A'],
@@ -312,7 +306,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'sweet_potato',
     name: 'Sweet potato',
-    slug: 'sweet-potato',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/sweet_potato_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
@@ -358,7 +351,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'broccoli',
     name: 'Broccoli',
-    slug: 'broccoli',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/broccoli_hero.jpg'),
     nutritionFlags: ['Vitamin C', 'Folate'],
@@ -404,7 +396,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'carrot',
     name: 'Carrot',
-    slug: 'carrot',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/carrot_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
@@ -452,7 +443,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'spinach',
     name: 'Spinach',
-    slug: 'spinach',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/spinach_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Folate'],
@@ -497,7 +487,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'butternut_squash',
     name: 'Butternut squash',
-    slug: 'butternut-squash',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/butternut_squash_hero.jpg'),
     nutritionFlags: ['Vitamin A', 'Fibre'],
@@ -542,7 +531,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'green_pea',
     name: 'Green peas',
-    slug: 'green-peas',
     category: 'Vegetable',
     heroMedia: AppMedia(uri: 'assets/foods/green_pea_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Fibre'],
@@ -592,7 +580,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'oats',
     name: 'Oats (porridge)',
-    slug: 'oats',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/oats_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Fibre'],
@@ -639,7 +626,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'rice',
     name: 'Rice',
-    slug: 'rice',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/rice_hero.jpg'),
     nutritionFlags: ['Energy', 'Carbohydrate'],
@@ -684,7 +670,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'bread',
     name: 'Bread (wheat)',
-    slug: 'bread',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/bread_hero.jpg'),
     isCommonAllergen: true,
@@ -733,7 +718,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'quinoa',
     name: 'Quinoa',
-    slug: 'quinoa',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/quinoa_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
@@ -778,7 +762,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'pasta',
     name: 'Pasta (wheat)',
-    slug: 'pasta',
     category: 'Grain',
     heroMedia: AppMedia(uri: 'assets/foods/pasta_hero.jpg'),
     isCommonAllergen: true,
@@ -831,8 +814,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'egg',
     name: 'Egg',
-    slug: 'egg',
-    category: 'Protein',
+    category: 'Egg',
     heroMedia: AppMedia(uri: 'assets/foods/egg_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'egg',
@@ -890,8 +872,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'chicken',
     name: 'Chicken',
-    slug: 'chicken',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/chicken_hero.jpg'),
     nutritionFlags: ['Protein', 'Iron-rich'],
     minAgeMonths: 6,
@@ -936,8 +917,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'beef',
     name: 'Beef',
-    slug: 'beef',
-    category: 'Protein',
+    category: 'Meat & Poultry',
     heroMedia: AppMedia(uri: 'assets/foods/beef_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Protein'],
     minAgeMonths: 6,
@@ -982,8 +962,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'salmon',
     name: 'Salmon (fish)',
-    slug: 'salmon',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/salmon_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'fish',
@@ -1030,8 +1009,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'shrimp',
     name: 'Shrimp / prawn (shellfish)',
-    slug: 'shrimp',
-    category: 'Protein',
+    category: 'Fish & Seafood',
     heroMedia: AppMedia(uri: 'assets/foods/shrimp_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'shellfish',
@@ -1078,8 +1056,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'peanut_butter',
     name: 'Peanut butter',
-    slug: 'peanut-butter',
-    category: 'Protein',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/peanut_butter_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'peanut',
@@ -1138,8 +1115,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'almond_butter',
     name: 'Almond butter (tree nut)',
-    slug: 'almond-butter',
-    category: 'Protein',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/almond_butter_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'tree_nuts',
@@ -1188,8 +1164,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tofu',
     name: 'Tofu (soy)',
-    slug: 'tofu',
-    category: 'Protein',
+    category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/tofu_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'soy',
@@ -1237,8 +1212,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'tahini',
     name: 'Tahini (sesame)',
-    slug: 'tahini',
-    category: 'Protein',
+    category: 'Nut & Seed',
     heroMedia: AppMedia(uri: 'assets/foods/tahini_hero.jpg'),
     isCommonAllergen: true,
     allergenId: 'sesame',
@@ -1290,7 +1264,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'yoghurt',
     name: 'Yoghurt (cow’s milk)',
-    slug: 'yoghurt',
     category: 'Dairy',
     heroMedia: AppMedia(uri: 'assets/foods/yoghurt_hero.jpg'),
     isCommonAllergen: true,
@@ -1338,7 +1311,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'cheese',
     name: 'Cheese (cow’s milk)',
-    slug: 'cheese',
     category: 'Dairy',
     heroMedia: AppMedia(uri: 'assets/foods/cheese_hero.jpg'),
     isCommonAllergen: true,
@@ -1392,7 +1364,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'lentil',
     name: 'Lentils',
-    slug: 'lentils',
     category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/lentil_hero.jpg'),
     nutritionFlags: ['Iron-rich', 'Plant protein'],
@@ -1437,7 +1408,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'chickpea',
     name: 'Chickpeas',
-    slug: 'chickpeas',
     category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/chickpea_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
@@ -1483,7 +1453,6 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'black_bean',
     name: 'Black beans',
-    slug: 'black-beans',
     category: 'Legume',
     heroMedia: AppMedia(uri: 'assets/foods/black_bean_hero.jpg'),
     nutritionFlags: ['Plant protein', 'Iron-rich'],
@@ -1532,8 +1501,7 @@ const List<Food> kSeedFoods = [
   Food(
     id: 'honey',
     name: 'Honey',
-    slug: 'honey',
-    category: 'Other',
+    category: 'Sweetener',
     heroMedia: AppMedia(uri: 'assets/foods/honey_hero.jpg'),
     nutritionFlags: ['Energy'],
     minAgeMonths: 12,
@@ -1566,5 +1534,2373 @@ const List<Food> kSeedFoods = [
     tips:
         'Read ingredient labels, as honey can appear in cereals, biscuits, and sauces. Use mashed fruit instead of honey to sweeten foods for under-ones.',
     sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // FRUIT (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'strawberry',
+    name: 'Strawberry',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/strawberry_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Strawberries can be offered from around six months. They are rich in vitamin C, which helps the body absorb iron from other foods, so they pair well with iron-rich meals. Their bright flavour and colour make them an appealing early fruit.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer a whole large, very ripe strawberry to suck and gnaw, or mash ripe berries to a pulp.',
+        portion: 'A tablespoon or two of mashed fruit.',
+        texture: 'Soft, mashable.',
+        safetyNote:
+            'Whole small or firm strawberries are a choking risk — use only large soft ones whole, or mash.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut:
+            'Quarter strawberries lengthways, or finely chop, so pieces cannot block the airway.',
+        portion: 'A small handful, chopped.',
+        texture: 'Soft pieces.',
+      ),
+    ],
+    choking:
+        'Round, firm berries are a choking hazard. Mash for younger babies, and quarter lengthways once your baby is taking finger foods.',
+    allergens: 'Not a common allergen. Strawberries can sometimes cause a harmless skin rash around the mouth from contact — different from a true allergy.',
+    faq:
+        'Do strawberries cause allergies? They are not a major allergen, though local skin redness around the mouth is common and usually not an allergy. Wash well before serving.',
+    tips:
+        'Serve very ripe berries for natural sweetness and softness. Stir mashed strawberry into plain yoghurt or porridge.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'raspberry',
+    name: 'Raspberry',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/raspberry_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft raspberries are an easy early fruit from around six months. They are high in fibre and vitamin C, and their soft, crumbly texture is simple for babies to manage.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer whole ripe raspberries (they squash easily), or mash onto a spoon.',
+        portion: 'A few berries, mashed or whole-soft.',
+        texture: 'Very soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer whole or lightly broken up to scatter on the tray.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk because raspberries are very soft and crumble easily. No special preparation is needed beyond using ripe fruit.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Will the seeds be a problem? No — the tiny seeds are fine and add fibre. The bright colour can show in nappies, which is harmless.',
+    tips:
+        'A great food for early self-feeding because it squashes rather than rolls. Mix into yoghurt or oatmeal.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'blackberry',
+    name: 'Blackberry',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/blackberry_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Antioxidants'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Ripe blackberries are soft and fibre-rich, suitable from around six months. They are mild and slightly tart, and squash easily for little hands.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Mash ripe blackberries, or offer whole soft berries to gum.',
+        portion: 'A spoonful or two, mashed.',
+        texture: 'Soft, juicy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Halve or offer whole; they break down easily when chewed.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk; ripe berries are soft. Choose fully ripe fruit, as under-ripe blackberries are firmer and more tart.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are the seeds safe? Yes, the small seeds are fine. Expect dark stains on clothes and in nappies — harmless.',
+    tips:
+        'Combine with apple or pear puree to balance the tartness. Mash into porridge for extra fibre.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'watermelon',
+    name: 'Watermelon',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/watermelon_hero.jpg'),
+    nutritionFlags: ['Hydrating', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Watermelon is a refreshing, hydrating fruit that can be offered from around six months. It is soft and mild, though its slippery texture means it needs sizing and de-seeding for safety.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer a large, thick stick with the rind left on as a handle, removing any seeds.',
+        portion: 'One or two sticks.',
+        texture: 'Soft, juicy.',
+        safetyNote:
+            'Remove seeds and never offer small round chunks — they are slippery and a choking risk.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Cut into small, thin, de-seeded pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Slippery cubes are a choking hazard. Offer as a large stick with rind-handle for younger babies, and remove seeds.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Can babies have melon seeds? Remove black seeds before serving. The pale immature seeds are generally fine but easier to remove.',
+    tips:
+        'A good cooling food when teething. Keep the rind on as a non-slip handle for early self-feeding.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'melon',
+    name: 'Melon (cantaloupe)',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/melon_hero.jpg'),
+    nutritionFlags: ['Vitamin A', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Soft, ripe cantaloupe melon can be offered from around six months. It is rich in vitamin A and naturally sweet, but is slippery, so size it appropriately.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a large, soft, de-seeded spear with a little rind as a handle.',
+        portion: 'One or two spears.',
+        texture: 'Soft, juicy.',
+        safetyNote: 'Avoid small slippery cubes for younger babies.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Cut into small bite-sized pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Slippery chunks are a choking risk; serve as a graspable spear first, then small soft pieces once chewing is established.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Which melon is best to start with? Any ripe, soft melon works; very firm melon is harder to manage, so choose ripe fruit.',
+    tips:
+        'Choose a fragrant, ripe melon that yields slightly at the stem end. Pairs nicely with plain yoghurt.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'peach',
+    name: 'Peach',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/peach_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Ripe peaches are soft, juicy, and easy to serve from around six months. They are a good source of vitamin C and gentle on little tummies.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer a large wedge of very ripe, soft peach (skin can stay on as a handle), or mash.',
+        portion: 'A wedge or 1–2 tablespoons mashed.',
+        texture: 'Soft, juicy.',
+        safetyNote: 'Always remove the hard stone (pit) completely.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Cut into small soft pieces or thin slices.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'The stone is a serious choking and obstruction hazard — always remove it. Firm, under-ripe peach is harder to manage, so use ripe fruit.',
+    allergens: 'Not a common allergen, though stone fruits occasionally cause oral itching in older children with pollen allergies.',
+    faq:
+        'Do I need to peel peaches? Not for babies who can manage it — the skin is soft when ripe and can act as a handle. Peel if you prefer.',
+    tips:
+        'Briefly steaming or roasting firmer peaches softens them. Mash with banana for a smooth puree.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'plum',
+    name: 'Plum',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/plum_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Ripe plums are soft and slightly tart, suitable from around six months. They are naturally high in fibre and can help keep things moving for constipated babies.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a large wedge of very soft, ripe, de-stoned plum, or mash.',
+        portion: 'A wedge or a spoonful, mashed.',
+        texture: 'Soft, juicy.',
+        safetyNote: 'Remove the stone, and peel the skin for younger babies as it can be tough.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Chop soft plum into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'The stone must be removed. Plum skin can be tough and slippery — peel or cut small for younger babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Will plums help with constipation? They contain fibre and natural sorbitol, which can have a gentle laxative effect — useful in moderation.',
+    tips:
+        'Stewing softens firmer plums and mellows the tartness. Combine with apple or oats.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'apricot',
+    name: 'Apricot',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/apricot_hero.jpg'),
+    nutritionFlags: ['Vitamin A', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Fresh ripe apricots are soft and rich in vitamin A, suitable from around six months. Dried apricots are sticky and need extra care.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a soft, ripe, de-stoned apricot half, or mash.',
+        portion: 'Half a fruit or a spoonful, mashed.',
+        texture: 'Soft.',
+        safetyNote: 'Remove the stone. Avoid whole dried apricots, which are a choking risk.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut:
+            'Chop fresh apricot small; finely chop or cook soft any dried apricot.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'The stone and whole dried apricots are choking hazards. Use ripe de-stoned fresh fruit, or soften and finely chop dried.',
+    allergens: 'Not a common allergen. Some dried apricots contain sulphites (a declarable allergen) — check the label.',
+    faq:
+        'Are dried apricots ok? In small, finely chopped or cooked amounts; choose unsulphured where possible and avoid whole pieces.',
+    tips:
+        'Simmer dried apricots until plump and soft, then mash into porridge. Fresh apricot pairs well with yoghurt.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'kiwi',
+    name: 'Kiwi',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/kiwi_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft, ripe kiwi is suitable from around six months and is exceptionally high in vitamin C. It is tangy, which some babies love straight away and others warm to over time.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Peel and offer a large wedge of soft kiwi, or mash.',
+        portion: 'A wedge or a spoonful.',
+        texture: 'Soft, juicy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Peel and cut into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk once peeled and ripe. The tiny seeds are fine. Choose ripe, soft fruit.',
+    allergens: 'Kiwi is not among the major regulated allergens, but it can occasionally cause reactions in some children — introduce on its own and watch as you would any new food.',
+    faq:
+        'Is kiwi too acidic for babies? Its acidity may cause a harmless rash around the mouth in some babies; a true allergy is uncommon but possible.',
+    tips:
+        'Choose fruit that yields to gentle pressure. Mix with banana or yoghurt to soften the tang.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'pineapple',
+    name: 'Pineapple',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/pineapple_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Manganese'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Ripe pineapple is tangy and juicy and can be offered from around six months. It is fibrous, so it needs cutting with the grain into manageable pieces.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer a long, soft spear of ripe pineapple to gnaw, cut with the grain.',
+        portion: 'One spear.',
+        texture: 'Soft but fibrous.',
+        safetyNote: 'Remove the tough core and any hard skin.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Cut into small, thin, soft pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'The core is firm and the flesh is fibrous; remove the core and cut small once your baby is past the spear stage.',
+    allergens: 'Not a common allergen. Its acidity can cause a harmless mouth rash in some babies.',
+    faq:
+        'Why does pineapple tingle? Its natural enzyme (bromelain) can cause a mild tingle and occasionally a passing rash around the mouth — usually harmless.',
+    tips:
+        'Choose a fragrant, ripe pineapple. Briefly cooking it softens the fibres and mellows the acidity.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'orange',
+    name: 'Orange',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/orange_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Folate'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Oranges and other citrus can be offered from around six months and are an excellent source of vitamin C, which boosts iron absorption from other foods.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Offer a large peeled segment with the thin membrane removed, or squeeze a little juice over other foods.',
+        portion: 'A segment or two.',
+        texture: 'Soft, juicy.',
+        safetyNote: 'Remove all pips and tough membranes, which are choking risks.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Cut peeled, de-membraned segments into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Pips, peel, and tough segment membranes are choking hazards — remove them. The juicy flesh itself is soft.',
+    allergens: 'Not a common allergen; citrus acidity may cause a harmless rash around the mouth.',
+    faq:
+        'Can I give orange juice? Whole fruit is preferable to juice for babies; if offered at all, juice should be very limited and well diluted, with meals.',
+    tips:
+        'A squeeze of orange over iron-rich foods like lentils helps iron absorption. Choose seedless varieties where possible.',
+    sourceCitations: ['NHS Start4Life', 'US Dietary Guidelines 2020–2025'],
+  ),
+  Food(
+    id: 'grape',
+    name: 'Grape',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/grape_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Hydrating'],
+    minAgeMonths: 6,
+    chokingRisk: 'High',
+    introduction:
+        'Grapes are nutritious but are one of the highest-risk choking foods for young children because of their round, firm shape. They must always be cut before serving.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Quarter grapes lengthways (never serve whole or halved); for younger babies, squash the quartered pieces.',
+        portion: 'A few quartered grapes.',
+        texture: 'Soft once cut.',
+        safetyNote:
+            'Whole and halved grapes are a leading choking hazard — always quarter lengthways.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Continue to quarter grapes lengthways well past the first birthday.',
+        portion: 'A small handful, quartered.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'High risk. Whole or halved grapes can completely block a child\'s airway. Always quarter lengthways — this remains important for several years.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'When can my child eat whole grapes? Keep quartering until at least four to five years, when chewing and the airway have matured.',
+    tips:
+        'Buy seedless grapes and quarter the whole bunch ahead of time so a safe portion is always ready.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'cherry',
+    name: 'Cherry',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/cherry_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Antioxidants'],
+    minAgeMonths: 6,
+    chokingRisk: 'High',
+    introduction:
+        'Cherries are sweet and nutritious but contain a hard stone and are round, so they need careful preparation from around six months.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Remove the stone, then quarter or mash the soft flesh.',
+        portion: 'A few prepared cherries.',
+        texture: 'Soft once stoned and cut.',
+        safetyNote:
+            'Always remove the stone and quarter — whole cherries and stones are serious choking hazards.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Continue to stone and halve or quarter cherries.',
+        portion: 'A small handful, prepared.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'High risk: the stone and the round shape are both hazards. Stone and quarter every cherry, well beyond the first birthday.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are cherry stones dangerous? Yes — they are a choking and obstruction risk and should always be removed before serving.',
+    tips:
+        'A cherry pitter speeds up preparation. Mash stoned cherries into yoghurt or porridge.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'fig',
+    name: 'Fig',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/fig_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Calcium'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft, ripe figs are sweet and high in fibre, suitable from around six months. Dried figs are sticky and chewy and need softening.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a halved soft ripe fig to scoop, or mash the flesh.',
+        portion: 'Half a fig or a spoonful.',
+        texture: 'Soft, seedy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Chop fresh fig small; simmer and finely chop dried figs.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Fresh ripe figs are low risk. Dried figs are chewy and sticky — soften by cooking and chop small.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are fig seeds ok? Yes, the tiny seeds are fine and add fibre. Figs can have a gentle laxative effect.',
+    tips:
+        'Choose soft, slightly wrinkled ripe figs. Stir mashed fig into yoghurt or oatmeal.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'papaya',
+    name: 'Papaya',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/papaya_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Vitamin A'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Ripe papaya is soft, buttery, and easy to serve from around six months. It is rich in vitamins A and C and very gentle on the stomach.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Scoop out seeds, then offer a soft spear or mash the flesh.',
+        portion: 'A spear or 1–2 tablespoons mashed.',
+        texture: 'Very soft.',
+        safetyNote: 'Remove all the black seeds before serving.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Cut into small soft pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when ripe and de-seeded. Choose soft fruit, as firm papaya is harder to manage.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'How do I pick a ripe papaya? It should be mostly yellow-orange and yield to gentle pressure. Remove the seeds before serving.',
+    tips:
+        'A squeeze of lime brightens the flavour for older babies. Mashes smoothly with banana.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'coconut',
+    name: 'Coconut',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/coconut_hero.jpg'),
+    nutritionFlags: ['Healthy fats', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Coconut in soft forms — such as coconut milk in cooking or finely grated fresh coconut — can be offered from around six months. It adds richness and flavour to purees and curries.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut:
+            'Stir full-fat coconut milk into purees or porridge, or blend soft fresh coconut into a smooth puree.',
+        portion: 'A spoonful stirred through food.',
+        texture: 'Smooth when blended or as milk.',
+        safetyNote: 'Avoid dry shredded or large hard pieces of coconut, which are a choking risk.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer finely grated soft coconut or coconut yoghurt.',
+        portion: 'A small amount.',
+        texture: 'Soft, fine.',
+      ),
+    ],
+    choking:
+        'Dry, shredded, or chunky coconut is a choking hazard. Use coconut milk or finely blended/grated soft coconut for babies.',
+    allergens: 'Coconut is botanically a fruit; it is treated as a tree nut in some labelling systems, but most people with tree-nut allergy tolerate it. Introduce carefully if there is a known tree-nut allergy.',
+    faq:
+        'Is coconut a nut? Not really — but it is sometimes labelled with tree nuts. If your baby has a tree-nut allergy, check with your clinician first.',
+    tips:
+        'Coconut milk makes a dairy-free base for creamy purees and mild curries. Choose unsweetened versions.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // VEGETABLES (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'potato',
+    name: 'Potato',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/potato_hero.jpg'),
+    nutritionFlags: ['Potassium', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Well-cooked potato is a soft, mild starchy vegetable suitable from around six months. Mashed or as soft wedges, it is easy to eat and pairs with almost anything.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft, then mash (loosen with milk), or offer a soft wedge.',
+        portion: '1–2 tablespoons mashed.',
+        texture: 'Soft, smooth.',
+        safetyNote: 'Avoid hard or under-cooked pieces, and skip added salt.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer soft-cooked cubes or wedges for self-feeding.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when fully cooked and soft. Avoid firm chunks; mash or cook until very tender.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are chips/fries ok? Home-cooked soft potato is best; avoid salty, fried, or heavily processed potato for babies.',
+    tips:
+        'Mash with a little breast milk, formula, or olive oil for a smooth texture. Mix with iron-rich foods.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'courgette',
+    name: 'Courgette (zucchini)',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/courgette_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Hydrating'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Courgette is a mild, soft vegetable that cooks quickly, suitable from around six months. It is a gentle way to add green vegetables to meals.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook soft and offer in long strips, or mash into purees.',
+        portion: 'A strip or a spoonful.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer small soft-cooked pieces or grate into meals.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft. Raw courgette is firmer — cook until tender for babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Do I peel courgette? No need; the soft skin is fine when cooked. Leave it on for extra nutrients.',
+    tips:
+        'Grate into pasta sauces and fritters. Roasting concentrates the flavour.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cauliflower',
+    name: 'Cauliflower',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/cauliflower_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked cauliflower is suitable from around six months. The florets make natural little handles for self-feeding.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Steam florets until very soft and offer whole as graspable handles, or mash.',
+        portion: 'A floret or two, or mashed.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Chop soft florets into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when steamed soft. Avoid firm, crunchy raw florets for babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Will it cause wind? Like other brassicas it can be a little gassy for some babies; this usually settles.',
+    tips:
+        'Cauliflower cheese (with low-salt cheese) is a tasty way to serve it. Mash into potato for a milder flavour.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'green_bean',
+    name: 'Green beans',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/green_bean_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked green beans are suitable from around six months and make easy, graspable finger foods.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Steam whole beans until very soft and offer as spears, or mash.',
+        portion: 'One or two soft beans.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Cut soft beans into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked very soft. Firm or raw beans are harder to chew — cook until tender.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Fresh or frozen? Both are fine; frozen beans are picked ripe and cook quickly. Cook until soft.',
+    tips:
+        'Squash the bean slightly so it is easy to gum. Toss cooked beans in a little olive oil.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'bell_pepper',
+    name: 'Bell pepper',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/bell_pepper_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Vitamin A'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Bell pepper is very high in vitamin C and can be offered soft-cooked from around six months. The skin can be tough, so cook well or remove it for younger babies.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Roast or steam strips until very soft; remove tough skin and offer as spears.',
+        portion: 'A soft strip.',
+        texture: 'Soft.',
+        safetyNote: 'The skin can be chewy and slippery — cook soft or peel for babies.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer thin soft-cooked or finely chopped pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Raw pepper and tough skin are harder to manage; cook soft and remove skin for younger babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Which colour is best? Red, orange, and yellow peppers are sweeter and milder than green — good for first tastes.',
+    tips:
+        'Roasting makes peppers sweet and soft and loosens the skin for easy peeling.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cucumber',
+    name: 'Cucumber',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/cucumber_hero.jpg'),
+    nutritionFlags: ['Hydrating'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Cool cucumber is hydrating and soothing for teething gums, suitable from around six months in appropriate shapes.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a large, thick spear (skin on for grip) to gnaw and soothe gums.',
+        portion: 'One spear.',
+        texture: 'Crisp; gnawing, not biting chunks.',
+        safetyNote: 'Avoid coin-shaped slices and small hard chunks, which are a choking risk.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Peel and cut into small thin pieces or batons.',
+        portion: 'A small handful.',
+        texture: 'Crisp, small.',
+      ),
+    ],
+    choking:
+        'Hard, round slices and chunks are a choking hazard. Offer as a large spear for gnawing first, then small pieces once chewing is established.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Chilled cucumber for teething? Yes — a cold, large spear can soothe sore gums under supervision.',
+    tips:
+        'Leave the skin on a spear for grip. Peel and chop small for older babies and toddlers.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'tomato',
+    name: 'Tomato',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/tomato_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Antioxidants'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Tomatoes are suitable from around six months, soft and rich in vitamin C and lycopene. Cherry tomatoes need quartering because of their round shape.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer soft cooked tomato, or large pieces of ripe soft tomato with skin removed.',
+        portion: 'A spoonful or a soft piece.',
+        texture: 'Soft, juicy.',
+        safetyNote: 'Quarter cherry/small tomatoes lengthways; whole ones are a choking hazard.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Quarter small tomatoes; chop larger ones into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Whole cherry tomatoes are a choking hazard — always quarter lengthways. Skins can be chewy; remove for younger babies.',
+    allergens: 'Not a common allergen; acidity can cause a harmless rash around the mouth.',
+    faq:
+        'Do tomatoes cause rashes? The acidity sometimes reddens the skin around the mouth — usually irritation, not allergy.',
+    tips:
+        'Cook into simple, unsalted sauces for pasta. Remove skins by scoring and briefly blanching.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'beetroot',
+    name: 'Beetroot',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/beetroot_hero.jpg'),
+    nutritionFlags: ['Folate', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked beetroot is earthy, naturally sweet, and rich in folate, suitable from around six months. Choose plain cooked beetroot, not the kind pickled in vinegar and salt.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and offer as strips, or mash/puree.',
+        portion: 'A strip or a spoonful.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Cut soft beetroot into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft. Avoid firm, raw beetroot for babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Why is the nappy pink? Beetroot can turn stools and urine pink/red — this is harmless and temporary.',
+    tips:
+        'Use plain cooked (not pickled) beetroot. Mix into yoghurt or potato for a milder taste and pretty colour.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'parsnip',
+    name: 'Parsnip',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/parsnip_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Vitamin C'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Parsnip is a sweet, soft root vegetable, suitable from around six months when well-cooked. It is a comforting, mild first vegetable.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Roast or steam until very soft; offer as a soft wedge or mash.',
+        portion: 'A wedge or a spoonful.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Cut soft parsnip into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when soft. Remove any hard woody core and cook until tender.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Is parsnip sweet enough on its own? Yes — roasting brings out natural sweetness, so no sugar is needed.',
+    tips:
+        'Roast for a caramelised flavour, or mash with potato and carrot for a soft medley.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'pumpkin',
+    name: 'Pumpkin',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/pumpkin_hero.jpg'),
+    nutritionFlags: ['Vitamin A', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Pumpkin and other soft squashes are rich in vitamin A and easy to serve from around six months, mashed or as soft pieces.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Roast or steam until very soft, then mash or offer soft strips.',
+        portion: '1–2 tablespoons mashed.',
+        texture: 'Soft, smooth.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer small soft-cooked pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft. Remove skin and seeds; cook until tender.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Can I use tinned pumpkin? Plain pumpkin puree (not sweetened pie filling) is a convenient option.',
+    tips:
+        'Pumpkin pairs well with mild spices like cinnamon (no sugar). Roast seeds are not for babies.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'asparagus',
+    name: 'Asparagus',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/asparagus_hero.jpg'),
+    nutritionFlags: ['Folate', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked asparagus spears make natural finger foods from around six months and are a good source of folate.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Steam spears until very soft and offer whole as a graspable handle.',
+        portion: 'One soft spear.',
+        texture: 'Soft.',
+        safetyNote: 'Use the tender tip and upper stalk; the woody base is too tough.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Chop soft spears into small pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft. Avoid the fibrous woody ends; cook the tender part well.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Will it change the smell of urine? Asparagus can give urine a distinctive smell — completely harmless.',
+    tips:
+        'Snap off the woody ends before cooking. A drizzle of olive oil helps fat-soluble vitamin absorption.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'eggplant',
+    name: 'Aubergine (eggplant)',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/eggplant_hero.jpg'),
+    nutritionFlags: ['Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Well-cooked aubergine becomes soft and creamy, suitable from around six months. It readily absorbs flavours from the dishes it is cooked in.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Roast or bake until very soft, then offer soft strips or mash the flesh.',
+        portion: 'A strip or a spoonful.',
+        texture: 'Soft, creamy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer small soft-cooked pieces or blend into dips.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when fully cooked. Undercooked aubergine is spongy and firm — cook until tender.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Do I need to salt it? Salting to draw out bitterness is not needed for babies; just cook it well and skip added salt.',
+    tips:
+        'Roast and blend into a smooth dip with a little tahini for older babies.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'kale',
+    name: 'Kale',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/kale_hero.jpg'),
+    nutritionFlags: ['Vitamin K', 'Vitamin C', 'Iron'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Kale is a nutrient-dense leafy green, suitable from around six months when cooked soft and finely chopped or blended.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft, then finely chop or blend into purees and sauces.',
+        portion: 'A spoonful stirred through food.',
+        texture: 'Soft, finely chopped.',
+        safetyNote: 'Large pieces of leaf can be hard to manage — chop finely or blend.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer finely chopped soft-cooked kale mixed into meals.',
+        portion: 'A small amount.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Leafy greens can ball up in the mouth — cook soft and chop finely or blend for babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are kale crisps ok? Crunchy kale crisps are a choking risk and often salty — stick to soft-cooked kale.',
+    tips:
+        'Remove tough stems, then blend into pasta sauces, soups, and purees to add iron and vitamins.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cabbage',
+    name: 'Cabbage',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/cabbage_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked cabbage is mild and suitable from around six months, finely chopped or blended into dishes.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and finely chop, or blend into purees.',
+        portion: 'A spoonful through food.',
+        texture: 'Soft.',
+        safetyNote: 'Avoid large leaf pieces; chop finely.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer finely chopped soft cabbage in mixed dishes.',
+        portion: 'A small amount.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Large leaves can bunch up — cook soft and chop finely for babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Will cabbage cause wind? It can be a little gassy for some babies; cooking well helps.',
+    tips:
+        'Soft-cook into mild stir-fries and soups. Mix with potato or carrot to soften the flavour.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'corn',
+    name: 'Corn',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/corn_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Carbohydrate'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Corn can be offered from around six months. A cob can be gnawed under supervision, while loose kernels need care because of their shape and skin.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a section of soft-cooked cob to gnaw the kernels off (supervised), or blend kernels into a puree.',
+        portion: 'A cob piece or a spoonful of puree.',
+        texture: 'Soft.',
+        safetyNote: 'Loose whole kernels can be a choking risk for young babies — blend or smash them.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer loose kernels once chewing is well established, or lightly smashed.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Whole kernels have a tough skin and can be inhaled by young babies; offer on the cob to gnaw, or blend/smash kernels until older.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Is sweetcorn from a tin ok? Yes, choose no-added-salt corn; blend or smash for younger babies.',
+    tips:
+        'A cob section doubles as a soothing, graspable teether. Blend kernels into soups and fritters.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'celery',
+    name: 'Celery',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/celery_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'celery',
+    nutritionFlags: ['Hydrating', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Celery is a declarable allergen in the UK and EU. It is very fibrous and stringy raw, so for babies it is best well-cooked and soft, or blended into soups and stocks, from around six months.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and finely chop, or blend into soups and purees.',
+        portion: 'A spoonful through food.',
+        texture: 'Soft, finely chopped.',
+        safetyNote: 'Raw celery and its long strings are a choking hazard — cook soft for babies.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer finely chopped soft-cooked celery in mixed dishes.',
+        portion: 'A small amount.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Raw celery is stringy and crunchy — a notable choking hazard. Cook it soft and chop finely for young children.',
+    allergens: 'Celery (including celeriac and celery in stocks) is a declarable allergen. Introduce on its own and watch for a reaction, as with other allergens.',
+    faq:
+        'Where is celery hidden? It often appears in stocks, soups, and spice mixes — check labels if your baby has reacted.',
+    tips:
+        'Use it blended into homemade vegetable soups and stocks for flavour. Cook until very soft.',
+    sourceCitations: ['NHS Start4Life', 'UK FIC'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // PROTEIN — meat, poultry & fish (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'turkey',
+    name: 'Turkey',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/turkey_hero.jpg'),
+    nutritionFlags: ['Protein', 'Iron', 'Zinc'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Turkey is a lean source of protein, iron, and zinc, suitable from around six months. Like all meats it should be moist and tender for babies — dry meat is hard to manage.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer moist shredded turkey, or blend into a smooth puree with a little stock.',
+        portion: 'A spoonful, shredded or pureed.',
+        texture: 'Moist, soft.',
+        safetyNote: 'Keep it moist; dry, stringy meat is a choking risk.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer finely chopped or shredded turkey, or a soft meatball.',
+        portion: 'A small handful.',
+        texture: 'Soft, moist.',
+      ),
+    ],
+    choking:
+        'Dry or tough meat is a choking hazard. Cook until tender, keep moist with sauce or stock, and shred or mince for babies.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Which cut is best? Darker thigh meat stays moister and is richer in iron than breast.',
+    tips:
+        'Mince into soft meatballs or blend into purees with iron-boosting vegetables.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'pork',
+    name: 'Pork',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/pork_hero.jpg'),
+    nutritionFlags: ['Protein', 'Iron', 'B vitamins'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Well-cooked, tender pork provides protein, iron, and B vitamins, suitable from around six months when soft and moist.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Slow-cook until very tender, then shred finely, or blend into a puree.',
+        portion: 'A spoonful, shredded.',
+        texture: 'Moist, soft.',
+        safetyNote: 'Avoid salty, cured pork (bacon, ham) and dry chops; cook fully and keep moist.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer finely chopped tender pork or a soft meatball.',
+        portion: 'A small handful.',
+        texture: 'Soft, moist.',
+      ),
+    ],
+    choking:
+        'Dry or chewy pork is a choking hazard. Slow-cook until it shreds easily and keep it moist.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Is bacon or ham ok? These are high in salt and best avoided for babies; choose fresh, plain pork.',
+    tips:
+        'Pulled, slow-cooked pork shoulder is naturally tender and easy to shred for little ones.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'lamb',
+    name: 'Lamb',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/lamb_hero.jpg'),
+    nutritionFlags: ['Protein', 'Iron', 'Zinc'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Lamb is rich in iron and zinc and suitable from around six months when slow-cooked until tender and served moist.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Slow-cook until very soft, shred finely, or blend into a puree with stock.',
+        portion: 'A spoonful, shredded.',
+        texture: 'Moist, soft.',
+        safetyNote: 'Keep it moist; remove any bones, gristle, and fatty hard bits.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer finely chopped tender lamb or a soft kofta/meatball.',
+        portion: 'A small handful.',
+        texture: 'Soft, moist.',
+      ),
+    ],
+    choking:
+        'Tough or dry lamb is a choking hazard. Cook low and slow, keep moist, and shred or mince.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Best cut for babies? Slow-cooked shoulder or leg becomes very tender and easy to shred.',
+    tips:
+        'Mild spices like cumin and coriander suit lamb well — flavour freely, but skip the salt.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cod',
+    name: 'Cod',
+    category: 'Fish & Seafood',
+    heroMedia: AppMedia(uri: 'assets/foods/cod_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'fish',
+    nutritionFlags: ['Protein', 'Lean'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Cod is a mild white fish and a common allergen, suitable from around six months. Fish is a valuable protein; introduce it carefully and check thoroughly for bones.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook through, flake finely, and check carefully for bones; offer flaked or in a puree.',
+        portion: 'A spoonful, flaked.',
+        texture: 'Soft, flaky.',
+        safetyNote: 'Remove every bone — fish bones are a serious choking hazard.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer flaked cod mixed into mash or made into soft fish cakes.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Fish bones are a choking hazard; check meticulously. Cook fully and flake finely.',
+    allergens: 'Fish is a common allergen. Introduce on its own, earlier in the day, and watch for about two hours; keep it in the diet once tolerated.',
+    faq:
+        'How much white fish is safe? White fish like cod has no specific weekly limit, unlike some oily fish — but always remove bones.',
+    tips:
+        'Poach gently in milk for a soft, mild result, or flake into potato for fish cakes.',
+    sourceCitations: ['NHS Start4Life', 'SACN 2018'],
+  ),
+  Food(
+    id: 'haddock',
+    name: 'Haddock',
+    category: 'Fish & Seafood',
+    heroMedia: AppMedia(uri: 'assets/foods/haddock_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'fish',
+    nutritionFlags: ['Protein', 'Lean'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Haddock is another mild white fish, suitable from around six months. Choose fresh (not smoked/salted) fillets and check carefully for bones.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook through, flake finely, and remove all bones; serve flaked or pureed.',
+        portion: 'A spoonful, flaked.',
+        texture: 'Soft, flaky.',
+        safetyNote: 'Avoid smoked haddock (high salt) for babies; remove all bones.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Flake into mash or soft fish cakes.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Bones are a choking hazard; check thoroughly. Cook fully and flake.',
+    allergens: 'Fish is a common allergen — introduce carefully and keep in the diet once tolerated.',
+    faq:
+        'Smoked haddock ok? No — smoked fish is salty; use fresh fillets for babies.',
+    tips:
+        'Mild and flaky, haddock works well in simple fish pie with soft mashed potato.',
+    sourceCitations: ['NHS Start4Life', 'SACN 2018'],
+  ),
+  Food(
+    id: 'tuna',
+    name: 'Tuna',
+    category: 'Fish & Seafood',
+    heroMedia: AppMedia(uri: 'assets/foods/tuna_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'fish',
+    nutritionFlags: ['Protein', 'Omega-3'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Tuna is a common allergen and can be offered from around six months. Tinned tuna is convenient and soft; note that fresh tuna counts as oily fish, and mercury guidance applies.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Mash tinned tuna (in spring water, no added salt) into a smooth, soft mixture.',
+        portion: 'A spoonful, mashed.',
+        texture: 'Soft, flaky.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Mix flaked tuna into mash, pasta, or soft fritters.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk; tuna is soft and flaky. Check tinned tuna for any stray bones.',
+    allergens: 'Fish is a common allergen. Introduce carefully and keep in the diet once tolerated.',
+    faq:
+        'Is there a limit on tuna? Tinned tuna isn\'t restricted like fresh tuna, but fresh/oily fish and high-mercury fish have portion limits — follow local guidance.',
+    tips:
+        'Choose tuna tinned in spring water with no added salt. Mix with a little plain yoghurt for moisture.',
+    sourceCitations: ['NHS Start4Life', 'SACN 2018'],
+  ),
+  Food(
+    id: 'sardine',
+    name: 'Sardine',
+    category: 'Fish & Seafood',
+    heroMedia: AppMedia(uri: 'assets/foods/sardine_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'fish',
+    nutritionFlags: ['Omega-3', 'Calcium', 'Vitamin D'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Sardines are an oily fish rich in omega-3, calcium, and vitamin D, suitable from around six months. Tinned soft-bone sardines are especially nutritious when well mashed.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Mash tinned sardines (in water/oil, no added salt) thoroughly, crushing the soft bones in.',
+        portion: 'A spoonful, mashed.',
+        texture: 'Soft, mashed.',
+        safetyNote: 'Mash the soft bones completely; remove any firm bones.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread mashed sardine on toast fingers or mix into pasta.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Mash the soft bones fully; check for any firm bones. The flesh itself is soft.',
+    allergens: 'Fish is a common allergen. Oily fish like sardines has a recommended portion limit for young children — follow local guidance.',
+    faq:
+        'Are the bones safe? In tinned sardines the small bones are soft and a good calcium source when thoroughly mashed.',
+    tips:
+        'A budget-friendly omega-3 source. Mash onto toast with a little tomato for an easy meal.',
+    sourceCitations: ['NHS Start4Life', 'SACN 2018'],
+  ),
+  Food(
+    id: 'mackerel',
+    name: 'Mackerel',
+    category: 'Fish & Seafood',
+    heroMedia: AppMedia(uri: 'assets/foods/mackerel_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'fish',
+    nutritionFlags: ['Omega-3', 'Vitamin D'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Mackerel is an oily fish high in omega-3, suitable from around six months. Use fresh (not smoked/salted) mackerel and remove bones carefully.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook through, flake finely, remove all bones, and serve flaked or in a puree.',
+        portion: 'A spoonful, flaked.',
+        texture: 'Soft, flaky.',
+        safetyNote: 'Avoid smoked mackerel (salty); remove every bone.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Mix flaked mackerel into mash or soft patties.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Bones are a choking hazard; check thoroughly. Cook fully and flake.',
+    allergens: 'Fish is a common allergen. Oily fish has a portion limit for young children — follow local guidance.',
+    faq:
+        'Smoked mackerel ok? No — it is high in salt; choose fresh fillets for babies.',
+    tips:
+        'Strong-flavoured but nutritious; balance with mild mash or potato.',
+    sourceCitations: ['NHS Start4Life', 'SACN 2018'],
+  ),
+  Food(
+    id: 'duck',
+    name: 'Duck',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/duck_hero.jpg'),
+    nutritionFlags: ['Protein', 'Iron'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Tender, well-cooked duck offers protein and iron and can be introduced from around six months when soft and moist.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Slow-cook until very tender, shred finely, or blend into a puree.',
+        portion: 'A spoonful, shredded.',
+        texture: 'Moist, soft.',
+        safetyNote: 'Remove skin and any bones; keep the meat moist.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer finely chopped tender duck.',
+        portion: 'A small handful.',
+        texture: 'Soft, moist.',
+      ),
+    ],
+    choking:
+        'Dry meat and bones are choking hazards. Slow-cook, remove bones, and keep moist.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Is duck too fatty? Remove the skin and excess fat; the meat itself is a fine occasional protein.',
+    tips:
+        'Slow-cooked duck legs shred easily. Pair with soft, mild vegetables.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'liver',
+    name: 'Liver',
+    category: 'Meat & Poultry',
+    heroMedia: AppMedia(uri: 'assets/foods/liver_hero.jpg'),
+    nutritionFlags: ['Iron', 'Vitamin A', 'B12'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Liver is exceptionally rich in iron, vitamin A, and B12, and can be introduced from around six months. Because of its very high vitamin A, it should be offered in small amounts and only about once a week.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook through, then blend into a very smooth pâté or stir a small amount into a puree.',
+        portion: 'A small amount — roughly weekly.',
+        texture: 'Smooth.',
+        safetyNote: 'Cook liver thoroughly and keep portions small and infrequent due to its high vitamin A.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread a thin layer of smooth liver pâté on toast fingers.',
+        portion: 'A small amount, about weekly.',
+        texture: 'Smooth.',
+      ),
+    ],
+    choking:
+        'Low risk when smooth and well-cooked. The main caution is vitamin A — keep servings small and roughly weekly.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Why limit liver? It is so rich in vitamin A that frequent large servings could provide too much; about once a week in small amounts is a common guide.',
+    tips:
+        'A little blended into a meat puree boosts iron significantly. Always cook fully.',
+    sourceCitations: ['NHS Start4Life', 'SACN 2018'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // GRAINS (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'barley',
+    name: 'Barley',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/barley_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Carbohydrate'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked barley is a hearty, fibre-rich grain suitable from around six months. It contains gluten, so introduce it as you would other gluten grains.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and serve as a thick porridge or blended into soups.',
+        portion: '1–2 tablespoons.',
+        texture: 'Soft, sticky.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer soft cooked barley grains mixed into stews.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked very soft. Avoid firm, undercooked grains.',
+    allergens: 'Barley contains gluten. Coeliac disease is separate from wheat allergy; if there is a family history, discuss introduction with a clinician.',
+    faq:
+        'Is barley gluten-free? No — barley contains gluten, so it is not suitable for a gluten-free diet.',
+    tips:
+        'Pearl barley cooks soft into comforting soups and porridges. Cook longer than the packet suggests for babies.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'millet',
+    name: 'Millet',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/millet_hero.jpg'),
+    nutritionFlags: ['Iron', 'Gluten-free'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Millet is a mild, naturally gluten-free grain suitable from around six months. Cooked soft, it makes a fluffy porridge.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook with extra liquid until soft and porridge-like; mash if needed.',
+        portion: '1–2 tablespoons.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer soft cooked millet mixed with vegetables or fruit.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft with plenty of liquid.',
+    allergens: 'Naturally gluten-free and not a common allergen.',
+    faq:
+        'Is millet nutritious? Yes — it provides iron and is a good gluten-free option to vary grains.',
+    tips:
+        'Cook in extra water or milk for a creamy texture. Stir in mashed fruit or veg.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'buckwheat',
+    name: 'Buckwheat',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/buckwheat_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Gluten-free', 'Iron'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Despite its name, buckwheat is gluten-free and unrelated to wheat. Cooked soft, it is a nutritious grain alternative from around six months.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and serve as porridge, or use fine buckwheat flour in soft pancakes.',
+        portion: '1–2 tablespoons.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer soft cooked buckwheat mixed into meals.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft.',
+    allergens: 'Gluten-free. Buckwheat allergy exists but is uncommon; introduce on its own and watch as with any new food.',
+    faq:
+        'Is buckwheat related to wheat? No — it is a seed, naturally gluten-free, and suitable for gluten-free diets.',
+    tips:
+        'Soft buckwheat pancakes make great finger food. Toasted buckwheat (kasha) has a nuttier flavour.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'couscous',
+    name: 'Couscous',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/couscous_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'wheat',
+    nutritionFlags: ['Carbohydrate'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Couscous is made from wheat, so it is a way to introduce the wheat allergen from around six months. Cooked soft and fluffy, it mixes easily into other foods.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook soft, then stir into a moist puree or mash so the small grains stick together.',
+        portion: '1–2 tablespoons, moist.',
+        texture: 'Soft, slightly sticky.',
+        safetyNote: 'Loose dry couscous can be inhaled — keep it moist and clumped together.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Mix moist couscous with finely chopped soft vegetables.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Dry, loose grains can be inhaled by young babies — serve moist and mixed into other foods.',
+    allergens: 'Couscous is wheat-based (contains gluten). Introduce as a wheat allergen, on its own, and keep it in the diet once tolerated.',
+    faq:
+        'Is couscous a grain? It is small balls of steamed wheat (semolina) — effectively a quick-cooking pasta/grain.',
+    tips:
+        'Stir into a moist vegetable or meat dish so it holds together for easy eating.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'semolina',
+    name: 'Semolina',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/semolina_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'wheat',
+    nutritionFlags: ['Carbohydrate'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Semolina, made from wheat, cooks into a smooth, soft pudding-like porridge — an easy way to offer the wheat allergen from around six months.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook with milk into a smooth, soft porridge and cool before serving.',
+        portion: '1–2 tablespoons.',
+        texture: 'Smooth, soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Serve soft semolina with mashed fruit stirred through.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk; semolina is smooth and soft when cooked.',
+    allergens: 'Semolina is wheat-based (contains gluten). Introduce as a wheat allergen and keep in the diet once tolerated.',
+    faq:
+        'Is semolina the same as couscous? They are both from durum wheat; semolina is the ground flour, often cooked into a smooth pudding.',
+    tips:
+        'Cook in whole milk (once dairy is tolerated) for a creamy texture; sweeten with mashed fruit, not sugar.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'noodles',
+    name: 'Noodles',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/noodles_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'wheat',
+    nutritionFlags: ['Carbohydrate'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft wheat noodles are an easy, fun finger food from around six months and a way to offer the wheat allergen. Choose plain noodles, not salty instant-noodle seasoning.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and offer long strands to grasp, or chop and mix into sauce.',
+        portion: 'A small handful.',
+        texture: 'Soft, slippery.',
+        safetyNote: 'Avoid salty instant-noodle flavour sachets.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer chopped soft noodles mixed with vegetables and protein.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked very soft. Long slippery strands are fine; cut shorter if easier.',
+    allergens: 'Wheat noodles contain gluten — introduce as a wheat allergen. Rice or buckwheat noodles are wheat-free alternatives.',
+    faq:
+        'Are rice noodles different? Yes — rice noodles are wheat-free; check the label if avoiding wheat.',
+    tips:
+        'Long soft noodles are great self-feeding practice. Toss in a little sauce so they cling together.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'polenta',
+    name: 'Polenta',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/polenta_hero.jpg'),
+    nutritionFlags: ['Carbohydrate', 'Gluten-free'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Polenta (cooked cornmeal) is naturally gluten-free and suitable from around six months, served soft and creamy or as soft set fingers.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook into a soft, creamy porridge and cool before serving.',
+        portion: '1–2 tablespoons.',
+        texture: 'Soft, creamy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Let it set, then cut into soft fingers for self-feeding.',
+        portion: 'A few soft fingers.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when soft. If set and cut into fingers, keep them soft, not firm and crisp.',
+    allergens: 'Naturally gluten-free and not a common allergen.',
+    faq:
+        'Is polenta the same as cornmeal? Yes — polenta is cooked from cornmeal, making it a gluten-free grain option.',
+    tips:
+        'Stir grated low-salt cheese or soft vegetables into creamy polenta for flavour.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'wheat_cereal',
+    name: 'Iron-fortified cereal',
+    category: 'Grain',
+    heroMedia: AppMedia(uri: 'assets/foods/wheat_cereal_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'wheat',
+    nutritionFlags: ['Iron', 'Fortified'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Iron-fortified infant cereals are a common early food because a baby\'s iron stores fall from around six months. Wheat-based cereals also help introduce the wheat allergen.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Mix with breast milk, formula, or water to a smooth, soft consistency.',
+        portion: '1–2 tablespoons, made up.',
+        texture: 'Smooth, soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Make thicker and stir in mashed fruit or veg.',
+        portion: 'A small bowl.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when mixed to a smooth consistency.',
+    allergens: 'Wheat-based cereals contain gluten — they help introduce the wheat allergen. Oat or rice cereals are wheat-free options.',
+    faq:
+        'Why fortified cereal? The added iron supports babies as their natural stores decline around six months.',
+    tips:
+        'Pair with a vitamin-C fruit (like mashed berries) to boost iron absorption.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // DAIRY (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'butter',
+    name: 'Butter',
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/butter_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Healthy fats', 'Vitamin A'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'A little butter can be used in cooking from around six months and is a way dairy enters the diet. It adds energy-dense fat and helps the body absorb fat-soluble vitamins from vegetables.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Melt a small knob into mashed or cooked vegetables.',
+        portion: 'A small knob in cooking.',
+        texture: 'Melted through food.',
+        safetyNote: 'Use unsalted butter and keep added salt low.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread thinly on toast fingers.',
+        portion: 'A thin spread.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk; butter is soft. The main note is to keep salt low — choose unsalted.',
+    allergens: 'Butter is a dairy product. It contains only traces of milk protein but still counts toward dairy introduction; watch as with other dairy.',
+    faq:
+        'Is butter just empty fat? Babies need plenty of fat for growth; a little butter is a useful energy source in home cooking.',
+    tips:
+        'Toss soft vegetables in a little butter to help absorb their vitamins. Choose unsalted.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cottage_cheese',
+    name: 'Cottage cheese',
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/cottage_cheese_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Protein', 'Calcium'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft cottage cheese is a mild, protein- and calcium-rich dairy food suitable from around six months. Choose full-fat and low- or no-added-salt.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer on a pre-loaded spoon, or blend smoother if the curds are large.',
+        portion: '1–2 tablespoons.',
+        texture: 'Soft, lumpy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Serve as a dip with soft veg, or mix with fruit.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk; it is soft. Larger curds can be blended smoother for younger babies.',
+    allergens: 'A dairy product — introduce as part of dairy and keep in the diet once tolerated.',
+    faq:
+        'Full-fat or low-fat? Full-fat dairy is recommended for babies and toddlers for the energy and fat they need.',
+    tips:
+        'Mix with mashed fruit for a quick sweet bowl, or with soft veg for a savoury one.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'ricotta',
+    name: 'Ricotta',
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/ricotta_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Protein', 'Calcium'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Ricotta is a soft, mild, creamy cheese suitable from around six months — easy to spread, mix, and cook with.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Offer a spoonful on its own, or stir into purees and pasta.',
+        portion: '1–2 tablespoons.',
+        texture: 'Soft, creamy.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread on toast or dollop onto soft pasta and vegetables.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk; ricotta is soft and smooth.',
+    allergens: 'A dairy product — introduce as part of dairy.',
+    faq:
+        'Is ricotta salty? It is milder and lower in salt than many cheeses, making it a good early choice.',
+    tips:
+        'Stir into warm pasta with soft vegetables, or mix with mashed fruit.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cream_cheese',
+    name: 'Cream cheese',
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/cream_cheese_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Calcium', 'Healthy fats'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Full-fat cream cheese is a soft, spreadable dairy food suitable from around six months. Choose a low-salt option and spread it thinly.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Stir a little into purees, or spread very thinly on a soft strip.',
+        portion: 'A small amount.',
+        texture: 'Soft, spreadable.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread thinly on toast fingers or soft crackers.',
+        portion: 'A thin spread.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when spread thinly. Avoid thick, sticky blobs, which can be harder to manage.',
+    allergens: 'A dairy product — introduce as part of dairy.',
+    faq:
+        'Is cream cheese high in salt? Some are — check the label and choose lower-salt versions for babies.',
+    tips:
+        'Spread thinly rather than thickly, and mix into mashed vegetables for creaminess.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'kefir',
+    name: 'Kefir',
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/kefir_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Probiotics', 'Calcium', 'Protein'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Kefir is a cultured, drinkable dairy product with live cultures, suitable in small amounts from around six months. Choose plain, full-fat, unsweetened kefir.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Stir a little plain kefir into purees or porridge.',
+        portion: 'A spoonful or two.',
+        texture: 'Smooth, pourable.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer a small amount in an open cup, or mixed with fruit.',
+        portion: 'A small amount.',
+        texture: 'Drinkable.',
+      ),
+    ],
+    choking:
+        'Low risk; kefir is liquid. Offer in an open cup rather than letting baby sip all day.',
+    allergens: 'A dairy product with live cultures — introduce as part of dairy. Use pasteurised kefir for infants.',
+    faq:
+        'Can kefir replace milk feeds? No — breast milk or formula stays the main milk drink until twelve months; kefir is a food, in small amounts.',
+    tips:
+        'Use plain, unsweetened, pasteurised kefir. Stir into porridge for a tangy, probiotic boost.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'whole_milk',
+    name: "Whole cow's milk",
+    category: 'Dairy',
+    heroMedia: AppMedia(uri: 'assets/foods/whole_milk_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'dairy',
+    nutritionFlags: ['Calcium', 'Protein', 'Vitamin D'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Cow\'s milk can be used in cooking and with cereal from around six months, but should not be given as a main drink until twelve months. Breast milk or formula remains the main milk in the first year.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Use whole milk in cooking — in porridge, sauces, or mashed potato.',
+        portion: 'In cooking only.',
+        texture: 'Liquid in food.',
+        safetyNote: 'Not as a main drink before 12 months; breast milk or formula stays the main milk.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Whole cow\'s milk can become a main drink, ideally from an open cup.',
+        portion: 'About 2–3 servings a day.',
+        texture: 'Drink.',
+      ),
+    ],
+    choking:
+        'Low risk; it is a liquid. The key point is timing — a food/cooking ingredient before 12 months, a main drink after.',
+    allergens: 'Cow\'s milk is a common allergen. Dairy foods (yoghurt, cheese) can come earlier; milk as a main drink waits until 12 months.',
+    faq:
+        'Why wait until 12 months to drink it? Cow\'s milk is low in iron and can displace iron-rich foods or milk feeds if given as a main drink too early.',
+    tips:
+        'Use full-fat (whole) milk for under-twos. Introduce a cup rather than a bottle as the main vessel.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // LEGUMES, NUTS & SEEDS (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'kidney_bean',
+    name: 'Kidney beans',
+    category: 'Legume',
+    heroMedia: AppMedia(uri: 'assets/foods/kidney_bean_hero.jpg'),
+    nutritionFlags: ['Protein', 'Iron', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Kidney beans are a plant protein and iron source suitable from around six months when very well cooked and soft. Always cook dried kidney beans thoroughly, or use tinned.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft, then mash or lightly smash so beans cannot be inhaled whole.',
+        portion: '1–2 tablespoons, mashed.',
+        texture: 'Soft, mashed.',
+        safetyNote: 'Whole beans are a choking risk for young babies — smash or mash. Never serve undercooked kidney beans.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer lightly smashed whole soft beans or mix into dishes.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Whole beans can be inhaled by young babies — smash or mash. Raw/undercooked kidney beans are unsafe; cook fully (tinned are pre-cooked).',
+    allergens: 'Not a common allergen. Pair with a vitamin-C food to boost iron absorption.',
+    faq:
+        'Tinned or dried? Tinned (no added salt) are convenient and fully cooked. If using dried, boil hard then simmer until very soft.',
+    tips:
+        'Mash into a soft bean dip, or stir into a mild chilli or stew (no added salt).',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'white_bean',
+    name: 'White beans',
+    category: 'Legume',
+    heroMedia: AppMedia(uri: 'assets/foods/white_bean_hero.jpg'),
+    nutritionFlags: ['Protein', 'Iron', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Soft white beans (such as cannellini or butter beans) are creamy and mild, suitable from around six months when well cooked and mashed.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft and mash to a creamy texture.',
+        portion: '1–2 tablespoons, mashed.',
+        texture: 'Soft, creamy.',
+        safetyNote: 'Smash or mash whole beans for young babies.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer lightly smashed soft beans or blend into dips.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Whole beans can be inhaled by young babies — mash or smash. Cook until very soft.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are butter beans the same? They are a large, creamy white bean and work the same way — mash them well.',
+    tips:
+        'White beans blend into a smooth, mild dip and add protein to soups.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'edamame',
+    name: 'Edamame',
+    category: 'Legume',
+    heroMedia: AppMedia(uri: 'assets/foods/edamame_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'soy',
+    nutritionFlags: ['Protein', 'Iron', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Edamame (young soybeans) is a way to introduce the soy allergen from around six months. The whole beans are firm and round, so smash them well for babies.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook soft, remove from the pod, and smash or mash the beans thoroughly.',
+        portion: 'A spoonful, smashed.',
+        texture: 'Soft, smashed.',
+        safetyNote: 'Whole edamame beans and pods are a choking hazard — always smash and remove pods.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer lightly smashed soft beans once chewing is well established.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Whole edamame beans are firm and round — a choking hazard. Smash well and never serve in the pod.',
+    allergens: 'Edamame is soy — a common allergen. Introduce on its own, watch for a reaction, and keep in the diet once tolerated.',
+    faq:
+        'Is edamame the same soy as tofu? Both are soy; offering either helps introduce the soy allergen.',
+    tips:
+        'Smash into a bright green mash, or blend into a smooth dip.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'cashew_butter',
+    name: 'Cashew butter',
+    category: 'Nut & Seed',
+    heroMedia: AppMedia(uri: 'assets/foods/cashew_butter_hero.jpg'),
+    isCommonAllergen: true,
+    allergenId: 'tree_nuts',
+    nutritionFlags: ['Healthy fats', 'Protein'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Smooth cashew butter is a way to introduce tree nuts from around six months. Never give whole nuts; thin nut butter so it is not a thick, sticky blob.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Thin smooth cashew butter with water, milk, or puree and offer a small amount.',
+        portion: 'A small spoonful, thinned.',
+        texture: 'Smooth, thinned.',
+        safetyNote: 'Whole nuts and thick blobs of nut butter are choking hazards — always thin it.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread thinly on a soft strip, or stir into porridge.',
+        portion: 'A thin spread.',
+        texture: 'Smooth.',
+      ),
+    ],
+    choking:
+        'Whole tree nuts are a serious choking hazard for young children. Thick nut butter can also stick — always thin or spread thinly.',
+    allergens: 'Cashew is a tree nut — a common allergen. Tree nuts are separate allergens, so tolerating one does not guarantee tolerating another. Introduce on its own and watch.',
+    faq:
+        'When can children have whole nuts? Whole nuts are not advised until around five years because of the choking risk; use smooth nut butters or finely ground nuts.',
+    tips:
+        'Stir a small amount into porridge or yoghurt. Choose unsweetened, unsalted cashew butter.',
+    sourceCitations: ['NHS Start4Life', 'AAP'],
+  ),
+  Food(
+    id: 'sunflower_seed_butter',
+    name: 'Sunflower seed butter',
+    category: 'Nut & Seed',
+    heroMedia: AppMedia(uri: 'assets/foods/sunflower_seed_butter_hero.jpg'),
+    nutritionFlags: ['Healthy fats', 'Vitamin E'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Smooth sunflower seed butter is a nut-free spread option from around six months — handy for nut-free settings. As with any seed/nut butter, thin it so it is not a sticky blob.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Thin with water, milk, or puree and offer a small amount.',
+        portion: 'A small spoonful, thinned.',
+        texture: 'Smooth, thinned.',
+        safetyNote: 'Thick blobs of seed butter can stick in the mouth — always thin or spread thinly.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread thinly on a soft strip.',
+        portion: 'A thin spread.',
+        texture: 'Smooth.',
+      ),
+    ],
+    choking:
+        'Thick, sticky seed butter is a choking risk — thin it or spread thinly.',
+    allergens: 'Sunflower seed is not a major regulated allergen and is a useful alternative in nut-free environments; introduce on its own as with any new food.',
+    faq:
+        'Is seed butter as good as nut butter? It offers healthy fats and vitamin E and is a great nut-free option, though it does not replace introducing actual tree nuts/peanut where appropriate.',
+    tips:
+        'A good choice for nut-free nurseries. Stir into porridge or thin onto toast.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'pumpkin_seed',
+    name: 'Pumpkin seed butter',
+    category: 'Nut & Seed',
+    heroMedia: AppMedia(uri: 'assets/foods/pumpkin_seed_hero.jpg'),
+    nutritionFlags: ['Iron', 'Healthy fats', 'Magnesium'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Ground or smooth pumpkin seed butter is an iron-rich, nut-free option from around six months. Whole seeds are a choking hazard, so use ground or butter forms.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Stir finely ground pumpkin seeds or thinned pumpkin-seed butter into purees.',
+        portion: 'A small spoonful.',
+        texture: 'Smooth or finely ground.',
+        safetyNote: 'Whole or chopped seeds are a choking hazard — use ground or smooth butter only.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Spread thinned seed butter thinly, or sprinkle finely ground seeds over food.',
+        portion: 'A small amount.',
+        texture: 'Smooth/fine.',
+      ),
+    ],
+    choking:
+        'Whole and chopped seeds can be inhaled — only offer finely ground or as a smooth, thinned butter.',
+    allergens: 'Not a major regulated allergen; introduce on its own and watch as with any new food.',
+    faq:
+        'Why pumpkin seeds? They are a good plant source of iron and magnesium — useful ground into meals.',
+    tips:
+        'Grind seeds to a fine powder and stir into porridge for an iron boost.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+
+  // ---------------------------------------------------------------------------
+  // MORE VEGETABLES & DRIED FRUIT (continued)
+  // ---------------------------------------------------------------------------
+  Food(
+    id: 'brussels_sprout',
+    name: 'Brussels sprouts',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/brussels_sprout_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Vitamin K', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Soft-cooked brussels sprouts are suitable from around six months. Their mild, slightly sweet flavour when roasted can win babies over.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Steam or roast until very soft, then halve or mash.',
+        portion: 'A halved soft sprout or a spoonful, mashed.',
+        texture: 'Soft.',
+        safetyNote: 'Whole sprouts can be a choking risk — halve or quarter soft ones.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer quartered soft sprouts or finely chopped.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Cook until very soft and halve or quarter; whole sprouts are a choking risk.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Will they cause wind? Like other brassicas they can be a little gassy for some babies; this usually settles.',
+    tips:
+        'Roasting mellows the flavour and adds sweetness — far more appealing than boiled.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'turnip',
+    name: 'Turnip',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/turnip_hero.jpg'),
+    nutritionFlags: ['Vitamin C', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Turnip is a mild root vegetable suitable from around six months when cooked until very soft, mashed or as soft pieces.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft, then mash or offer soft wedges.',
+        portion: 'A wedge or a spoonful, mashed.',
+        texture: 'Soft.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Offer small soft-cooked pieces.',
+        portion: 'A small handful.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Low risk when cooked soft. Avoid firm, raw turnip.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Turnip or swede? They are similar; both mash well. Use whichever you have, cooked very soft.',
+    tips:
+        'Mash with potato and carrot for a soft, mild root medley.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'mushroom',
+    name: 'Mushroom',
+    category: 'Vegetable',
+    heroMedia: AppMedia(uri: 'assets/foods/mushroom_hero.jpg'),
+    nutritionFlags: ['B vitamins', 'Fibre'],
+    minAgeMonths: 6,
+    chokingRisk: 'Low',
+    introduction:
+        'Well-cooked mushrooms are suitable from around six months and add savoury flavour. Cook thoroughly and chop finely, as the rubbery texture can be tricky.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Cook until very soft, then finely chop or blend into sauces and purees.',
+        portion: 'A spoonful through food.',
+        texture: 'Soft, finely chopped.',
+        safetyNote: 'Use only shop-bought edible mushrooms, cooked well; never wild-picked ones.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer finely chopped soft-cooked mushrooms in mixed dishes.',
+        portion: 'A small amount.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Cook well and chop finely; the springy texture of large pieces can be hard to chew.',
+    allergens: 'Not a common allergen.',
+    faq:
+        'Are mushrooms safe for babies? Cooked, shop-bought mushrooms are fine. Never use foraged/wild mushrooms.',
+    tips:
+        'Finely chopped mushrooms melt into pasta sauces and add savoury depth.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'raisin',
+    name: 'Raisins',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/raisin_hero.jpg'),
+    nutritionFlags: ['Iron', 'Fibre'],
+    minAgeMonths: 9,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Raisins offer iron and fibre but are small, sticky, and chewy, so they need care. They are usually introduced a little later, around nine months, and softened or chopped.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Soak or cook to plump and soften, then finely chop or mash into food.',
+        portion: 'A small amount, softened.',
+        texture: 'Soft, chopped.',
+        safetyNote: 'Whole raisins are a choking risk for young babies — soften and chop.',
+      ),
+      ServingBand(
+        ageBand: '18 mo+',
+        howToCut: 'Offer whole raisins only once your child chews well, with supervision.',
+        portion: 'A small amount.',
+        texture: 'Chewy.',
+      ),
+    ],
+    choking:
+        'Small, sticky, and chewy — a choking risk for young babies. Soften and chop; offer whole only when chewing is well established.',
+    allergens: 'Not a common allergen. Dried fruit is sticky and sugary, so offer with meals and rinse/brush teeth to protect them.',
+    faq:
+        'Are raisins bad for teeth? Sticky dried fruit clings to teeth; serve with meals rather than as a grazing snack, and keep up tooth-brushing.',
+    tips:
+        'Plump raisins in warm water, then chop into porridge or soft baking.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'date',
+    name: 'Dates',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/date_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Potassium', 'Natural sweetness'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Dates are very sweet and sticky and contain a hard stone. Softened and mashed, date can be used as a natural sweetener in baby food from around six months.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Remove the stone, soak to soften, then mash into a smooth paste to stir through food.',
+        portion: 'A small amount as a sweetener.',
+        texture: 'Smooth paste.',
+        safetyNote: 'Always remove the stone; whole/sticky dates are a choking hazard.',
+      ),
+      ServingBand(
+        ageBand: '12 mo+',
+        howToCut: 'Offer finely chopped soft, de-stoned date.',
+        portion: 'A small amount.',
+        texture: 'Soft, chopped.',
+      ),
+    ],
+    choking:
+        'The stone is a choking hazard — always remove it. Whole sticky dates are also a risk; mash or finely chop.',
+    allergens: 'Not a common allergen. Naturally very sugary, so use sparingly and protect teeth.',
+    faq:
+        'Can I sweeten baby food with dates? Yes — date paste is a useful whole-food sweetener instead of added sugar, in small amounts.',
+    tips:
+        'Blend de-stoned soaked dates into a paste to sweeten porridge or baking naturally.',
+    sourceCitations: ['NHS Start4Life'],
+  ),
+  Food(
+    id: 'prune',
+    name: 'Prunes',
+    category: 'Fruit',
+    heroMedia: AppMedia(uri: 'assets/foods/prune_hero.jpg'),
+    nutritionFlags: ['Fibre', 'Iron'],
+    minAgeMonths: 6,
+    chokingRisk: 'Moderate',
+    introduction:
+        'Prunes (dried plums) are well known for gently easing constipation and are suitable from around six months as a smooth puree.',
+    howToServeByAge: [
+      ServingBand(
+        ageBand: '6 mo+',
+        howToCut: 'Stew or soak to soften, then blend into a smooth puree (remove any stones first).',
+        portion: '1–2 teaspoons of puree.',
+        texture: 'Smooth.',
+        safetyNote: 'Check for stones; whole prunes are a choking hazard.',
+      ),
+      ServingBand(
+        ageBand: '9 mo+',
+        howToCut: 'Finely chop soft, stoned prunes into porridge or yoghurt.',
+        portion: 'A small amount.',
+        texture: 'Soft.',
+      ),
+    ],
+    choking:
+        'Whole prunes and any stones are choking hazards — soften, de-stone, and puree or finely chop.',
+    allergens: 'Not a common allergen. Sticky and sugary — offer with meals and keep up tooth-brushing.',
+    faq:
+        'Do prunes help constipation? Yes — prune puree contains fibre and sorbitol with a gentle laxative effect; use small amounts.',
+    tips:
+        'A spoon of prune puree stirred into porridge can help a constipated baby. Start small.',
+    sourceCitations: ['NHS Start4Life'],
   ),
 ];

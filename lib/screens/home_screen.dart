@@ -6,8 +6,8 @@ import '../theme/tokens.dart';
 import '../widgets/baby_header.dart';
 import '../widgets/common.dart';
 import 'allergen_screen.dart';
-import 'foods_screen.dart';
 import 'guides_screen.dart';
+import 'plan_screen.dart';
 import 'progress_screen.dart';
 import 'readiness_quiz_screen.dart';
 import 'tracker_screen.dart';
@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
                     _QuickAction(
                       icon: Icons.assignment_outlined,
                       label: 'Plan',
-                      onTap: () => _go(context, const FoodsScreen()),
+                      onTap: () => _go(context, const PlanScreen()),
                     ),
                     _QuickAction(
                       icon: Icons.calendar_today_outlined,
@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                   _AllergenDueBanner(count: due),
                   const SizedBox(height: AppSpacing.lg),
                 ],
-                _PlanHero(onTap: () => _go(context, const FoodsScreen())),
+                _PlanHero(onTap: () => _go(context, const PlanScreen())),
                 const SizedBox(height: AppSpacing.xl),
                 _AllergenCard(onTap: () => _go(context, const AllergenScreen())),
                 const SizedBox(height: AppSpacing.xl),

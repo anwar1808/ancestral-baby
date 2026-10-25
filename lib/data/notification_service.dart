@@ -70,20 +70,6 @@ class NotificationService {
     );
   }
 
-  Future<void> showNow({
-    required int id,
-    required String title,
-    required String body,
-  }) async {
-    await init();
-    await _plugin.show(id, title, body, _details);
-  }
-
-  Future<void> cancel(int id) async {
-    await init();
-    await _plugin.cancel(id);
-  }
-
   Future<void> cancelAll() async {
     await init();
     await _plugin.cancelAll();

@@ -3,10 +3,12 @@ import 'package:provider/provider.dart';
 
 import '../data/seed_ancestral_meals.dart';
 import '../data/seed_meals.dart';
+import '../data/seed_recipes.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import '../widgets/common.dart';
 import 'food_detail_screen.dart';
+import 'recipe_detail_screen.dart';
 
 /// Meals (§5): age-appropriate meal ideas grouped by stage; each links to its
 /// component foods. A top filter switches between the **Standard** combos and
@@ -20,6 +22,7 @@ class MealsScreen extends StatefulWidget {
 }
 
 class _MealsScreenState extends State<MealsScreen> {
+  int _mode = 0; // 0 = Recipes, 1 = Ideas
   bool _ancestral = false;
 
   @override
@@ -29,7 +32,7 @@ class _MealsScreenState extends State<MealsScreen> {
           title: const Text('Meals'), automaticallyImplyLeading: false),
       body: Column(
         children: [
-          // Standard / Ancestral filter.
+          // Recipes / Ideas switcher.
           Padding(
             padding: const EdgeInsets.fromLTRB(
                 AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.sm),
@@ -42,24 +45,126 @@ class _MealsScreenState extends State<MealsScreen> {
               child: Row(
                 children: [
                   _FilterTab(
-                    label: 'Standard',
-                    selected: !_ancestral,
-                    onTap: () => setState(() => _ancestral = false),
+                    label: 'Recipes',
+                    selected: _mode == 0,
+                    onTap: () => setState(() => _mode = 0),
                   ),
                   _FilterTab(
-                    label: '🦴 Ancestral',
-                    selected: _ancestral,
-                    onTap: () => setState(() => _ancestral = true),
+                    label: 'Ideas',
+                    selected: _mode == 1,
+                    onTap: () => setState(() => _mode = 1),
                   ),
                 ],
               ),
             ),
           ),
+          // In Ideas mode, the Standard / Ancestral filter.
+          if (_mode == 1)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.sm),
+              child: Container(
+                padding: const EdgeInsets.all(4),
+                decoration: BoxDecoration(
+                  color: AppColors.softBlue,
+                  borderRadius: BorderRadius.circular(AppRadius.pill),
+                ),
+                child: Row(
+                  children: [
+                    _FilterTab(
+                      label: 'Standard',
+                      selected: !_ancestral,
+                      onTap: () => setState(() => _ancestral = false),
+                    ),
+                    _FilterTab(
+                      label: '🦴 Ancestral',
+                      selected: _ancestral,
+                      onTap: () => setState(() => _ancestral = true),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           Expanded(
-            child: _ancestral ? const _AncestralList() : const _StandardList(),
+            child: _mode == 0
+                ? const _RecipesView()
+                : (_ancestral ? const _AncestralList() : const _StandardList()),
           ),
         ],
       ),
+    );
+  }
+}
+
+/// Recipe library grouped by collection (First Meals, Iron-Rich, Quick & Easy,
+/// Ancestral). Tapping a recipe opens its ingredients + method.
+class _RecipesView extends StatelessWidget {
+  const _RecipesView();
+
+  @override
+  Widget build(BuildContext context) {
+    final byCollection = <String, List<Recipe>>{};
+    for (final r in kSeedRecipes) {
+      byCollection.putIfAbsent(r.collection, () => []).add(r);
+    }
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg, AppSpacing.sm, AppSpacing.lg, AppSpacing.lg),
+      children: byCollection.entries.expand((e) {
+        return [
+          Padding(
+            padding: const EdgeInsets.only(
+                top: AppSpacing.sm, bottom: AppSpacing.md),
+            child: Text(e.key,
+                style: Theme.of(context).textTheme.titleMedium),
+          ),
+          ...e.value.map((r) => Padding(
+                padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                child: InfoCard(
+                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                      builder: (_) => RecipeDetailScreen(recipe: r))),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: r.ancestral
+                              ? AppColors.butter
+                              : AppColors.softBlue,
+                          borderRadius: BorderRadius.circular(AppRadius.chip),
+                        ),
+                        child: Icon(
+                            r.ancestral ? Icons.spa : Icons.restaurant_menu,
+                            color: AppColors.navy),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(r.title,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.navy)),
+                            const SizedBox(height: 2),
+                            Text('${r.stage} · ${r.summary}',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.textSecondary)),
+                          ],
+                        ),
+                      ),
+                      const Icon(Icons.chevron_right,
+                          color: AppColors.textMuted),
+                    ],
+                  ),
+                ),
+              )),
+        ];
+      }).toList(),
     );
   }
 }

@@ -53,11 +53,20 @@ class _FoodDetailScreenState extends State<FoodDetailScreen> {
             icon: const Icon(Icons.more_vert, color: AppColors.navy),
             onSelected: (v) {
               if (v == 'media') _setMedia(context, food);
+              if (v == 'trylater') {
+                context.read<AppState>().toggleTryLater(food.id);
+              }
             },
             itemBuilder: (_) => [
               const PopupMenuItem(
                 value: 'media',
                 child: Text('Set photo / video'),
+              ),
+              PopupMenuItem(
+                value: 'trylater',
+                child: Text(state.isTryLater(food.id)
+                    ? 'Remove from Try Later'
+                    : 'Add to Try Later'),
               ),
             ],
           ),
