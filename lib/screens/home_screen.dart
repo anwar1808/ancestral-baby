@@ -185,7 +185,7 @@ class _PlanHero extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Build baby\'s first foods plan',
+                Text('Start the 100 Foods Plan',
                     style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(height: AppSpacing.sm),
                 const Text(
@@ -194,7 +194,7 @@ class _PlanHero extends StatelessWidget {
                   style: TextStyle(color: AppColors.textSecondary, height: 1.4),
                 ),
                 const SizedBox(height: AppSpacing.lg),
-                PrimaryButton(label: 'Start your first foods plan', onPressed: onTap),
+                PrimaryButton(label: 'Open the plan', onPressed: onTap),
               ],
             ),
           ),

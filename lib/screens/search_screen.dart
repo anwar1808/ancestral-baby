@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data/seed_guides_toddler.dart';
-import '../data/seed_meals.dart';
 import '../state/app_state.dart';
 import '../theme/tokens.dart';
 import 'food_detail_screen.dart';
+import 'guides_screen.dart';
+import 'recipe_detail_screen.dart';
 
-/// Search across foods, guides, and meals (§5).
+/// Search across foods, guides (all audiences), and the recipe library.
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -38,10 +39,11 @@ class _SearchScreenState extends State<SearchScreen> {
             .toList();
     final meals = q.isEmpty
         ? []
-        : kSeedMeals
-            .where((m) =>
-                m.title.toLowerCase().contains(q) ||
-                m.description.toLowerCase().contains(q))
+        : state.recipes
+            .where((r) =>
+                r.title.toLowerCase().contains(q) ||
+                r.summary.toLowerCase().contains(q) ||
+                r.ingredients.any((i) => i.toLowerCase().contains(q)))
             .toList();
 
     return Scaffold(
@@ -93,7 +95,12 @@ class _SearchScreenState extends State<SearchScreen> {
                               leading: const Icon(Icons.menu_book,
                                   color: AppColors.navy),
                               title: Text(g.title),
-                              subtitle: Text(g.section),
+                              subtitle: Text(g.audience == g.section
+                                  ? g.section
+                                  : '${g.audience} · ${g.section}'),
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) => GuideDetail(guide: g))),
                             )),
                       ],
                       if (meals.isNotEmpty) ...[
@@ -103,7 +110,13 @@ class _SearchScreenState extends State<SearchScreen> {
                               leading: const Icon(Icons.lunch_dining,
                                   color: AppColors.navy),
                               title: Text(m.title),
-                              subtitle: Text(m.stage),
+                              subtitle: Text(m.ancestral
+                                  ? '${m.stage} · Ancestral'
+                                  : m.stage),
+                              onTap: () => Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          RecipeDetailScreen(recipe: m))),
                             )),
                       ],
                       if (foods.isEmpty && guides.isEmpty && meals.isEmpty)

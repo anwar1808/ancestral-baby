@@ -198,11 +198,12 @@ const List<Guide> kSeedGuides = [
         'From around 12 months, whole or semi-skimmed cow\'s milk can become a '
         'main drink. The NHS suggests offering a cup from around six months and '
         'discouraging bottles once your child is one, to protect developing '
-        'teeth. Water and milk are the best drinks; avoid '
-        'sugary drinks and limit juice.'
-        '\n\nToo much milk can blunt appetite for food and affect iron levels, '
-        'so keep it to roughly two to three servings a day and offer it with or '
-        'after meals rather than sipping all day.',
+        'teeth. Water and milk are the best drinks. Our approach skips juice '
+        'and other sweet drinks altogether.'
+        '\n\nThe NHS suggests at least 350 ml of milk a day, or two servings '
+        'of foods made from milk such as yoghurt or cheese. Much more than '
+        'that can blunt appetite for food and affect iron levels, so offer it '
+        'with or after meals rather than sipping all day.',
   ),
   Guide(
     id: 't_family_meals',

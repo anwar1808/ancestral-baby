@@ -10,7 +10,7 @@
 
 | Layer | What it governs | Source of authority | Can the other layer override it? |
 |---|---|---|---|
-| **Safety floor** | What is unsafe at a given age: choking shapes, honey, added salt and sugar, unpasteurised dairy, undercooked egg and meat, whole nuts, allergen introduction method and timing, liver frequency | NHS Start for Life weaning guidance; SACN *Feeding in the First Year of Life* (2018); BSACI / BDA early-allergen guidance; AAP; WHO complementary feeding; LEAP (2015) and EAT (2016) trials | **No.** The ancestral layer never goes below the floor. |
+| **Safety floor** | What is unsafe at a given age: choking shapes, honey, added salt and sugar, unpasteurised dairy, undercooked egg and meat, whole nuts, allergen introduction method and timing, liver frequency | NHS Start for Life weaning guidance; SACN *Feeding in the First Year of Life* (2018); BSACI / BDA early-allergen guidance; AAP (including healthychildren.org choking prevention); CDC infant and toddler choking hazards; WHO complementary feeding; LEAP (2015) and EAT (2016) trials | **No.** The ancestral layer never goes below the floor. |
 | **Ancestral layer** | Which foods we put first, what we recommend next, how we suggest serving, every recipe | The canon in §2, as confirmed by Annie | Yes, within the floor. |
 
 The disclaimers already in the app stay as they are. The ancestral layer is presented as the app's point of view, with the mainstream position named alongside it where they differ, as the existing guide already does.
@@ -36,12 +36,12 @@ Drawn from the app's own guide `ancestral_first_foods_order` and the header of `
 
 **Today (mainstream list):** avocado, banana, sweet potato, broccoli, carrot, butternut squash, pear.
 
-**Proposed ancestral First Foods (all already in the 100-food catalogue, all 6 mo+):**
+**Ancestral First Foods as built (v1.4.0 order: meat stock, fermented brine, beef, egg, avocado, lamb, salmon, liver, courgette, broccoli, butter, kefir).** The table below is the June proposal, kept for its reasons; where it differs, the code and this line win.
 
 | Order | Food | Why it leads | Safety-floor note |
 |---|---|---|---|
 | 1 | Beef (slow-cooked, in its stock) | Meat stock is the canon's first food; beef carries haem iron and zinc | Cook until it shreds; serve as a strip or a spoon of stock |
-| 2 | Egg (yolk first) | Choline, DHA, iron; yolk-before-white is canon | Hard-cooked; egg is a top allergen, so it also starts the Allergen Programme |
+| 2 | Egg (well-cooked, whole) | Choline, DHA, iron; whole egg early per allergy guidance (yolk-first overruled, check v2 item 3) | Hard-cooked; egg is a top allergen, so it also starts the Allergen Programme |
 | 3 | Avocado | Fat, soft texture, no cooking | None |
 | 4 | Lamb | Second gelatinous slow-cook meat | As beef |
 | 5 | Salmon | Oily fish, DHA, vitamin D | Fish is a top allergen; bones removed; cooked through |
@@ -58,10 +58,10 @@ Drawn from the app's own guide `ancestral_first_foods_order` and the header of `
 When the home card or a stage suggests the next food, apply in order:
 
 1. Nothing below the safety floor for the baby's corrected age.
-2. If an allergen series is active, the next food is that series' food.
+2. If an allergen series is active, the next food is that series' food. Then the parent's picks for this week, in stage order (v1.4.0).
 3. Otherwise prefer, in order: an untried animal food, an untried fat or fermented dairy, an untried non-starchy vegetable, an untried low-sugar fruit, then everything else.
 4. Liver only when seven or more days have passed since the last liver log.
-5. Starches, grains, and legumes rank last by default (decision A may change this).
+5. Starches, grains, and legumes are not offered before 24 months (decision A), except bread and tofu as allergen exposure.
 6. Within a tier, prefer foods the parent marked Try Later, then foods with iron-rich or healthy-fats flags.
 
 The current engine ranks by catalogue order within a skill. Implementing the rules above is a small change in `AppState`, not a new system.

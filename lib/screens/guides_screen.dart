@@ -102,7 +102,7 @@ class _GuidesScreenState extends State<GuidesScreen> {
                   child: InfoCard(
                     padding: EdgeInsets.zero,
                     onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => _GuideDetail(guide: g))),
+                        builder: (_) => GuideDetail(guide: g))),
                     child: Row(
                       children: [
                         Container(
@@ -168,9 +168,9 @@ class _GuidesScreenState extends State<GuidesScreen> {
   }
 }
 
-class _GuideDetail extends StatelessWidget {
+class GuideDetail extends StatelessWidget {
   final Guide guide;
-  const _GuideDetail({required this.guide});
+  const GuideDetail({super.key, required this.guide});
 
   @override
   Widget build(BuildContext context) {

@@ -45,4 +45,19 @@
 
 Sources: nhs.uk/baby/weaning-and-feeding/what-to-feed-young-children/ · nhs.uk/conditions/baby/weaning-and-feeding/drinks-and-cups-for-babies-and-young-children/ · nhs.uk/live-well/eat-well/food-types/fish-and-shellfish-nutrition/ · nhs.uk/conditions/baby/weaning-and-feeding/vitamins-for-children/ · nhs.uk/best-start-in-life/baby/weaning/what-to-feed-your-baby/ (6 months, 7 to 9, 10 to 12, over 12 months) · nhs.uk/best-start-in-life/baby/weaning/safe-weaning/preparing-food-safely/
 
-Still our own judgement, not NHS: the 24 mo+ and 3 yr+ ages for raw slices, drumsticks, and bones.
+Later serving bands (checked 25 Oct 2026 against AAP, healthychildren.org Choking Prevention, and CDC, Infant and Toddler Nutrition: choking hazards). AAP keeps raw vegetable sticks, raw fruit chunks, whole grapes, nuts and seeds (sunflower in particular), popcorn, sausages, and chunks of meat away until at least four. CDC lists bones in meat or fish and whole corn kernels, with no age. Changes: apple, carrot, and celery raw sticks moved from 3 yr+ to 4 yr+; raw pepper at 24 mo+ finely chopped or slivers only; corn kernels in moist dishes; lamb and chicken at 24 mo+ off the bone; whole sunflower and pumpkin seeds not before four. Still our judgement: the 24 mo+ step for thin raw slices and grated raw vegetables, which AAP does not address.
+
+## D. Whole-app cohesiveness pass after v1.4.1 (25 Oct 2026)
+
+Method: an audit over the live app data (every recipe's foods against their safe and approach ages, unsafe words in recipe text, stage foods against stage ages, serving-band order, allergen serving foods), then a wording sweep of screens, guides, and docs.
+
+| # | Found | Fix |
+|---|---|---|
+| 13 | Recipes: no food below its safe age, no ancestral recipe using a food before our approach allows it, no honey before 12 months, every "sugar" and "whole nuts" mention is a "no" or "never". | None needed. |
+| 14 | Honey sits in Big Flavors 2.0 (suggested from nine months) but is safe only from 12. It could not be picked, but the list gave no reason. | Stage lists now say "Safe from 12 months" on any food not yet safe for the baby's age. |
+| 15 | Older "Milk & moving to a cup" guide said "two to three servings" and "limit juice"; the new toddler guides say at least 350 ml and no juice. | Older guide now gives the NHS figure and our no-juice line. |
+| 16 | Search looked in the retired June meal-idea list, not the recipe library, and guide results could not be opened. | Search covers all recipes (title, summary, ingredients) and opens recipes and guides. |
+| 17 | Canon §3 still listed "egg (yolk first)" and §4 did not mention picks or the bread and tofu exception. | Canon updated to match the code. |
+| 18 | Home's empty-state card said "Build baby's first foods plan". | "Start the 100 Foods Plan". |
+| 19 | Mustard (UK and EU list) has no food in the catalogue to serve it with, so its series cannot suggest one. | Open: needs a catalogue food with a photo and serving bands. Not built. |
+| 20 | Wheat foods other than bread, and edamame, are delayed to 24 months while their allergens are introduced at six. | Consistent with item 1: bread and tofu are the exposures. No change. |

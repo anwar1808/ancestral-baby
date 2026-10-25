@@ -152,13 +152,13 @@ const Map<String, List<ServingBand>> kExtraBands = {
           'Thick wedges and bite-sized chunks of raw apple are still choking hazards.',
     ),
     ServingBand(
-      ageBand: '3 yr+',
+      ageBand: '4 yr+',
       howToCut:
-          'Thin raw slices remain the safest raw cut. Move to thicker slices only when your child chews well and takes small bites.',
+          'From about four, thicker raw slices can be tried if your child chews well and takes small bites. Until then keep to very thin slices, grated apple, or cooked.',
       portion: 'Half to one small apple.',
       texture: 'Crisp.',
       safetyNote:
-          'Avoid hard raw chunks until your child chews confidently; always supervise and serve seated.',
+          'AAP guidance keeps raw vegetable sticks and raw fruit chunks away until at least age four. Serve seated and supervised.',
     ),
   ],
 
@@ -306,13 +306,13 @@ const Map<String, List<ServingBand>> kExtraBands = {
           'Raw carrot coins, chunks, and thick sticks are still choking hazards.',
     ),
     ServingBand(
-      ageBand: '3 yr+',
+      ageBand: '4 yr+',
       howToCut:
-          'Thin matchsticks of raw carrot can be tried once your child chews well. Soft cooked sticks remain a good choice.',
+          'From about four, thin raw matchsticks can be tried if your child chews well. Before that, keep raw carrot grated or in peeler ribbons; soft cooked sticks are fine at any stage.',
       portion: 'A small handful.',
       texture: 'Thin and crisp.',
       safetyNote:
-          'Never cut raw carrot into coins. Serve seated and supervised.',
+          'Never cut raw carrot into coins. AAP guidance keeps raw vegetable sticks and raw fruit chunks away until at least age four.',
     ),
   ],
   'celery': [
@@ -326,12 +326,13 @@ const Map<String, List<ServingBand>> kExtraBands = {
           'The long strings can catch in the throat; always remove them.',
     ),
     ServingBand(
-      ageBand: '3 yr+',
+      ageBand: '4 yr+',
       howToCut:
-          'Thin sticks of de-strung raw celery can be tried once your child chews well.',
+          'From about four, thin sticks of de-strung raw celery can be tried if your child chews well. Before that, slice it very thinly across the stalk or serve it cooked.',
       portion: 'A few thin sticks.',
       texture: 'Crisp.',
-      safetyNote: 'Keep removing the strings, and supervise.',
+      safetyNote:
+          'Keep removing the strings. AAP guidance keeps raw vegetable sticks and raw fruit chunks away until at least age four.',
     ),
   ],
   'cucumber': [
@@ -349,22 +350,22 @@ const Map<String, List<ServingBand>> kExtraBands = {
     ServingBand(
       ageBand: '24 mo+',
       howToCut:
-          'Offer raw pepper in thin strips, with seeds and white pith removed, alongside cooked pepper.',
-      portion: 'A few strips.',
+          'Offer raw pepper finely chopped or in very thin, short slivers, with seeds and pith removed, alongside soft cooked strips. Keep thicker raw pieces until about four.',
+      portion: 'A few slivers.',
       texture: 'Thin and crisp.',
       safetyNote:
-          'Raw skin is tough; thin strips are easier to chew than chunks.',
+          'Raw skin is tough. AAP guidance keeps raw vegetable sticks and raw fruit chunks away until at least age four.',
     ),
   ],
   'corn': [
     ServingBand(
       ageBand: '24 mo+',
       howToCut:
-          'Offer short lengths of soft cooked corn on the cob to bite kernels from, or loose cooked kernels stirred into meals.',
-      portion: 'A short piece of cob, or a small handful of kernels.',
-      texture: 'Soft kernels.',
+          'Stir cooked kernels into moist dishes such as stews and mashes, or squash them lightly. A short piece of soft cooked cob can be offered to a confident chewer to bite from, seated.',
+      portion: 'A short piece of cob, or a spoonful of kernels in a dish.',
+      texture: 'Soft.',
       safetyNote:
-          'Popcorn is a different food: it is a recognised choking hazard and is best kept away from young children.',
+          'Loose whole corn kernels are on the CDC list of choking hazards for young children. Popcorn is a recognised hazard; AAP guidance keeps it away until at least age four.',
     ),
   ],
   'green_pea': [
@@ -416,22 +417,22 @@ const Map<String, List<ServingBand>> kExtraBands = {
     ServingBand(
       ageBand: '24 mo+',
       howToCut:
-          'A trimmed lamb rib or a chop bone with tender meat left on can be offered to gnaw, alongside small pieces of meat.',
-      portion: 'One bone, plus small pieces.',
+          'Offer tender lamb off the bone, in thin strips or small pieces about the size of a fingertip, or minced into patties.',
+      portion: 'A small handful of pieces.',
       texture: 'Tender.',
       safetyNote:
-          'Check the bone for loose splinters and small fragments, remove gristle, and take the bone away once the meat is gone. Supervise throughout.',
+          'Bones in meat are on the CDC list of choking hazards, and AAP guidance lists chunks of meat until at least age four, so serve it off the bone and cut small.',
     ),
   ],
   'chicken': [
     ServingBand(
       ageBand: '24 mo+',
       howToCut:
-          'A drumstick with skin, loose cartilage, and the thin splinter bones removed can be offered to eat from. Otherwise, small moist pieces.',
-      portion: 'One small drumstick, or a small handful of pieces.',
+          'Pull drumstick and thigh meat off the bone and offer it in small moist pieces or shreds.',
+      portion: 'A small handful of pieces.',
       texture: 'Moist, tender.',
       safetyNote:
-          'Check carefully for small bones and cartilage. Large, dry chunks of meat remain a choking hazard for young children.',
+          'Bones in meat are on the CDC list of choking hazards, and AAP guidance lists chunks of meat until at least age four. Check for small bones and cartilage.',
     ),
   ],
   'duck': [
@@ -755,11 +756,12 @@ const Map<String, List<ServingBand>> kExtraBands = {
     ),
     ServingBand(
       ageBand: '24 mo+',
-      howToCut: 'Spread on toast or crackers, or use in sauces and baking.',
+      howToCut:
+          'Spread thinly on toast or crackers, or use in sauces and baking.',
       portion: 'A thin spread.',
       texture: 'Thin spread.',
       safetyNote:
-          'Avoid spoonfuls. Offer whole sunflower seeds only once your child chews well, and never in a handful.',
+          'Avoid spoonfuls. AAP guidance names sunflower seeds in particular and keeps whole seeds away until at least age four.',
     ),
   ],
   'pumpkin_seed': [
@@ -774,11 +776,11 @@ const Map<String, List<ServingBand>> kExtraBands = {
     ServingBand(
       ageBand: '24 mo+',
       howToCut:
-          'Continue with ground seeds and seed butter. Seeds baked into bread or bars are usually manageable.',
+          'Continue with ground seeds and seed butter, or seeds baked into bread or bars.',
       portion: 'A small amount.',
       texture: 'Ground, or baked in.',
       safetyNote:
-          'Offer loose whole seeds only once your child chews well, a few at a time and seated.',
+          'AAP guidance keeps whole nuts and seeds away until at least age four, so no loose whole seeds before then.',
     ),
   ],
 };

@@ -171,6 +171,15 @@ class SkillDetailScreen extends StatelessWidget {
                                     color: AppColors.textSecondary,
                                     height: 1.35)),
                           ],
+                          if (!food.isDelayedByApproach &&
+                              !state.foodOpenForAge(food)) ...[
+                            const SizedBox(height: 2),
+                            Text('Safe from ${food.minAgeMonths} months.',
+                                style: const TextStyle(
+                                    fontSize: 12,
+                                    color: AppColors.textMuted,
+                                    fontStyle: FontStyle.italic)),
+                          ],
                           if (food.isDelayedByApproach) ...[
                             const SizedBox(height: 2),
                             Text(
